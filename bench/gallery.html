@@ -6,7 +6,7 @@
 <title>Nexitally parser folio bench</title>
 <style>
   :root { color-scheme: light; --ink:#241b14; --paper:#f6efe4; --card:#fffaf1; --rule:#d7c7b0; --keep:#1f6b3a; --excluded:#9a3412; --dup:#7c4a12; --unsupported:#3730a3; --quiet:#6b6258; }
-  html, body { margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 ui-sans-serif, system-ui, sans-serif; }
+  html, body { margin:0; background:var(--paper); color:var(--ink); font-family: system-ui, -apple-system, sans-serif; font-size:16px; line-height:1.5; }
   body { display:grid; grid-template-columns: 240px 1fr; min-height:100vh; }
   nav { position:sticky; top:0; height:100vh; overflow:auto; border-right:1px solid var(--rule); padding:1.2rem 1rem; background:#efe6d6; }
   nav h1 { font-size:1rem; margin:0 0 .75rem; }
@@ -24,13 +24,14 @@
   .meta { color:var(--quiet); font-size:.9rem; }
   table.lines { width:100%; border-collapse:collapse; font-size:.86rem; }
   table.lines th, table.lines td { border-top:1px solid var(--rule); padding:.28rem .35rem; vertical-align:top; text-align:left; }
-  table.lines code { white-space:pre-wrap; word-break:break-all; }
+  table.lines td:nth-child(2) { white-space:nowrap; }
+  table.lines code { white-space:pre-wrap; overflow-wrap:anywhere; }
   tr.keep td:nth-child(2) { color:var(--keep); font-weight:600; }
   tr.excluded td:nth-child(2) { color:var(--excluded); font-weight:600; }
   tr.duplicate td:nth-child(2) { color:var(--dup); font-weight:600; }
   tr.unsupported td:nth-child(2) { color:var(--unsupported); font-weight:600; }
   tr.quiet { color:var(--quiet); }
-  pre.kept { background:#f3fff6; border:1px solid #b7d7c0; padding:.7rem; overflow:auto; white-space:pre-wrap; }
+  pre.kept { background:#f3fff6; border:1px solid #b7d7c0; padding:.7rem; overflow:auto; white-space:pre-wrap; overflow-wrap:anywhere; }
   .error { background:#fff1eb; border:1px solid #e8b4a0; padding:.7rem; }
   .tally { display:flex; flex-wrap:wrap; gap:.4rem 1rem; padding:0; list-style:none; }
   @media (max-width: 720px) { body { grid-template-columns: 1fr; } nav { position:relative; height:auto; } }

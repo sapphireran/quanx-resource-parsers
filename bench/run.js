@@ -233,6 +233,14 @@ function assertGeneratedCurrent(report) {
   if (htmlOnDisk !== html || mdOnDisk !== md) {
     throw new Error("generated gallery/matrix is stale; run `npm run gallery`");
   }
+  ["managed-full-profile", "reset-substring-trap", "html-interstitial"].forEach(function (id) {
+    var dest = path.join(__dirname, "snapshots", id + ".html");
+    var expected = gallery.renderOne(report, id);
+    var onDisk = fs.existsSync(dest) ? fs.readFileSync(dest, "utf8") : "";
+    if (onDisk !== expected) {
+      throw new Error("generated snapshot " + id + " is stale; run `npm run gallery`");
+    }
+  });
 }
 
 function dumpFile(relOrAbs) {

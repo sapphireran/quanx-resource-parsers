@@ -33,3 +33,4 @@ npm run gallery
 | `gallery.js` | Static HTML renderer |
 | `run.js` | CLI |
 | `gallery.html` | Generated gallery (open locally) |
+| `snapshots/` | Single-case HTML used for screenshots |
