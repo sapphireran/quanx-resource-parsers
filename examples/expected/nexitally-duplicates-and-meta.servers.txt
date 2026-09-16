@@ -1,0 +1,2 @@
+anytls=usable-a.example.test:443, password=usable-a, over-tls=true, tls-host=usable-a.example.test, udp-relay=true, tag=USABLE-A
+anytls=usable-b.example.test:443, password=usable-b, over-tls=true, tls-host=usable-b.example.test, udp-relay=true, tag=USABLE-B

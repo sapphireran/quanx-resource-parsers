@@ -1,0 +1,3 @@
+AnyTLS=hk.example.test:443, password=pwd, over-tls=true, tls-host=hk.example.test, udp-relay=true, tag=HK-Case
+ShadowSocks=jp.example.test:443, method=aes-128-gcm, password=pwd, udp-relay=true, tag=JP-Case
+TROJAN=sg.example.test:443, password=pwd, over-tls=true, tag=SG-Case

@@ -1,0 +1,4 @@
+anytls=hk-01.example.test:443, password=example-password-hk01, over-tls=true, tls-host=cdn.example.test, udp-relay=true, tag=HK-01 AnyTLS
+anytls=hk-02.example.test:443, password=example-password-hk02, over-tls=true, tls-host=cdn.example.test, udp-relay=true, tag=HK-02 AnyTLS
+anytls=jp-01.example.test:443, password=example-password-jp01, over-tls=true, tls-host=cdn.example.test, udp-relay=true, tag=JP-01 AnyTLS
+anytls=sg-01.example.test:443, password=example-password-sg01, over-tls=true, tls-host=cdn.example.test, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=SG-01 AnyTLS Reality

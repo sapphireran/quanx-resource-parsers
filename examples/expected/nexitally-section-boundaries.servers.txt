@@ -1,0 +1,1 @@
+anytls=keep.example.test:443, password=keep, over-tls=true, tls-host=keep.example.test, udp-relay=true, tag=KEEP-BEFORE-BOUNDARY
