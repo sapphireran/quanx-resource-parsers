@@ -1,0 +1,5 @@
+anytls=hk-01.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Hong Kong 01
+anytls=jp-02.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Tokyo 02
+anytls=sg-03.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Singapore 03
+anytls=us-04.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Los Angeles 04
+anytls=tw-05.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=Taipei 05 Reality
