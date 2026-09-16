@@ -1,0 +1,2 @@
+anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=v6-01
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01

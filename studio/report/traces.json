@@ -1,0 +1,1818 @@
+[
+  {
+    "id": "managed-full-profile",
+    "title": "Nexitally-shaped full profile",
+    "claim": "A managed full Quantumult X config keeps only the first [server_local] servers and drops banners, the duplicate, and later sections.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01\nshadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01",
+        "shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "# invented managed full profile — not a live export",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 1,
+          "trimmed": "[general]",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 2,
+          "trimmed": "server_check_url = http://www.google.com/generate_204",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 4,
+          "trimmed": "[dns]",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 5,
+          "trimmed": "server = 223.5.5.5",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 6,
+          "trimmed": "",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 7,
+          "trimmed": "[policy]",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 8,
+          "trimmed": "static = Proxy, HK-01, SG-01, JP-01",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 9,
+          "trimmed": "",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 10,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 11,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 12,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 13,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 14,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "DROP_DUPLICATE",
+          "detail": "exact trimmed line already kept"
+        },
+        {
+          "index": 15,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=Traffic 128GB",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Traffic\""
+        },
+        {
+          "index": 16,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=Expire 2099-01-01",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Expire\""
+        },
+        {
+          "index": 17,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=流量 剩余 12 天",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"流量\""
+        },
+        {
+          "index": 18,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=[Premium]",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"[Premium]\""
+        },
+        {
+          "index": 19,
+          "trimmed": "shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 20,
+          "trimmed": "; commented leftover",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 21,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 22,
+          "trimmed": "[filter_local]",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 23,
+          "trimmed": "host-suffix, example.com, proxy",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 24,
+          "trimmed": "final, proxy",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 25,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 26,
+          "trimmed": "[rewrite_local]",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 27,
+          "trimmed": "; none",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 28,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "info-banners-en-zh",
+    "title": "English and Chinese info banners",
+    "claim": "Traffic / Expire / Reset / Days Left / 流量 / 到期 / 剩余 / 套餐 / [Premium] are DROP_EXCLUDED.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=Traffic",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Traffic\""
+        },
+        {
+          "index": 3,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=Expire",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Expire\""
+        },
+        {
+          "index": 4,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=Reset",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Reset\""
+        },
+        {
+          "index": 5,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=Days Left 3",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Days Left\""
+        },
+        {
+          "index": 6,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=流量",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"流量\""
+        },
+        {
+          "index": 7,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=到期",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"到期\""
+        },
+        {
+          "index": 8,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=剩余",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"剩余\""
+        },
+        {
+          "index": 9,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=套餐",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"套餐\""
+        },
+        {
+          "index": 10,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=node [Premium] stub",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"[Premium]\""
+        },
+        {
+          "index": 11,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "reset-substring-trap",
+    "title": "Reset substring trap",
+    "claim": "HK-Reset-01 and Preset are excluded because Reset is a substring; HK-RST-01 is kept.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-RST-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-RST-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-RST-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-Reset-01",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Reset\""
+        },
+        {
+          "index": 3,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-Preset-01",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"reset\""
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "days-left-spacing",
+    "title": "Days Left vs DaysLeft",
+    "claim": "The exclusion token is the two-word phrase Days Left. DaysLeft is kept.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=DaysLeft",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=DaysLeft"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=DaysLeft",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=Days Left",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Days Left\""
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "premium-as-section",
+    "title": "[Premium] as a later header",
+    "claim": "A [Premium] INI header terminates [server_local]; nodes after it are OUTSIDE_SECTION.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "[Premium]",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "section-cut-by-filter",
+    "title": "Filter section after servers",
+    "claim": "The first [filter_local] header ends the capture. Filter rules are not leaked into the server resource.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "[filter_local]",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "host-suffix, apple.com, proxy",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 4,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 5,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "first-of-two-server-local",
+    "title": "First of two [server_local] blocks",
+    "claim": "Only the first [server_local] block is read.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "[server_local]",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "server-local-at-eof",
+    "title": "Section is last in the file",
+    "claim": "A [server_local] block that runs to EOF is captured in full.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[general]",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 1,
+          "trimmed": "network_check_url = http://bing.com",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 4,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 5,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 6,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "header-mixed-case",
+    "title": "Mixed-case header",
+    "claim": "[Server_Local] matches because the header regex is case-insensitive.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[Server_Local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "[POLICY]",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "static = Proxy, anytls-standard-tls-01",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "header-indented",
+    "title": "Indented header",
+    "claim": "Leading whitespace before [server_local] is allowed.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "header-no-newline",
+    "title": "Header without a following newline",
+    "claim": "[server_local] with no newline after the closing bracket is ERROR_NO_SECTION.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: no usable server entries were found."
+    },
+    "trace": {
+      "error": "Nexitally parser: no usable server entries were found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "result",
+          "code": "ERROR_NO_USABLE",
+          "detail": "section matched but no KEEP lines remain"
+        }
+      ]
+    }
+  },
+  {
+    "id": "glued-header",
+    "title": "Glued header",
+    "claim": "[server_local]anytls=... is not a section header followed by a newline.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    "trace": {
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 1,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        }
+      ]
+    }
+  },
+  {
+    "id": "inner-spaced-header",
+    "title": "Inner-spaced header",
+    "claim": "[server local] does not match [server_local].",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    "trace": {
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server local]",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        }
+      ]
+    }
+  },
+  {
+    "id": "missing-server-local",
+    "title": "No [server_local] section",
+    "claim": "A profile that only has [server_remote] / [policy] returns the missing-section error.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    "trace": {
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[general]",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 1,
+          "trimmed": "resource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 3,
+          "trimmed": "[server_remote]",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 4,
+          "trimmed": "YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL, tag=Nexitally, opt-parser=true",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 5,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 6,
+          "trimmed": "[policy]",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 7,
+          "trimmed": "static = Proxy, resource-tag-regex=^Nexitally",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 8,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        }
+      ]
+    }
+  },
+  {
+    "id": "empty-usable",
+    "title": "Section with no usable servers",
+    "claim": "Comments and banners alone produce the no-usable-servers error.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: no usable server entries were found."
+    },
+    "trace": {
+      "error": "Nexitally parser: no usable server entries were found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "; leftover",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 2,
+          "trimmed": "# leftover",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 3,
+          "trimmed": "// leftover",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 4,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=Traffic 1GB",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"Traffic\""
+        },
+        {
+          "index": 5,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 6,
+          "trimmed": "",
+          "region": "result",
+          "code": "ERROR_NO_USABLE",
+          "detail": "section matched but no KEEP lines remain"
+        }
+      ]
+    }
+  },
+  {
+    "id": "placeholders-only",
+    "title": "Premium and traffic placeholders only",
+    "claim": "A [Premium] stub plus traffic rows is ERROR_NO_USABLE.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: no usable server entries were found."
+    },
+    "trace": {
+      "error": "Nexitally parser: no usable server entries were found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=[Premium]",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"[Premium]\""
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, tag=套餐到期",
+          "region": "section",
+          "code": "DROP_EXCLUDED",
+          "detail": "exclusion substring \"套餐\""
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "result",
+          "code": "ERROR_NO_USABLE",
+          "detail": "section matched but no KEEP lines remain"
+        }
+      ]
+    }
+  },
+  {
+    "id": "protocol-roster",
+    "title": "Official seven-prefix roster",
+    "claim": "anytls, shadowsocks, vmess, vless, trojan, http, and socks5 official samples are kept.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01\nshadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02\nvmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vmess-01\nvless=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vless-01\ntrojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=trojan-tls-01\nhttp=example.com:80,fast-open=false, udp-relay=false, tag=http-01\nsocks5=example.com:80,fast-open=false, udp-relay=false, tag=socks5-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+        "shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02",
+        "vmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vmess-01",
+        "vless=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vless-01",
+        "trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=trojan-tls-01",
+        "http=example.com:80,fast-open=false, udp-relay=false, tag=http-01",
+        "socks5=example.com:80,fast-open=false, udp-relay=false, tag=socks5-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 3,
+          "trimmed": "vmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vmess-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 4,
+          "trimmed": "vless=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vless-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 5,
+          "trimmed": "trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=trojan-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 6,
+          "trimmed": "http=example.com:80,fast-open=false, udp-relay=false, tag=http-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 7,
+          "trimmed": "socks5=example.com:80,fast-open=false, udp-relay=false, tag=socks5-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 8,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "anytls-reality",
+    "title": "AnyTLS Reality sample",
+    "claim": "The official Reality AnyTLS line is kept as a normal anytls= server.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "comments-and-duplicates",
+    "title": "Comments and exact duplicates",
+    "claim": "; # // comments drop. A second copy of the same trimmed line is DROP_DUPLICATE.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "DROP_DUPLICATE",
+          "detail": "exact trimmed line already kept"
+        },
+        {
+          "index": 3,
+          "trimmed": ";anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 4,
+          "trimmed": "#anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 5,
+          "trimmed": "//anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "section",
+          "code": "DROP_COMMENT",
+          "detail": "comment prefix ; # or //"
+        },
+        {
+          "index": 6,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 7,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bom-crlf",
+    "title": "UTF-8 BOM and CRLF",
+    "claim": "A BOM and Windows newlines are normalized before the section regex runs.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "unsupported-family",
+    "title": "Unsupported families",
+    "claim": "wireguard, hysteria2, tuic, and ssr= prefixes are DROP_UNSUPPORTED. shadowsocks + ssr-protocol is kept.",
+    "parsed": {
+      "content": "shadowsocks=example.com:443, method=chacha20, password=pwd, ssr-protocol=auth_chain_b, ssr-protocol-param=def, obfs=tls1.2_ticket_fastauth, obfs-host=apple.com, tag=ssr",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "shadowsocks=example.com:443, method=chacha20, password=pwd, ssr-protocol=auth_chain_b, ssr-protocol-param=def, obfs=tls1.2_ticket_fastauth, obfs-host=apple.com, tag=ssr"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "wireguard=192.0.2.10:51820, tag=wg-01",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 2,
+          "trimmed": "hysteria2=example.com:443, tag=hy2-01",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 3,
+          "trimmed": "tuic=example.com:443, tag=tuic-01",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 4,
+          "trimmed": "ssr=example.com:443, tag=ssr-scheme",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 5,
+          "trimmed": "shadowsocks=example.com:443, method=chacha20, password=pwd, ssr-protocol=auth_chain_b, ssr-protocol-param=def, obfs=tls1.2_ticket_fastauth, obfs-host=apple.com, tag=ssr",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 6,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "policy-lookalikes",
+    "title": "Policy lines inside the section",
+    "claim": "static= / available= lines are not server schemes.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "static = Proxy, HK-01, SG-01",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 3,
+          "trimmed": "available = Auto, HK-01, SG-01",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "filter-rules-inside-section",
+    "title": "Filter rules inside the section",
+    "claim": "host, and ip-cidr, lines inside [server_local] are DROP_UNSUPPORTED.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "host, www.example.com, proxy",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 3,
+          "trimmed": "ip-cidr, 192.0.2.0/24, direct",
+          "region": "section",
+          "code": "DROP_UNSUPPORTED",
+          "detail": "prefix is not a supported Quantumult X server scheme"
+        },
+        {
+          "index": 4,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "html-interstitial",
+    "title": "HTML login page",
+    "claim": "An HTML body has no [server_local] header and errors.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    "trace": {
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "<!DOCTYPE html>",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 1,
+          "trimmed": "<html><body>",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 2,
+          "trimmed": "<form action=\"https://example.com/login\">",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 3,
+          "trimmed": "<input name=\"user\"/>",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 4,
+          "trimmed": "</form>",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 5,
+          "trimmed": "</body></html>",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 6,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        }
+      ]
+    }
+  },
+  {
+    "id": "clash-yaml",
+    "title": "Clash YAML",
+    "claim": "A Clash proxies document is not a Quantumult X profile.",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    "trace": {
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "proxies:",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 1,
+          "trimmed": "- name: HK-01",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 2,
+          "trimmed": "type: ss",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 3,
+          "trimmed": "server: example.com",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 4,
+          "trimmed": "port: 443",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 5,
+          "trimmed": "cipher: chacha20-ietf-poly1305",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 6,
+          "trimmed": "password: pwd",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 7,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wrong-section-server-remote",
+    "title": "Servers only under [server_remote]",
+    "claim": "The parser looks for [server_local], not [server_remote].",
+    "parsed": {
+      "content": null,
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    "trace": {
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "kept": [],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_remote]",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "file",
+          "code": "ERROR_NO_SECTION",
+          "detail": "no [server_local] header followed by a newline"
+        }
+      ]
+    }
+  },
+  {
+    "id": "preamble-then-section",
+    "title": "Preamble then section",
+    "claim": "Vendor banners before [server_local] are OUTSIDE_SECTION and do not block a later valid section.",
+    "parsed": {
+      "content": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "Thanks for using this invented sample.",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 1,
+          "trimmed": "Traffic: 0 / 0",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 2,
+          "trimmed": "",
+          "region": "preamble",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        },
+        {
+          "index": 3,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 4,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 5,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "protocol-case-and-spacing",
+    "title": "Scheme case and spacing",
+    "claim": "ANYTLS = and ShadowSocks= are kept. A space before = is allowed.",
+    "parsed": {
+      "content": "ANYTLS = example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=ANYTLS-CASE\nShadowSocks=example.com:80, method=chacha20, password=pwd, tag=SS-CASE",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "ANYTLS = example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=ANYTLS-CASE",
+        "ShadowSocks=example.com:80, method=chacha20, password=pwd, tag=SS-CASE"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "ANYTLS = example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=ANYTLS-CASE",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "ShadowSocks=example.com:80, method=chacha20, password=pwd, tag=SS-CASE",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ipv6-and-tabs",
+    "title": "IPv6 and tab padding",
+    "claim": "A documented IPv6 literal and a tab-indented server line are kept after trim.",
+    "parsed": {
+      "content": "anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=v6-01\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=v6-01",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=v6-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  },
+  {
+    "id": "quoted-overlong-params",
+    "title": "Long official TLS params",
+    "claim": "Official tls-pubkey-sha256 / Reality fields do not confuse the prefix matcher.",
+    "parsed": {
+      "content": "http=example.com:443, username=name, password=pwd, over-tls=true, tls-host=example.com, tls-verification=true, tls-pubkey-sha256=eb5ec6684564fd0d04975903ed75342d1b9fdc2096ea54b4cf8caf4740f4ae25, fast-open=false, udp-relay=false, tag=http-tls-02\nanytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01",
+      "error": null
+    },
+    "trace": {
+      "error": null,
+      "kept": [
+        "http=example.com:443, username=name, password=pwd, over-tls=true, tls-host=example.com, tls-verification=true, tls-pubkey-sha256=eb5ec6684564fd0d04975903ed75342d1b9fdc2096ea54b4cf8caf4740f4ae25, fast-open=false, udp-relay=false, tag=http-tls-02",
+        "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01"
+      ],
+      "lines": [
+        {
+          "index": 0,
+          "trimmed": "[server_local]",
+          "region": "header",
+          "code": "SECTION_HEADER",
+          "detail": "section header; capture starts on the following line"
+        },
+        {
+          "index": 1,
+          "trimmed": "http=example.com:443, username=name, password=pwd, over-tls=true, tls-host=example.com, tls-verification=true, tls-pubkey-sha256=eb5ec6684564fd0d04975903ed75342d1b9fdc2096ea54b4cf8caf4740f4ae25, fast-open=false, udp-relay=false, tag=http-tls-02",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 2,
+          "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01",
+          "region": "section",
+          "code": "KEEP",
+          "detail": "supported server line"
+        },
+        {
+          "index": 3,
+          "trimmed": "",
+          "region": "after",
+          "code": "OUTSIDE_SECTION",
+          "detail": "outside the first [server_local] capture"
+        }
+      ]
+    }
+  }
+]

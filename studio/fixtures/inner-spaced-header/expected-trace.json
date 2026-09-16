@@ -1,0 +1,27 @@
+{
+  "error": "Nexitally parser: [server_local] section was not found.",
+  "kept": [],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "[server local]",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 1,
+      "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 2,
+      "trimmed": "",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    }
+  ]
+}

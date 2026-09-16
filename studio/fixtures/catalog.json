@@ -1,0 +1,154 @@
+{
+  "cases": [
+    {
+      "id": "managed-full-profile",
+      "title": "Nexitally-shaped full profile",
+      "claim": "A managed full Quantumult X config keeps only the first [server_local] servers and drops banners, the duplicate, and later sections."
+    },
+    {
+      "id": "info-banners-en-zh",
+      "title": "English and Chinese info banners",
+      "claim": "Traffic / Expire / Reset / Days Left / 流量 / 到期 / 剩余 / 套餐 / [Premium] are DROP_EXCLUDED."
+    },
+    {
+      "id": "reset-substring-trap",
+      "title": "Reset substring trap",
+      "claim": "HK-Reset-01 and Preset are excluded because Reset is a substring; HK-RST-01 is kept."
+    },
+    {
+      "id": "days-left-spacing",
+      "title": "Days Left vs DaysLeft",
+      "claim": "The exclusion token is the two-word phrase Days Left. DaysLeft is kept."
+    },
+    {
+      "id": "premium-as-section",
+      "title": "[Premium] as a later header",
+      "claim": "A [Premium] INI header terminates [server_local]; nodes after it are OUTSIDE_SECTION."
+    },
+    {
+      "id": "section-cut-by-filter",
+      "title": "Filter section after servers",
+      "claim": "The first [filter_local] header ends the capture. Filter rules are not leaked into the server resource."
+    },
+    {
+      "id": "first-of-two-server-local",
+      "title": "First of two [server_local] blocks",
+      "claim": "Only the first [server_local] block is read."
+    },
+    {
+      "id": "server-local-at-eof",
+      "title": "Section is last in the file",
+      "claim": "A [server_local] block that runs to EOF is captured in full."
+    },
+    {
+      "id": "header-mixed-case",
+      "title": "Mixed-case header",
+      "claim": "[Server_Local] matches because the header regex is case-insensitive."
+    },
+    {
+      "id": "header-indented",
+      "title": "Indented header",
+      "claim": "Leading whitespace before [server_local] is allowed."
+    },
+    {
+      "id": "header-no-newline",
+      "title": "Header without a following newline",
+      "claim": "[server_local] with no newline after the closing bracket is ERROR_NO_SECTION."
+    },
+    {
+      "id": "glued-header",
+      "title": "Glued header",
+      "claim": "[server_local]anytls=... is not a section header followed by a newline."
+    },
+    {
+      "id": "inner-spaced-header",
+      "title": "Inner-spaced header",
+      "claim": "[server local] does not match [server_local]."
+    },
+    {
+      "id": "missing-server-local",
+      "title": "No [server_local] section",
+      "claim": "A profile that only has [server_remote] / [policy] returns the missing-section error."
+    },
+    {
+      "id": "empty-usable",
+      "title": "Section with no usable servers",
+      "claim": "Comments and banners alone produce the no-usable-servers error."
+    },
+    {
+      "id": "placeholders-only",
+      "title": "Premium and traffic placeholders only",
+      "claim": "A [Premium] stub plus traffic rows is ERROR_NO_USABLE."
+    },
+    {
+      "id": "protocol-roster",
+      "title": "Official seven-prefix roster",
+      "claim": "anytls, shadowsocks, vmess, vless, trojan, http, and socks5 official samples are kept."
+    },
+    {
+      "id": "anytls-reality",
+      "title": "AnyTLS Reality sample",
+      "claim": "The official Reality AnyTLS line is kept as a normal anytls= server."
+    },
+    {
+      "id": "comments-and-duplicates",
+      "title": "Comments and exact duplicates",
+      "claim": "; # // comments drop. A second copy of the same trimmed line is DROP_DUPLICATE."
+    },
+    {
+      "id": "bom-crlf",
+      "title": "UTF-8 BOM and CRLF",
+      "claim": "A BOM and Windows newlines are normalized before the section regex runs."
+    },
+    {
+      "id": "unsupported-family",
+      "title": "Unsupported families",
+      "claim": "wireguard, hysteria2, tuic, and ssr= prefixes are DROP_UNSUPPORTED. shadowsocks + ssr-protocol is kept."
+    },
+    {
+      "id": "policy-lookalikes",
+      "title": "Policy lines inside the section",
+      "claim": "static= / available= lines are not server schemes."
+    },
+    {
+      "id": "filter-rules-inside-section",
+      "title": "Filter rules inside the section",
+      "claim": "host, and ip-cidr, lines inside [server_local] are DROP_UNSUPPORTED."
+    },
+    {
+      "id": "html-interstitial",
+      "title": "HTML login page",
+      "claim": "An HTML body has no [server_local] header and errors."
+    },
+    {
+      "id": "clash-yaml",
+      "title": "Clash YAML",
+      "claim": "A Clash proxies document is not a Quantumult X profile."
+    },
+    {
+      "id": "wrong-section-server-remote",
+      "title": "Servers only under [server_remote]",
+      "claim": "The parser looks for [server_local], not [server_remote]."
+    },
+    {
+      "id": "preamble-then-section",
+      "title": "Preamble then section",
+      "claim": "Vendor banners before [server_local] are OUTSIDE_SECTION and do not block a later valid section."
+    },
+    {
+      "id": "protocol-case-and-spacing",
+      "title": "Scheme case and spacing",
+      "claim": "ANYTLS = and ShadowSocks= are kept. A space before = is allowed."
+    },
+    {
+      "id": "ipv6-and-tabs",
+      "title": "IPv6 and tab padding",
+      "claim": "A documented IPv6 literal and a tab-indented server line are kept after trim."
+    },
+    {
+      "id": "quoted-overlong-params",
+      "title": "Long official TLS params",
+      "claim": "Official tls-pubkey-sha256 / Reality fields do not confuse the prefix matcher."
+    }
+  ]
+}

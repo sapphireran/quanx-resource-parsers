@@ -1,0 +1,37 @@
+{
+  "error": null,
+  "kept": [
+    "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+    "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01"
+  ],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "[server_local]",
+      "region": "header",
+      "code": "SECTION_HEADER",
+      "detail": "section header; capture starts on the following line"
+    },
+    {
+      "index": 1,
+      "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 2,
+      "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 3,
+      "trimmed": "",
+      "region": "after",
+      "code": "OUTSIDE_SECTION",
+      "detail": "outside the first [server_local] capture"
+    }
+  ]
+}

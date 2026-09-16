@@ -1,0 +1,4 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01
+shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02

@@ -1,0 +1,69 @@
+{
+  "error": "Nexitally parser: [server_local] section was not found.",
+  "kept": [],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "[general]",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 1,
+      "trimmed": "resource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 2,
+      "trimmed": "",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 3,
+      "trimmed": "[server_remote]",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 4,
+      "trimmed": "YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL, tag=Nexitally, opt-parser=true",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 5,
+      "trimmed": "",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 6,
+      "trimmed": "[policy]",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 7,
+      "trimmed": "static = Proxy, resource-tag-regex=^Nexitally",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 8,
+      "trimmed": "",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    }
+  ]
+}
