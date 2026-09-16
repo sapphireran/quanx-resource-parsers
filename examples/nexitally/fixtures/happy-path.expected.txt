@@ -1,0 +1,3 @@
+anytls=node-01.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=Nexitally-HK-01
+anytls=node-02.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=Nexitally-JP-01
+trojan=node-03.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, tls-verification=true, udp-relay=true, tag=Nexitally-SG-01

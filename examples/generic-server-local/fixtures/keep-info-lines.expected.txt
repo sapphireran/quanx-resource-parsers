@@ -1,0 +1,2 @@
+anytls=info.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, tag=Traffic: 0.00 GB
+anytls=node-01.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, tag=Usable-HK

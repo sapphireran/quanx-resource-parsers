@@ -1,0 +1,2 @@
+anytls=node-01.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, tag=保留-HK
+anytls=node-02.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, tag=保留-JP

@@ -1,0 +1,22 @@
+{
+  "parser": "extract-server-local.js",
+  "title": "Generic [server_local] extractor fixtures",
+  "notes": [
+    "Educational parser only. It is not used by the Nexitally Quantumult X profile.",
+    "Compare keep-info-lines with examples/nexitally/fixtures/placeholders-only.conf."
+  ],
+  "cases": [
+    {
+      "name": "keep-info-lines",
+      "description": "Raw extract keeps traffic-info lines that the Nexitally parser drops.",
+      "input": "fixtures/keep-info-lines.conf",
+      "expectedContent": "fixtures/keep-info-lines.expected.txt"
+    },
+    {
+      "name": "missing-section",
+      "description": "Still fail when [server_local] is absent.",
+      "input": "fixtures/missing-section.conf",
+      "expectedError": "Generic extractor: [server_local] section was not found."
+    }
+  ]
+}
