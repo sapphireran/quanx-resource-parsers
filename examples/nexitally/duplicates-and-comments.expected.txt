@@ -1,0 +1,2 @@
+anytls=dup-01.example.invalid:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=dup-01
+anytls=keep-unique.example.invalid:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=keep-unique

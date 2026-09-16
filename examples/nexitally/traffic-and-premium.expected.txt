@@ -1,0 +1,2 @@
+anytls=keep-01.example.invalid:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=keep-tokyo-01
+anytls=keep-02.example.invalid:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=keep-osaka-01
