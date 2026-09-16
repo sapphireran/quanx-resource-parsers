@@ -5,17 +5,23 @@
  * receives that response locally, extracts [server_local], and returns only
  * valid server entries to [server_remote]. It contains no subscription URL,
  * account identifier, node password, or other private information.
+ *
+ * On device, Quantumult X injects $resource / $done. In Node, the same file
+ * exports parseNexitallyResource for scripts/check-examples.js.
  */
 
-var text = String($resource.content || "")
-  .replace(/^\uFEFF/, "")
-  .replace(/\r\n/g, "\n");
+function parseNexitallyResource(content) {
+  var text = String(content || "")
+    .replace(/^\uFEFF/, "")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n");
 
-var match = text.match(/(?:^|\n)\s*\[server_local\]\s*\n([\s\S]*?)(?=\n\s*\[[^\]]+\]\s*(?:\n|$)|$)/i);
+  var match = text.match(/(?:^|\n)\s*\[server_local\]\s*\n([\s\S]*?)(?=\n\s*\[[^\]]+\]\s*(?:\n|$)|$)/i);
 
-if (!match) {
-  $done({ error: "Nexitally parser: [server_local] section was not found." });
-} else {
+  if (!match) {
+    return { error: "Nexitally parser: [server_local] section was not found." };
+  }
+
   var supported = /^(?:anytls|shadowsocks|vmess|vless|trojan|http|socks5)\s*=/i;
   var excluded = /(?:\[Premium\]|Traffic|Expire|Reset|Days Left|流量|到期|剩余|套餐)/i;
   var seen = {};
@@ -31,8 +37,18 @@ if (!match) {
     });
 
   if (!servers.length) {
-    $done({ error: "Nexitally parser: no usable server entries were found." });
-  } else {
-    $done({ content: servers.join("\n") });
+    return { error: "Nexitally parser: no usable server entries were found." };
   }
+
+  return { content: servers.join("\n") };
+}
+
+if (typeof $resource !== "undefined" && typeof $done === "function") {
+  $done(parseNexitallyResource($resource.content));
+}
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    parseNexitallyResource: parseNexitallyResource
+  };
 }

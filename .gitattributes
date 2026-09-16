@@ -1,0 +1,3 @@
+# Keep the BOM + CRLF fixture byte-stable so the parser's newline/BOM
+# handling can be regression-tested.
+examples/nexitally/fixtures/crlf-and-bom.conf text eol=crlf

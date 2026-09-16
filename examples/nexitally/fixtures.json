@@ -1,0 +1,56 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "notes": "All hosts and passwords are fake. Do not replace them with a live subscription.",
+  "cases": [
+    {
+      "name": "managed-full-config",
+      "input": "examples/nexitally/managed-full-config.conf",
+      "expected": "examples/nexitally/expected-servers.txt"
+    },
+    {
+      "name": "mixed-protocols",
+      "input": "examples/nexitally/fixtures/mixed-protocols.conf",
+      "expected": "examples/nexitally/expected/mixed-protocols.txt"
+    },
+    {
+      "name": "duplicates-and-premium",
+      "input": "examples/nexitally/fixtures/duplicates-and-premium.conf",
+      "expected": "examples/nexitally/expected/duplicates-and-premium.txt"
+    },
+    {
+      "name": "crlf-and-bom",
+      "input": "examples/nexitally/fixtures/crlf-and-bom.conf",
+      "expected": "examples/nexitally/expected-servers.txt"
+    },
+    {
+      "name": "header-case-and-spacing",
+      "input": "examples/nexitally/fixtures/header-case-and-spacing.conf",
+      "expected": "examples/nexitally/expected/header-case-and-spacing.txt"
+    },
+    {
+      "name": "section-at-eof",
+      "input": "examples/nexitally/fixtures/section-at-eof.conf",
+      "expected": "examples/nexitally/expected/section-at-eof.txt"
+    },
+    {
+      "name": "policy-must-not-leak",
+      "input": "examples/nexitally/fixtures/policy-must-not-leak.conf",
+      "expected": "examples/nexitally/expected/policy-must-not-leak.txt"
+    },
+    {
+      "name": "missing-section",
+      "input": "examples/nexitally/fixtures/missing-section.conf",
+      "error": "Nexitally parser: [server_local] section was not found."
+    },
+    {
+      "name": "empty-servers",
+      "input": "examples/nexitally/fixtures/empty-servers.conf",
+      "error": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "name": "already-a-server-list",
+      "input": "examples/nexitally/fixtures/already-a-server-list.txt",
+      "error": "Nexitally parser: [server_local] section was not found."
+    }
+  ]
+}

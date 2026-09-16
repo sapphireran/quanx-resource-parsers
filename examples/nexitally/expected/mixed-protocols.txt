@@ -1,0 +1,7 @@
+anytls=anytls-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=ANYTLS-01
+shadowsocks=ss-01.example.test:80, method=chacha20, password=example-password-not-real, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=SS-01
+vmess=vmess-01.example.test:443, method=chacha20-poly1305, password=00000000-0000-4000-8000-000000000001, obfs=wss, obfs-uri=/ws, fast-open=false, udp-relay=false, tag=VMESS-01
+vless=vless-01.example.test:443, method=none, password=00000000-0000-4000-8000-000000000002, obfs=over-tls, fast-open=false, udp-relay=false, tag=VLESS-01
+trojan=trojan-01.example.test:443, password=example-password-not-real, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=TROJAN-01
+http=http-01.example.test:80, username=example-user, password=example-password-not-real, fast-open=false, udp-relay=false, tag=HTTP-01
+socks5=socks-01.example.test:443, username=example-user, password=example-password-not-real, over-tls=true, tls-host=example.com, tls-verification=true, fast-open=false, udp-relay=false, tag=SOCKS5-01
