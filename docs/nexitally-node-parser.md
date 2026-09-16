@@ -36,8 +36,8 @@ The extractor stops at the next `[section]` header or at end of file. That
 boundary is what prevents `[policy]` lines from leaking into the server
 resource.
 
-A redacted managed-file fixture lives under `examples/nexitally/` once that
-directory is added.
+See the annotated fixture:
+[`../examples/nexitally/managed-full-config.conf`](../examples/nexitally/managed-full-config.conf).
 
 ## Extraction steps
 
@@ -120,7 +120,8 @@ Quantumult X stores that body on the `[server_remote]` resource tagged
 | `Nexitally parser: [server_local] section was not found.` | The URL is probably already a server list, HTML, or another client's format. |
 | `Nexitally parser: no usable server entries were found.` | The section existed but every line was a comment, placeholder, duplicate, or unsupported type. |
 
-Those strings are stable. Example fixtures and the checker assert them.
+Those strings are part of the example checker. If they change, update
+[`../examples/nexitally/fixtures.json`](../examples/nexitally/fixtures.json).
 
 ## What stays local
 
@@ -135,17 +136,19 @@ repository use `*.example.test` hosts and `example-password-not-real`.
 
 ## Dual-mode export
 
-On device, Quantumult X defines `$resource` and `$done`. The script is written
-so a local Node checker can call the same extraction rules without sending
-network requests.
+On device, Quantumult X defines `$resource` and `$done`. In Node, the same
+file also exports `parseNexitallyResource` so `scripts/check-examples.js` can
+call it without `vm`. The export is ignored on device because `module` is not
+part of the Quantumult X parser runtime.
 
 ## Maintenance checklist
 
 When Nexitally changes the managed file:
 
-1. Save a **redacted** copy of the new `[server_local]` shape (replace hosts,
-   passwords, and any account text).
-2. Confirm the extractor still returns only live server lines.
+1. Save a **redacted** copy of the new `[server_local]` shape into
+   `examples/nexitally/` (replace hosts, passwords, and any account text).
+2. Run `node scripts/check-examples.js`.
 3. If a new protocol prefix appears, add it to the `supported` regex **and** to
    [qx-server-line-cheatsheet.md](qx-server-line-cheatsheet.md).
-4. If a new metadata tag appears, add it to the `excluded` regex.
+4. If a new metadata tag appears, add it to `excluded` and to the
+   `duplicates-and-premium` fixture.

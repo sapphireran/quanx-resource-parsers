@@ -108,8 +108,7 @@ and/or `server-tag-regex`:
 static = nexitally, resource-tag-regex=^Nexitally, img-url=https://example.com/icon.png
 ```
 
-A local-profile snippet for that pattern lives under `examples/quantumult-x/`
-once examples are added.
+See [`../examples/quantumult-x/policy-with-nexitally-resource.conf`](../examples/quantumult-x/policy-with-nexitally-resource.conf).
 
 ## Parameterized UI (`$parser`)
 
@@ -127,7 +126,7 @@ personally maintained here.
 
 ## Local Node simulation
 
-On a laptop, Quantumult X is not required to check extraction rules. A local
-runner can inject `$resource` / `$done` and compare output to files under
-`examples/`. That path never sends network requests and never needs a real
-subscription URL.
+On a laptop, Quantumult X is not required to check extraction rules. The
+example runner injects `$resource` / `$done` (or `require`s the dual-mode
+export) and compares output to files under `examples/`. That path never sends
+network requests and never needs a real subscription URL.

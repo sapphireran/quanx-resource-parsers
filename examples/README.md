@@ -16,15 +16,14 @@ is never stored here.
 
 ## How to run them
 
-From the repository root, after the example checker is added:
+From the repository root:
 
 ```bash
 node scripts/check-examples.js
 node scripts/run-parser.js examples/nexitally/managed-full-config.conf
 ```
 
-Until that checker exists, the expected `*.txt` files are the source of truth
-for what [`../nexitally-node-parser.js`](../nexitally-node-parser.js) should emit.
+The catalog of fixtures is [../docs/example-catalog.md](../docs/example-catalog.md).
 
 ## What a fixture is allowed to contain
 

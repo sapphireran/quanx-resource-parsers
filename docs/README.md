@@ -17,10 +17,10 @@ profile and refresh only the server list.
 | [nexitally-node-parser.md](nexitally-node-parser.md) | How the Nexitally `[server_local]` extractor works |
 | [qx-server-line-cheatsheet.md](qx-server-line-cheatsheet.md) | Example Quantumult X server lines used in this repo |
 | [privacy-and-safety.md](privacy-and-safety.md) | What must never be committed |
+| [troubleshooting.md](troubleshooting.md) | Failures seen when wiring the parser into a local profile |
+| [example-catalog.md](example-catalog.md) | Every checked-in fixture and the expected parser result |
 
-Runnable copies of the fixtures live in [`../examples`](../examples) once that
-directory is added. Troubleshooting and an example catalog will land next to
-those fixtures.
+Runnable copies of those fixtures live in [`../examples`](../examples).
 
 ## How to read this with the code
 
@@ -29,7 +29,9 @@ those fixtures.
 2. Read [nexitally-node-parser.md](nexitally-node-parser.md) for the extraction
    rules.
 3. Open [`../nexitally-node-parser.js`](../nexitally-node-parser.js) next to
-   the Nexitally notes above.
+   [`../examples/nexitally/managed-full-config.conf`](../examples/nexitally/managed-full-config.conf).
+4. Run `node scripts/check-examples.js` from the repository root. The checker
+   loads the same parser Quantumult X would run.
 
 ## Scope
 
