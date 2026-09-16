@@ -1,0 +1,2 @@
+anytls = tw-tpe-01.example.test:443, password=example-anytls-password, over-tls=true, tls-verification=true, tls-host=tw-tpe-01.example.test, tag=TW-Tpe-01
+shadowsocks = kr-sel-01.example.test:443, method=chacha20-ietf-poly1305, password=example-ss-password, tag=KR-Sel-01

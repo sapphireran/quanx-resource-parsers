@@ -1,0 +1,2 @@
+anytls = sg-cbd-01.example.test:443, password=example-anytls-password, over-tls=true, tls-verification=true, tls-host=sg-cbd-01.example.test, tag=SG-Cbd-01
+trojan = de-fra-01.example.test:443, password=example-trojan-password, over-tls=true, tls-host=de-fra-01.example.test, tls-verification=true, tag=DE-Fra-01

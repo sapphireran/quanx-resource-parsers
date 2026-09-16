@@ -1,0 +1,4 @@
+anytls = hk-central-01.example.test:443, password=example-anytls-password, over-tls=true, tls-verification=true, tls-host=hk-central-01.example.test, udp-relay=true, tag=HK-Central-01
+anytls = hk-central-02.example.test:443, password=example-anytls-password, over-tls=true, tls-verification=true, tls-host=hk-central-02.example.test, udp-relay=true, tag=HK-Central-02
+shadowsocks = jp-osaka-01.example.test:443, method=chacha20-ietf-poly1305, password=example-ss-password, obfs=http, obfs-host=download.windowsupdate.com, udp-relay=true, tag=JP-Osaka-01
+vmess = us-sfo-01.example.test:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000001, obfs=wss, obfs-host=us-sfo-01.example.test, obfs-uri=/example, tls13=true, udp-relay=true, tag=US-Sfo-01
