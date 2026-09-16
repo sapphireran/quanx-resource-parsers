@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nexitally parser pipeline — personal field guide</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6f1e7;
+      --ink: #1d1a16;
+      --card: #fffaf0;
+      --keep: #1f6b3a;
+      --drop: #8a2b2b;
+      --line: #c9bba3;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1b1814;
+        --ink: #f3eadc;
+        --card: #26211b;
+        --keep: #7dcea0;
+        --drop: #f5b7b1;
+        --line: #5a4f40;
+      }
+    }
+    body {
+      margin: 0 auto;
+      max-width: 52rem;
+      padding: 2rem 1.25rem 4rem;
+      font: 16px/1.5 ui-sans-serif, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    h1, h2 { font-weight: 650; letter-spacing: -0.02em; }
+    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; }
+    pre {
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 0.9rem 1rem;
+      overflow: auto;
+    }
+    .row { display: grid; gap: 0.75rem; }
+    @media (min-width: 720px) {
+      .flow { display: grid; grid-template-columns: 1fr 1.4fr; gap: 1rem; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+    }
+    .keep { color: var(--keep); font-weight: 650; }
+    .drop { color: var(--drop); font-weight: 650; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95em; }
+    th, td { border-top: 1px solid var(--line); padding: 0.4rem 0.35rem; text-align: left; vertical-align: top; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <h1>Nexitally parser pipeline</h1>
+  <p>
+    Personal, source-faithful sketch of <code>nexitally-node-parser.js</code>.
+    Quantumult X downloads the managed full configuration.
+    This script keeps server lines and throws the rest away.
+  </p>
+
+  <div class="flow">
+    <div class="card">
+      <h2>In</h2>
+      <p><code>$resource.content</code> — a whole Quantumult X profile, often with <code>[general]</code>, <code>[policy]</code>, <code>[server_local]</code>, filters, rewrite, MitM.</p>
+      <p>The private URL stays in Quantumult X. The script never reads <code>$resource.link</code>.</p>
+    </div>
+    <div class="card">
+      <h2>Out</h2>
+      <p><span class="keep">$done({ content })</span> — kept server lines, one per line, no section header.</p>
+      <p><span class="drop">$done({ error })</span> — either no <code>[server_local]</code>, or the sieve kept nothing.</p>
+    </div>
+  </div>
+
+  <h2>Sieve</h2>
+  <pre>BOM strip → CRLF to LF → first [server_local]
+    → trim each line
+    → drop empty / ;#// comments
+    → drop if not anytls|shadowsocks|vmess|vless|trojan|http|socks5 =
+    → drop if [Premium]|Traffic|Expire|Reset|Days Left|流量|到期|剩余|套餐
+    → drop exact duplicates
+    → join keeps with \\n</pre>
+
+  <h2>False friends worth remembering</h2>
+  <table>
+    <thead>
+      <tr><th>Fragment</th><th>Today</th><th>Because</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>tag=Preset-HK</code></td><td class="drop">drop</td><td><code>Preset</code> contains <code>Reset</code></td></tr>
+      <tr><td><code>tag=unexpired-cache</code></td><td class="drop">drop</td><td><code>unexpired</code> contains <code>Expire</code></td></tr>
+      <tr><td><code>https=…</code></td><td class="drop">drop</td><td>only <code>http=</code> is listed</td></tr>
+      <tr><td><code>shadowsocks2022=…</code></td><td class="drop">drop</td><td>digits sit before <code>=</code></td></tr>
+      <tr><td><code>anytls=…, tag=HK # note</code></td><td class="keep">keep</td><td>inline <code>#</code> is not a comment</td></tr>
+    </tbody>
+  </table>
+
+  <p>Companion pages: <a href="04-source-walkthrough.md">source walkthrough</a> · <a href="05-keep-drop-and-false-friends.md">keep / drop</a> · <a href="../examples/README.md">examples</a>.</p>
+</body>
+</html>
