@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.conf text eol=lf
+*.expected.txt text eol=lf
+*.error.txt text eol=lf
+lab/fixtures/crlf-utf8-bom.conf binary

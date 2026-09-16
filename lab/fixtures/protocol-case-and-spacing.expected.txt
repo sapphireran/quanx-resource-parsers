@@ -1,0 +1,2 @@
+ANYTLS=upper.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Upper
+ShadowSocks = spaced.example.invalid:443, method=chacha20, password=placeholder, tag=Spaced

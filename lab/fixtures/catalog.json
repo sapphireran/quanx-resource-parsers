@@ -1,0 +1,246 @@
+{
+  "description": "Sanitized personal fixtures for nexitally-node-parser.js. Hosts use .example.invalid. Passwords are public placeholders from Quantumult X sample.conf or the word placeholder.",
+  "fixtures": [
+    {
+      "id": "nexitally-style-full",
+      "title": "Nexitally-style full configuration",
+      "title_zh": "拟真 Nexitally 完整配置",
+      "kind": "content",
+      "input": "lab/fixtures/nexitally-style-full.conf",
+      "expect": "lab/fixtures/nexitally-style-full.expected.txt",
+      "notes": "Mimics a managed Quantumult X export: DNS, policy, Chinese node names, traffic rows, a [Premium] stub section, a duplicate, and later filter rules. Only the three real AnyTLS nodes survive.",
+      "notes_zh": "模拟机场完整配置：中文节点名、流量行、[Premium] 分段、重复行。只保留三台真实 AnyTLS。"
+    },
+    {
+      "id": "zh-info-nodes",
+      "title": "Chinese traffic / expiry rows",
+      "title_zh": "中文流量与到期行",
+      "kind": "content",
+      "input": "lab/fixtures/zh-info-nodes.conf",
+      "expect": "lab/fixtures/zh-info-nodes.expected.txt",
+      "notes": "Lines containing 剩余, 流量, 到期, or 套餐 are dropped even when they use a supported protocol prefix.",
+      "notes_zh": "节点行里只要出现 剩余 / 流量 / 到期 / 套餐 就会被丢掉。"
+    },
+    {
+      "id": "en-info-nodes",
+      "title": "English traffic / expiry rows",
+      "title_zh": "英文流量与到期行",
+      "kind": "content",
+      "input": "lab/fixtures/en-info-nodes.conf",
+      "expect": "lab/fixtures/en-info-nodes.expected.txt",
+      "notes": "Traffic, Expire, Reset, and Days Left are substring matches. Reset also matches inside other words; see reset-substring.",
+      "notes_zh": "Traffic / Expire / Reset / Days Left 是子串匹配。Reset 也会误伤其它单词。"
+    },
+    {
+      "id": "premium-tag-and-stub",
+      "title": "[Premium] in a tag and as a later section",
+      "title_zh": "标签里的 [Premium] 与后续分段",
+      "kind": "content",
+      "input": "lab/fixtures/premium-tag-and-stub.conf",
+      "expect": "lab/fixtures/premium-tag-and-stub.expected.txt",
+      "notes": "A server line whose tag contains [Premium] is dropped. A later [Premium] header ends [server_local], so nodes after that header are never seen.",
+      "notes_zh": "tag 含 [Premium] 的行会被丢。后面的 [Premium] 分段会结束 [server_local]。"
+    },
+    {
+      "id": "official-protocol-mix",
+      "title": "Official Quantumult X protocol samples",
+      "title_zh": "官方协议样例混合",
+      "kind": "content",
+      "input": "lab/fixtures/official-protocol-mix.conf",
+      "expect": "lab/fixtures/official-protocol-mix.expected.txt",
+      "notes": "Uncommented lines adapted from crossutility/Quantumult-X sample.conf: AnyTLS, SS2022, VMess, VLESS Reality Vision, Trojan, HTTP, SOCKS5.",
+      "notes_zh": "改编自官方 sample.conf 的协议行，全部应被保留。"
+    },
+    {
+      "id": "unsupported-family",
+      "title": "Unsupported protocol prefixes",
+      "title_zh": "不支持的协议前缀",
+      "kind": "content",
+      "input": "lab/fixtures/unsupported-family.conf",
+      "expect": "lab/fixtures/unsupported-family.expected.txt",
+      "notes": "hysteria2, tuic, wireguard, and ssh are not in the keep list. A following AnyTLS line is kept.",
+      "notes_zh": "hysteria2 / tuic / wireguard / ssh 不在保留列表。"
+    },
+    {
+      "id": "comment-styles",
+      "title": "Three Quantumult X comment styles",
+      "title_zh": "三种注释写法",
+      "kind": "content",
+      "input": "lab/fixtures/comment-styles.conf",
+      "expect": "lab/fixtures/comment-styles.expected.txt",
+      "notes": "Official sample.conf treats lines starting with ; # or // as comments. Those prefixes are dropped before protocol matching.",
+      "notes_zh": "以 ; # // 开头的行按官方规则当注释。"
+    },
+    {
+      "id": "duplicate-after-trim",
+      "title": "Duplicates after trim",
+      "title_zh": "去空白后的重复行",
+      "kind": "content",
+      "input": "lab/fixtures/duplicate-after-trim.conf",
+      "expect": "lab/fixtures/duplicate-after-trim.expected.txt",
+      "notes": "Leading spaces or tabs do not create a second node. Dedup is exact-string after trim.",
+      "notes_zh": "先 trim 再按整行去重。"
+    },
+    {
+      "id": "crlf-utf8-bom",
+      "title": "UTF-8 BOM and CRLF",
+      "title_zh": "UTF-8 BOM 与 CRLF",
+      "kind": "content",
+      "binary": true,
+      "input": "lab/fixtures/crlf-utf8-bom.conf",
+      "expect": "lab/fixtures/crlf-utf8-bom.expected.txt",
+      "notes": "Nexitally exports on Windows-style line endings plus a BOM should still parse. The file is stored as binary so Git does not rewrite CRLF.",
+      "notes_zh": "带 BOM 的 CRLF 文件仍应解析成功。"
+    },
+    {
+      "id": "section-case-and-indent",
+      "title": "Indented [SERVER_LOCAL]",
+      "title_zh": "缩进且大小写不敏感的分段名",
+      "kind": "content",
+      "input": "lab/fixtures/section-case-and-indent.conf",
+      "expect": "lab/fixtures/section-case-and-indent.expected.txt",
+      "notes": "The section header is matched case-insensitively and may have leading whitespace.",
+      "notes_zh": "分段名大小写不敏感，允许前置空白。"
+    },
+    {
+      "id": "section-eof",
+      "title": "Section runs to end of file",
+      "title_zh": "分段一直到文件末尾",
+      "kind": "content",
+      "input": "lab/fixtures/section-eof.conf",
+      "expect": "lab/fixtures/section-eof.expected.txt",
+      "notes": "No following [section] header is required.",
+      "notes_zh": "后面可以没有其它分段。"
+    },
+    {
+      "id": "section-cut-by-filter",
+      "title": "Later [filter_local] ends the extract",
+      "title_zh": "后续 [filter_local] 截断提取",
+      "kind": "content",
+      "input": "lab/fixtures/section-cut-by-filter.conf",
+      "expect": "lab/fixtures/section-cut-by-filter.expected.txt",
+      "notes": "A server-shaped line after [filter_local] is not extracted. The parser does not scan the whole file for protocol lines.",
+      "notes_zh": "分段结束后的节点行不会被提取。"
+    },
+    {
+      "id": "missing-server-local",
+      "title": "No [server_local] section",
+      "title_zh": "没有 [server_local]",
+      "kind": "error",
+      "input": "lab/fixtures/missing-server-local.conf",
+      "expect": "lab/fixtures/missing-server-local.error.txt",
+      "notes": "A server-only snippet under [server_remote] is the wrong input shape for this parser.",
+      "notes_zh": "只有 [server_remote] 时会报错。"
+    },
+    {
+      "id": "empty-usable",
+      "title": "Section present but nothing usable",
+      "title_zh": "有分段但没有可用节点",
+      "kind": "error",
+      "input": "lab/fixtures/empty-usable.conf",
+      "expect": "lab/fixtures/empty-usable.error.txt",
+      "notes": "Comments plus an info-node still produce the no-usable-servers error, not an empty resource.",
+      "notes_zh": "只剩注释和流量行时返回错误，而不是空列表。"
+    },
+    {
+      "id": "header-no-newline",
+      "title": "Header without a following newline",
+      "title_zh": "分段标题后没有换行",
+      "kind": "error",
+      "input": "lab/fixtures/header-no-newline.conf",
+      "expect": "lab/fixtures/header-no-newline.error.txt",
+      "notes": "The extractor requires a newline after [server_local]. A header-only file is treated as missing.",
+      "notes_zh": "标题后必须有换行，否则视为找不到分段。"
+    },
+    {
+      "id": "wrong-section-server-remote",
+      "title": "Nodes live under [server_remote]",
+      "title_zh": "节点写在 [server_remote]",
+      "kind": "error",
+      "input": "lab/fixtures/wrong-section-server-remote.conf",
+      "expect": "lab/fixtures/wrong-section-server-remote.error.txt",
+      "notes": "This parser only reads [server_local] from a full configuration.",
+      "notes_zh": "本解析器只读完整配置里的 [server_local]。"
+    },
+    {
+      "id": "ipv6-and-tabs",
+      "title": "Tab-indented IPv6 AnyTLS",
+      "title_zh": "Tab 缩进的 IPv6 节点",
+      "kind": "content",
+      "input": "lab/fixtures/ipv6-and-tabs.conf",
+      "expect": "lab/fixtures/ipv6-and-tabs.expected.txt",
+      "notes": "Leading tabs are trimmed. IPv6 literals stay intact.",
+      "notes_zh": "行首 Tab 会被 trim，IPv6 地址原样保留。"
+    },
+    {
+      "id": "first-of-two-sections",
+      "title": "Only the first [server_local] is read",
+      "title_zh": "只读取第一个 [server_local]",
+      "kind": "content",
+      "input": "lab/fixtures/first-of-two-sections.conf",
+      "expect": "lab/fixtures/first-of-two-sections.expected.txt",
+      "notes": "A second [server_local] later in the file is ignored. Managed Nexitally exports normally have one.",
+      "notes_zh": "文件里若出现第二次 [server_local]，会被忽略。"
+    },
+    {
+      "id": "protocol-case-and-spacing",
+      "title": "Protocol case and spaces before =",
+      "title_zh": "协议大小写与等号前空格",
+      "kind": "content",
+      "input": "lab/fixtures/protocol-case-and-spacing.conf",
+      "expect": "lab/fixtures/protocol-case-and-spacing.expected.txt",
+      "notes": "ANYTLS= and ShadowSocks = both match the supported-prefix regex.",
+      "notes_zh": "ANYTLS= 与 ShadowSocks = 都可以匹配。"
+    },
+    {
+      "id": "reset-substring",
+      "title": "Reset matches inside other words",
+      "title_zh": "Reset 会误伤其它单词",
+      "kind": "content",
+      "input": "lab/fixtures/reset-substring.conf",
+      "expect": "lab/fixtures/reset-substring.expected.txt",
+      "notes": "The excluded regex is a substring. tag=Preset 01 contains Reset and is dropped. This is documented, not a suggested rename.",
+      "notes_zh": "排除规则是子串：Preset 含 Reset，会被丢掉。"
+    },
+    {
+      "id": "days-left-spacing",
+      "title": "Days Left needs the space",
+      "title_zh": "Days Left 必须带空格",
+      "kind": "content",
+      "input": "lab/fixtures/days-left-spacing.conf",
+      "expect": "lab/fixtures/days-left-spacing.expected.txt",
+      "notes": "Days Left is dropped. DaysLeft (no space) is kept. The parser does not try to be a full English NLP filter.",
+      "notes_zh": "Days Left 会被丢，DaysLeft 会保留。"
+    },
+    {
+      "id": "policy-lookalikes",
+      "title": "Policy lines inside [server_local]",
+      "title_zh": "混进 [server_local] 的策略行",
+      "kind": "content",
+      "input": "lab/fixtures/policy-lookalikes.conf",
+      "expect": "lab/fixtures/policy-lookalikes.expected.txt",
+      "notes": "static= and available= policy definitions are not server prefixes.",
+      "notes_zh": "static= / available= 不是节点行。"
+    },
+    {
+      "id": "http-socks-helpers",
+      "title": "HTTP and SOCKS5 helpers",
+      "title_zh": "HTTP 与 SOCKS5 辅助节点",
+      "kind": "content",
+      "input": "lab/fixtures/http-socks-helpers.conf",
+      "expect": "lab/fixtures/http-socks-helpers.expected.txt",
+      "notes": "Helper HTTP/SOCKS5 nodes are kept. They are valid Quantumult X server prefixes.",
+      "notes_zh": "HTTP / SOCKS5 辅助节点会保留。"
+    },
+    {
+      "id": "preamble-then-section",
+      "title": "Preamble text before [server_local]",
+      "title_zh": "分段前的说明文字",
+      "kind": "content",
+      "input": "lab/fixtures/preamble-then-section.conf",
+      "expect": "lab/fixtures/preamble-then-section.expected.txt",
+      "notes": "Provider notes, subscription-userinfo comments, and [general] above the section are ignored.",
+      "notes_zh": "分段之前的说明和 [general] 都会被忽略。"
+    }
+  ]
+}

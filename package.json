@@ -1,0 +1,16 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. Not company code.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node lab/run.js",
+    "explain": "node lab/run.js --explain",
+    "dump": "node lab/run.js --dump",
+    "gallery": "node lab/run.js --gallery",
+    "matrix": "node lab/run.js --matrix"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
