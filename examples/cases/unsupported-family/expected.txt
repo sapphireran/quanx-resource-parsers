@@ -1,0 +1,1 @@
+shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A

@@ -1,0 +1,21 @@
+{
+  "input": "/workspace/examples/cases/empty-file/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [],
+  "id": "empty-file",
+  "title": "Empty body",
+  "group": "errors"
+}

@@ -1,0 +1,67 @@
+{
+  "input": "/workspace/examples/cases/missing-server-local/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[general]"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "server_check_url = http://www.apple.com/generate_204"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[policy]"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "static = Proxy, DIRECT"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[filter_local]"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "final, Proxy"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    }
+  ],
+  "id": "missing-server-local",
+  "title": "Full profile without [server_local]",
+  "group": "errors"
+}

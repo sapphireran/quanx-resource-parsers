@@ -1,0 +1,44 @@
+{
+  "input": "/workspace/examples/cases/days-left-spacing/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=DaysLeft-01",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "anytls=info.example.test:443, password=pwd, over-tls=true, tag=Days Left-01",
+      "needle": "Days Left"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=DaysLeft-01"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "days-left-spacing",
+  "title": "Days Left vs DaysLeft",
+  "group": "keep-drop"
+}

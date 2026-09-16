@@ -1,0 +1,1 @@
+Non-greedy match + next [header] terminator. The second block is after [filter_local] and is ignored. A second [server_local] would also be ignored if it followed the first without a terminator — only the first cut is used.

@@ -1,0 +1,44 @@
+{
+  "input": "/workspace/examples/cases/placeholders-only/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: no usable server entries were found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: no usable server entries were found."
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=Traffic: 0",
+      "needle": "Traffic"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "anytls=premium.example.test:443, password=pwd, over-tls=true, tag=XX [Premium]",
+      "needle": "[Premium]"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "placeholders-only",
+  "title": "Only banners and [Premium]",
+  "group": "errors"
+}

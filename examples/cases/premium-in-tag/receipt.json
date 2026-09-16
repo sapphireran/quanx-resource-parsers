@@ -1,0 +1,44 @@
+{
+  "input": "/workspace/examples/cases/premium-in-tag/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=JP-01 Premium",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "anytls=premium.example.test:443, password=pwd, over-tls=true, tag=JP-01 [Premium]",
+      "needle": "[Premium]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=JP-01 Premium"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "premium-in-tag",
+  "title": "[Premium] in tag vs Premium without brackets",
+  "group": "keep-drop"
+}

@@ -1,0 +1,8 @@
+anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A
+anytls=osaka-b.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=JP-Osaka-B
+shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A
+vmess=sg-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=SG-A
+vless=us-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=US-A
+trojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=DE-A
+http=helper-a.nodes.example.test:8080, username=user, password=pwd, over-tls=false, tag=Helper-HTTP
+socks5=helper-b.nodes.example.test:1080, username=user, password=pwd, over-tls=false, tag=Helper-SOCKS5

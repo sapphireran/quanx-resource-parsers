@@ -1,0 +1,47 @@
+{
+  "input": "/workspace/examples/cases/comments-only/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: no usable server entries were found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: no usable server entries were found."
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "; anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "# shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A"
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "// vmess=sg-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=SG-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "comments-only",
+  "title": "Only comments inside the section",
+  "group": "errors"
+}

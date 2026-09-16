@@ -1,0 +1,42 @@
+{
+  "input": "/workspace/examples/cases/empty-server-local/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: no usable server entries were found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: no usable server entries were found."
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "[policy]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "static = Proxy, DIRECT"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "empty-server-local",
+  "title": "Empty [server_local] then [policy]",
+  "group": "errors"
+}

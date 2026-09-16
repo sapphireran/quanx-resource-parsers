@@ -1,0 +1,38 @@
+{
+  "input": "/workspace/examples/cases/space-before-equals/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls =tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=JP-Spaced",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls =tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=JP-Spaced"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "space-before-equals",
+  "title": "Space before = on the scheme",
+  "group": "keep-drop"
+}

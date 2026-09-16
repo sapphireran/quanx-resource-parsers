@@ -1,0 +1,556 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "errorMissing": "Nexitally parser: [server_local] section was not found.",
+  "errorEmpty": "Nexitally parser: no usable server entries were found.",
+  "cases": [
+    {
+      "id": "typical-managed-full",
+      "title": "Synthetic Nexitally-style full profile",
+      "group": "happy-path",
+      "input": "examples/cases/typical-managed-full/input.conf",
+      "notes": "examples/cases/typical-managed-full/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/typical-managed-full/expected.txt"
+      },
+      "receipt": "examples/cases/typical-managed-full/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "protocol-roster",
+      "title": "All seven supported prefixes",
+      "group": "happy-path",
+      "input": "examples/cases/protocol-roster/input.conf",
+      "notes": "examples/cases/protocol-roster/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/protocol-roster/expected.txt"
+      },
+      "receipt": "examples/cases/protocol-roster/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "anytls-reality",
+      "title": "AnyTLS with Reality sample keys",
+      "group": "happy-path",
+      "input": "examples/cases/anytls-reality/input.conf",
+      "notes": "examples/cases/anytls-reality/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/anytls-reality/expected.txt"
+      },
+      "receipt": "examples/cases/anytls-reality/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "ss2022-and-ssr-extras",
+      "title": "Shadowsocks 2022 and ssr-protocol extras",
+      "group": "happy-path",
+      "input": "examples/cases/ss2022-and-ssr-extras/input.conf",
+      "notes": "examples/cases/ss2022-and-ssr-extras/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/ss2022-and-ssr-extras/expected.txt"
+      },
+      "receipt": "examples/cases/ss2022-and-ssr-extras/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "ipv6-and-cjk-tags",
+      "title": "IPv6 literal and CJK tags",
+      "group": "happy-path",
+      "input": "examples/cases/ipv6-and-cjk-tags/input.conf",
+      "notes": "examples/cases/ipv6-and-cjk-tags/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/ipv6-and-cjk-tags/expected.txt"
+      },
+      "receipt": "examples/cases/ipv6-and-cjk-tags/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "header-mixed-case",
+      "title": "[SERVER_LOCAL] mixed case",
+      "group": "header",
+      "input": "examples/cases/header-mixed-case/input.conf",
+      "notes": "examples/cases/header-mixed-case/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/header-mixed-case/expected.txt"
+      },
+      "receipt": "examples/cases/header-mixed-case/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "header-leading-ws",
+      "title": "Indented [server_local]",
+      "group": "header",
+      "input": "examples/cases/header-leading-ws/input.conf",
+      "notes": "examples/cases/header-leading-ws/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/header-leading-ws/expected.txt"
+      },
+      "receipt": "examples/cases/header-leading-ws/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "header-inner-spaces",
+      "title": "[ server_local ] does not match",
+      "group": "header",
+      "input": "examples/cases/header-inner-spaces/input.conf",
+      "notes": "examples/cases/header-inner-spaces/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/header-inner-spaces/expected-error.txt"
+      },
+      "receipt": "examples/cases/header-inner-spaces/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "section-at-eof",
+      "title": "[server_local] last section",
+      "group": "header",
+      "input": "examples/cases/section-at-eof/input.conf",
+      "notes": "examples/cases/section-at-eof/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/section-at-eof/expected.txt"
+      },
+      "receipt": "examples/cases/section-at-eof/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "first-of-two-sections",
+      "title": "First of two [server_local] blocks",
+      "group": "header",
+      "input": "examples/cases/first-of-two-sections/input.conf",
+      "notes": "examples/cases/first-of-two-sections/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/first-of-two-sections/expected.txt"
+      },
+      "receipt": "examples/cases/first-of-two-sections/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "premium-section-terminator",
+      "title": "[Premium] as a section header ends the cut",
+      "group": "header",
+      "input": "examples/cases/premium-section-terminator/input.conf",
+      "notes": "examples/cases/premium-section-terminator/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/premium-section-terminator/expected.txt"
+      },
+      "receipt": "examples/cases/premium-section-terminator/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "preamble-then-section",
+      "title": "Banner text before [server_local]",
+      "group": "header",
+      "input": "examples/cases/preamble-then-section/input.conf",
+      "notes": "examples/cases/preamble-then-section/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/preamble-then-section/expected.txt"
+      },
+      "receipt": "examples/cases/preamble-then-section/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "commented-false-header",
+      "title": "Commented [server_local] is not a header",
+      "group": "header",
+      "input": "examples/cases/commented-false-header/input.conf",
+      "notes": "examples/cases/commented-false-header/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/commented-false-header/expected.txt"
+      },
+      "receipt": "examples/cases/commented-false-header/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "glued-header",
+      "title": "Header glued to a server line",
+      "group": "errors",
+      "input": "examples/cases/glued-header/input.conf",
+      "notes": "examples/cases/glued-header/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/glued-header/expected-error.txt"
+      },
+      "receipt": "examples/cases/glued-header/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "header-no-newline",
+      "title": "[server_local] at EOF without body newline",
+      "group": "errors",
+      "input": "examples/cases/header-no-newline/input.conf",
+      "notes": "examples/cases/header-no-newline/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/header-no-newline/expected-error.txt"
+      },
+      "receipt": "examples/cases/header-no-newline/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "comments-and-duplicates",
+      "title": "Comment styles and exact-line dedup",
+      "group": "keep-drop",
+      "input": "examples/cases/comments-and-duplicates/input.conf",
+      "notes": "examples/cases/comments-and-duplicates/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/comments-and-duplicates/expected.txt"
+      },
+      "receipt": "examples/cases/comments-and-duplicates/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "inline-hash-kept",
+      "title": "Inline # in a tag is not a comment",
+      "group": "keep-drop",
+      "input": "examples/cases/inline-hash-kept/input.conf",
+      "notes": "examples/cases/inline-hash-kept/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/inline-hash-kept/expected.txt"
+      },
+      "receipt": "examples/cases/inline-hash-kept/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "space-before-equals",
+      "title": "Space before = on the scheme",
+      "group": "keep-drop",
+      "input": "examples/cases/space-before-equals/input.conf",
+      "notes": "examples/cases/space-before-equals/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/space-before-equals/expected.txt"
+      },
+      "receipt": "examples/cases/space-before-equals/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "tabs-trimmed",
+      "title": "Leading tabs trimmed",
+      "group": "keep-drop",
+      "input": "examples/cases/tabs-trimmed/input.conf",
+      "notes": "examples/cases/tabs-trimmed/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/tabs-trimmed/expected.txt"
+      },
+      "receipt": "examples/cases/tabs-trimmed/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "http-vs-https",
+      "title": "http kept, https dropped",
+      "group": "keep-drop",
+      "input": "examples/cases/http-vs-https/input.conf",
+      "notes": "examples/cases/http-vs-https/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/http-vs-https/expected.txt"
+      },
+      "receipt": "examples/cases/http-vs-https/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "socks5-vs-socks",
+      "title": "socks5 kept, socks dropped",
+      "group": "keep-drop",
+      "input": "examples/cases/socks5-vs-socks/input.conf",
+      "notes": "examples/cases/socks5-vs-socks/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/socks5-vs-socks/expected.txt"
+      },
+      "receipt": "examples/cases/socks5-vs-socks/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "unsupported-family",
+      "title": "Hysteria, TUIC, WireGuard, URI lines",
+      "group": "keep-drop",
+      "input": "examples/cases/unsupported-family/input.conf",
+      "notes": "examples/cases/unsupported-family/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/unsupported-family/expected.txt"
+      },
+      "receipt": "examples/cases/unsupported-family/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "en-info-banners",
+      "title": "English Traffic/Expire/Reset/Days Left",
+      "group": "keep-drop",
+      "input": "examples/cases/en-info-banners/input.conf",
+      "notes": "examples/cases/en-info-banners/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/en-info-banners/expected.txt"
+      },
+      "receipt": "examples/cases/en-info-banners/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "zh-info-banners",
+      "title": "Chinese 流量/到期/剩余/套餐",
+      "group": "keep-drop",
+      "input": "examples/cases/zh-info-banners/input.conf",
+      "notes": "examples/cases/zh-info-banners/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/zh-info-banners/expected.txt"
+      },
+      "receipt": "examples/cases/zh-info-banners/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "premium-in-tag",
+      "title": "[Premium] in tag vs Premium without brackets",
+      "group": "keep-drop",
+      "input": "examples/cases/premium-in-tag/input.conf",
+      "notes": "examples/cases/premium-in-tag/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/premium-in-tag/expected.txt"
+      },
+      "receipt": "examples/cases/premium-in-tag/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "reset-substring-trap",
+      "title": "Reset as a substring of a real tag",
+      "group": "keep-drop",
+      "input": "examples/cases/reset-substring-trap/input.conf",
+      "notes": "examples/cases/reset-substring-trap/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/reset-substring-trap/expected.txt"
+      },
+      "receipt": "examples/cases/reset-substring-trap/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "days-left-spacing",
+      "title": "Days Left vs DaysLeft",
+      "group": "keep-drop",
+      "input": "examples/cases/days-left-spacing/input.conf",
+      "notes": "examples/cases/days-left-spacing/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/days-left-spacing/expected.txt"
+      },
+      "receipt": "examples/cases/days-left-spacing/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "false-friend-password",
+      "title": "Traffic inside password=",
+      "group": "keep-drop",
+      "input": "examples/cases/false-friend-password/input.conf",
+      "notes": "examples/cases/false-friend-password/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/false-friend-password/expected.txt"
+      },
+      "receipt": "examples/cases/false-friend-password/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "filter-rules-inside-section",
+      "title": "Filter rules mixed into [server_local]",
+      "group": "keep-drop",
+      "input": "examples/cases/filter-rules-inside-section/input.conf",
+      "notes": "examples/cases/filter-rules-inside-section/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/filter-rules-inside-section/expected.txt"
+      },
+      "receipt": "examples/cases/filter-rules-inside-section/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "policy-lookalikes",
+      "title": "Policy lines inside [server_local]",
+      "group": "keep-drop",
+      "input": "examples/cases/policy-lookalikes/input.conf",
+      "notes": "examples/cases/policy-lookalikes/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/policy-lookalikes/expected.txt"
+      },
+      "receipt": "examples/cases/policy-lookalikes/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "block-comment-not-recognized",
+      "title": "C-style block comment is not a comment",
+      "group": "keep-drop",
+      "input": "examples/cases/block-comment-not-recognized/input.conf",
+      "notes": "examples/cases/block-comment-not-recognized/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/block-comment-not-recognized/expected.txt"
+      },
+      "receipt": "examples/cases/block-comment-not-recognized/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "same-host-different-tag",
+      "title": "Same host, different tag, both kept",
+      "group": "keep-drop",
+      "input": "examples/cases/same-host-different-tag/input.conf",
+      "notes": "examples/cases/same-host-different-tag/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/same-host-different-tag/expected.txt"
+      },
+      "receipt": "examples/cases/same-host-different-tag/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "missing-server-local",
+      "title": "Full profile without [server_local]",
+      "group": "errors",
+      "input": "examples/cases/missing-server-local/input.conf",
+      "notes": "examples/cases/missing-server-local/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/missing-server-local/expected-error.txt"
+      },
+      "receipt": "examples/cases/missing-server-local/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "empty-server-local",
+      "title": "Empty [server_local] then [policy]",
+      "group": "errors",
+      "input": "examples/cases/empty-server-local/input.conf",
+      "notes": "examples/cases/empty-server-local/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/empty-server-local/expected-error.txt"
+      },
+      "receipt": "examples/cases/empty-server-local/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "comments-only",
+      "title": "Only comments inside the section",
+      "group": "errors",
+      "input": "examples/cases/comments-only/input.conf",
+      "notes": "examples/cases/comments-only/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/comments-only/expected-error.txt"
+      },
+      "receipt": "examples/cases/comments-only/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "placeholders-only",
+      "title": "Only banners and [Premium]",
+      "group": "errors",
+      "input": "examples/cases/placeholders-only/input.conf",
+      "notes": "examples/cases/placeholders-only/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/placeholders-only/expected-error.txt"
+      },
+      "receipt": "examples/cases/placeholders-only/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "already-server-only",
+      "title": "Server lines without a section header",
+      "group": "errors",
+      "input": "examples/cases/already-server-only/input.conf",
+      "notes": "examples/cases/already-server-only/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/already-server-only/expected-error.txt"
+      },
+      "receipt": "examples/cases/already-server-only/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "server-remote-not-local",
+      "title": "Servers listed under [server_remote]",
+      "group": "errors",
+      "input": "examples/cases/server-remote-not-local/input.conf",
+      "notes": "examples/cases/server-remote-not-local/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/server-remote-not-local/expected-error.txt"
+      },
+      "receipt": "examples/cases/server-remote-not-local/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "clash-yaml",
+      "title": "Clash YAML body",
+      "group": "errors",
+      "input": "examples/cases/clash-yaml/input.conf",
+      "notes": "examples/cases/clash-yaml/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/clash-yaml/expected-error.txt"
+      },
+      "receipt": "examples/cases/clash-yaml/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "html-interstitial",
+      "title": "HTML login/interstitial page",
+      "group": "errors",
+      "input": "examples/cases/html-interstitial/input.conf",
+      "notes": "examples/cases/html-interstitial/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/html-interstitial/expected-error.txt"
+      },
+      "receipt": "examples/cases/html-interstitial/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "empty-file",
+      "title": "Empty body",
+      "group": "errors",
+      "input": "examples/cases/empty-file/input.conf",
+      "notes": "examples/cases/empty-file/notes.md",
+      "expect": {
+        "kind": "error",
+        "file": "examples/cases/empty-file/expected-error.txt"
+      },
+      "receipt": "examples/cases/empty-file/receipt.json",
+      "wrap": null
+    },
+    {
+      "id": "bom-crlf",
+      "title": "UTF-8 BOM and CRLF wrap",
+      "group": "encoding",
+      "input": "examples/cases/bom-crlf/input.conf",
+      "notes": "examples/cases/bom-crlf/notes.md",
+      "expect": {
+        "kind": "content",
+        "file": "examples/cases/bom-crlf/expected.txt"
+      },
+      "receipt": "examples/cases/bom-crlf/receipt.json",
+      "wrap": {
+        "bom": true,
+        "crlf": true
+      }
+    }
+  ]
+}

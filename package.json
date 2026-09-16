@@ -1,0 +1,11 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No company code, no live subscriptions.",
+  "scripts": {
+    "test": "node tools/check.js",
+    "ledger": "node tools/ledger.js",
+    "gallery": "node tools/gallery.js",
+    "seed": "node tools/seed-cases.js"
+  }
+}

@@ -1,0 +1,342 @@
+{
+  "input": "/workspace/examples/cases/typical-managed-full/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "next-section",
+    "nextHeader": "[server_remote]"
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 8
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A\nanytls=osaka-b.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=JP-Osaka-B\nshadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A\nvmess=sg-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=SG-A\nvless=us-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=US-A\ntrojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=DE-A\nhttp=helper-a.nodes.example.test:8080, username=user, password=pwd, over-tls=false, tag=Helper-HTTP\nsocks5=helper-b.nodes.example.test:1080, username=user, password=pwd, over-tls=false, tag=Helper-SOCKS5",
+    "lineCount": 8
+  },
+  "lines": [
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "# Synthetic Nexitally-style Quantumult X full configuration."
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "# Hosts are *.example.test. Passwords are placeholders."
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "# This is NOT a live subscription and must not be fetched."
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[general]"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "resource_parser_url = https://raw.githubusercontent.com/sapphireran/quanx-resource-parsers/main/nexitally-node-parser.js"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "server_check_url = http://www.apple.com/generate_204"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[dns]"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "no-ipv6"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "server = 223.5.5.5"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[policy]"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "static = Nexitally, JP-Tokyo-A, JP-Osaka-B, HK-A, img-url=https://example.test/icon.png"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "static = Proxy, Nexitally, DIRECT"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "static = Final, Proxy, DIRECT"
+    },
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "# English info banners"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=Traffic: 12.3/100GB",
+      "needle": "Traffic"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=Expire: 2099-12-31",
+      "needle": "Expire"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=Reset: 5 Days Left",
+      "needle": "Reset"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "# Chinese info banners"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=流量: 12.3/100GB",
+      "needle": "流量"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=到期: 2099-12-31",
+      "needle": "到期"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=剩余: 5天",
+      "needle": "剩余"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=套餐: Premium",
+      "needle": "套餐"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "# Premium placeholder"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "anytls=premium.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, tag=JP-01 [Premium]",
+      "needle": "[Premium]"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=osaka-b.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=JP-Osaka-B"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "vmess=sg-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=SG-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "vless=us-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=US-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "trojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=DE-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "http=helper-a.nodes.example.test:8080, username=user, password=pwd, over-tls=false, tag=Helper-HTTP"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "socks5=helper-b.nodes.example.test:1080, username=user, password=pwd, over-tls=false, tag=Helper-SOCKS5"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "# duplicate of JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_DUPLICATE",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A",
+      "firstIndex": 1
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": ";anytls=commented.example.test:443, password=pwd, over-tls=true, tag=Commented"
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "#anytls=hash-comment.example.test:443, password=pwd, over-tls=true, tag=HashCommented"
+    },
+    {
+      "where": "inside",
+      "decision": "COMMENT",
+      "text": "//anytls=slash-comment.example.test:443, password=pwd, over-tls=true, tag=SlashCommented"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "hysteria=hy.example.test:443, password=pwd, tag=HY-Drop"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "wireguard=wg.example.test:51820, tag=WG-Drop"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "https=https-helper.nodes.example.test:443, username=user, password=pwd, tag=HTTPS-Drop"
+    },
+    {
+      "where": "cut",
+      "decision": "SECTION_CUT",
+      "text": "[server_remote]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "[server_remote]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "https://example.test/do-not-fetch, tag=Ignored"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": ""
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "[filter_local]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "host, example.test, direct"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "final, Proxy"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": ""
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "[rewrite_local]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": ""
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "[mitm]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": ""
+    }
+  ],
+  "id": "typical-managed-full",
+  "title": "Synthetic Nexitally-style full profile",
+  "group": "happy-path"
+}

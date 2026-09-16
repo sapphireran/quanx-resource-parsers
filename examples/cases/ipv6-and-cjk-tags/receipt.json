@@ -1,0 +1,43 @@
+{
+  "input": "/workspace/examples/cases/ipv6-and-cjk-tags/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 2
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, tag=文档-东京-A\ntrojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tag=法兰克福-A",
+    "lineCount": 2
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, tag=文档-东京-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "trojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tag=法兰克福-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "ipv6-and-cjk-tags",
+  "title": "IPv6 literal and CJK tags",
+  "group": "happy-path"
+}

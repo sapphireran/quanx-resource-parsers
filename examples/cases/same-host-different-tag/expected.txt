@@ -1,0 +1,2 @@
+anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=JP-A
+anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tag=JP-B

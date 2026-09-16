@@ -1,0 +1,68 @@
+{
+  "input": "/workspace/examples/cases/protocol-roster/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 7
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A\nshadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A\nvmess=sg-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=SG-A\nvless=us-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=US-A\ntrojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=DE-A\nHTTP=helper-a.nodes.example.test:8080, username=user, password=pwd, tag=Helper-HTTP-UC\nSocks5=helper-b.nodes.example.test:1080, username=user, password=pwd, tag=Helper-SOCKS5-UC",
+    "lineCount": 7
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "vmess=sg-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=SG-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "vless=us-a.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=US-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "trojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=DE-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "HTTP=helper-a.nodes.example.test:8080, username=user, password=pwd, tag=Helper-HTTP-UC"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "Socks5=helper-b.nodes.example.test:1080, username=user, password=pwd, tag=Helper-SOCKS5-UC"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "protocol-roster",
+  "title": "All seven supported prefixes",
+  "group": "happy-path"
+}

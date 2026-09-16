@@ -1,0 +1,2 @@
+anytls=[2001:db8::10]:443, password=pwd, over-tls=true, tls-host=apple.com, tag=文档-东京-A
+trojan=de-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, tag=法兰克福-A

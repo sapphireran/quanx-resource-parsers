@@ -1,0 +1,48 @@
+{
+  "input": "/workspace/examples/cases/http-vs-https/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 2
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "http=helper-a.nodes.example.test:8080, username=user, password=pwd, over-tls=false, tag=Helper-HTTP\nhttp =helper-c.nodes.example.test:8080, username=user, password=pwd, tag=Helper-HTTP-Spaced",
+    "lineCount": 2
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "http=helper-a.nodes.example.test:8080, username=user, password=pwd, over-tls=false, tag=Helper-HTTP"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "https=https-helper.nodes.example.test:443, username=user, password=pwd, tag=HTTPS-Drop"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "http =helper-c.nodes.example.test:8080, username=user, password=pwd, tag=Helper-HTTP-Spaced"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "http-vs-https",
+  "title": "http kept, https dropped",
+  "group": "keep-drop"
+}
