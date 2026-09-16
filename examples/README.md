@@ -8,7 +8,7 @@ Nothing in this directory is a working Nexitally account. Hosts use `example.com
 
 | Path | What it is |
 | --- | --- |
-| [`fixtures/nexitally-full-config.sanitized.conf`](fixtures/nexitally-full-config.sanitized.conf) | A managed **full** Quantumult X profile in the shape Nexitally emits: `[general]`, `[dns]`, `[policy]`, `[server_local]`, filters, rewrite, MITM. |
+| [`fixtures/nexitally-full-config.sanitized.conf`](fixtures/nexitally-full-config.sanitized.conf) | A managed **full** Quantumult X profile in the shape Nexitally emits: `[general]`, `[dns]`, `[policy]`, `[server_local]`, filters, rewrite, MITM. Line-by-line reading guide: [`fixtures/ANNOTATED.md`](fixtures/ANNOTATED.md). |
 | [`fixtures/nexitally-parsed-servers.expected.txt`](fixtures/nexitally-parsed-servers.expected.txt) | Server-only text the parser should return from that full profile. |
 | [`fixtures/comments-and-duplicates.conf`](fixtures/comments-and-duplicates.conf) | Comments, blank lines, and an exact duplicate server line. |
 | [`fixtures/mixed-protocols.conf`](fixtures/mixed-protocols.conf) | One line each of AnyTLS, Shadowsocks, VMess, VLESS, Trojan, HTTP, and SOCKS5. |
