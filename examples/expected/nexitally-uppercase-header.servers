@@ -1,0 +1,2 @@
+ANYTLS = case-01.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=CASE-01
+Shadowsocks = case-02.nodes.example.test:8388, method=chacha20, password=example-password, udp-relay=true, tag=CASE-02

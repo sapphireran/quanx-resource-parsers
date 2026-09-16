@@ -1,0 +1,5 @@
+anytls = hk-01.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=HK-01
+anytls = jp-01.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=JP-01
+anytls = sg-01.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=SG-01
+shadowsocks = ss-01.nodes.example.test:8388, method=2022-blake3-aes-128-gcm, password=ZXhhbXBsZS1zczIwMjItc2VjcmV0, udp-relay=true, tag=SS-HK-01
+vmess = vmess-01.nodes.example.test:80, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000001, fast-open=false, udp-relay=false, tag=VMESS-01
