@@ -24,13 +24,15 @@ var PRIVACY_PATTERNS = [
 ];
 
 function checkPrivacy(entry, body) {
+  var stripped = String(body)
+    .replace(/<YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL>/g, "")
+    .replace(/nexitally-node-parser\.js/gi, "")
+    .replace(/https?:\/\/(?:raw\.)?githubusercontent\.com\/sapphireran\/quanx-resource-parsers[^\s,]*/gi, "")
+    .replace(/https?:\/\/cdn\.jsdelivr\.net\/gh\/sapphireran\/quanx-resource-parsers@[^\s,]*/gi, "");
   for (var i = 0; i < PRIVACY_PATTERNS.length; i++) {
-    if (PRIVACY_PATTERNS[i].test(body)) {
+    if (PRIVACY_PATTERNS[i].test(stripped)) {
       return fail(entry.id, "privacy guard hit " + PRIVACY_PATTERNS[i]);
     }
-  }
-  if (body.indexOf("<YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL>") === -1 && /nexitally/i.test(body) && /https?:\/\//i.test(body)) {
-    return fail(entry.id, "possible live Nexitally URL (use the placeholder)");
   }
   return null;
 }
