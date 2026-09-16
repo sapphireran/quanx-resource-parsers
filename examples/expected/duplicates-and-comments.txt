@@ -1,0 +1,3 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=same-tag
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=false, tag=same-tag
+trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, tag=padded

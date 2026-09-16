@@ -1,0 +1,2 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=blank-01
+trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, tag=blank-02

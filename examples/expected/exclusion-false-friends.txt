@@ -1,0 +1,4 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01
+trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, tag=SG-01
+vmess=example.com:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, tag=US-01
+shadowsocks=example.com:80, method=chacha20, password=pwd, tag=SS-01
