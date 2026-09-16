@@ -1,0 +1,84 @@
+{
+  "description": "Fictional Quantumult X fixtures for personal parsers in this repository. No live subscription URLs.",
+  "fixtures": [
+    {
+      "name": "nexitally-typical-full-config",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/input-full-config.conf",
+      "expectedContent": "examples/nexitally/expected-servers.snippet"
+    },
+    {
+      "name": "nexitally-missing-server-local",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/missing-server-local.conf",
+      "expectedError": "Nexitally parser: [server_local] section was not found."
+    },
+    {
+      "name": "nexitally-empty-server-local",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/empty-server-local.conf",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "name": "nexitally-placeholders-only",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/placeholders-only.conf",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "name": "nexitally-unsupported-schemes",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/unsupported-schemes.conf",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "name": "nexitally-comments-and-duplicates",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/comments-and-duplicates.conf",
+      "expectedContent": "examples/nexitally/edge-cases/comments-and-duplicates.snippet"
+    },
+    {
+      "name": "nexitally-section-leak-guard",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/section-leak-guard.conf",
+      "expectedContent": "examples/nexitally/edge-cases/section-leak-guard.snippet"
+    },
+    {
+      "name": "nexitally-heading-case",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/heading-case.conf",
+      "expectedContent": "examples/nexitally/edge-cases/heading-case.snippet"
+    },
+    {
+      "name": "nexitally-crlf-and-bom",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/crlf-and-bom.source.conf",
+      "transform": "crlf-bom",
+      "expectedContent": "examples/nexitally/edge-cases/crlf-and-bom.snippet"
+    },
+    {
+      "name": "nexitally-reality-anytls",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/reality-anytls.conf",
+      "expectedContent": "examples/nexitally/edge-cases/reality-anytls.snippet"
+    },
+    {
+      "name": "nexitally-trailing-section",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/trailing-section.conf",
+      "expectedContent": "examples/nexitally/edge-cases/trailing-section.snippet"
+    },
+    {
+      "name": "nexitally-scheme-case",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/scheme-case.conf",
+      "expectedContent": "examples/nexitally/edge-cases/scheme-case.snippet"
+    },
+    {
+      "name": "nexitally-whitespace-heading",
+      "parser": "nexitally-node-parser.js",
+      "input": "examples/nexitally/edge-cases/whitespace-heading.conf",
+      "expectedContent": "examples/nexitally/edge-cases/whitespace-heading.snippet"
+    }
+  ]
+}
