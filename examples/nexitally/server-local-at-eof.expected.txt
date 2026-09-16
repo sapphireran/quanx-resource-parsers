@@ -1,0 +1,2 @@
+anytls=eof-01.example.invalid:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=EOF-01
+trojan=eof-02.example.invalid:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=EOF-02

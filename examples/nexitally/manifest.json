@@ -1,0 +1,62 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "description": "Sanitized fixtures for the Nexitally Quantumult X node parser. Hosts, passwords, and tags are fictional.",
+  "cases": [
+    {
+      "id": "typical-full-profile",
+      "input": "examples/nexitally/typical-full-profile.conf",
+      "expect": {
+        "contentFile": "examples/nexitally/typical-full-profile.expected.txt"
+      }
+    },
+    {
+      "id": "mixed-protocols",
+      "input": "examples/nexitally/mixed-protocols.conf",
+      "expect": {
+        "contentFile": "examples/nexitally/mixed-protocols.expected.txt"
+      }
+    },
+    {
+      "id": "placeholders-and-duplicates",
+      "input": "examples/nexitally/placeholders-and-duplicates.conf",
+      "expect": {
+        "contentFile": "examples/nexitally/placeholders-and-duplicates.expected.txt"
+      }
+    },
+    {
+      "id": "spacing-and-case",
+      "input": "examples/nexitally/spacing-and-case.conf",
+      "expect": {
+        "contentFile": "examples/nexitally/spacing-and-case.expected.txt"
+      }
+    },
+    {
+      "id": "crlf-and-bom",
+      "input": "examples/nexitally/crlf-and-bom.conf",
+      "expect": {
+        "contentFile": "examples/nexitally/crlf-and-bom.expected.txt"
+      }
+    },
+    {
+      "id": "server-local-at-eof",
+      "input": "examples/nexitally/server-local-at-eof.conf",
+      "expect": {
+        "contentFile": "examples/nexitally/server-local-at-eof.expected.txt"
+      }
+    },
+    {
+      "id": "missing-server-local",
+      "input": "examples/nexitally/missing-server-local.conf",
+      "expect": {
+        "errorContains": "[server_local] section was not found"
+      }
+    },
+    {
+      "id": "no-usable-servers",
+      "input": "examples/nexitally/no-usable-servers.conf",
+      "expect": {
+        "errorContains": "no usable server entries were found"
+      }
+    }
+  ]
+}

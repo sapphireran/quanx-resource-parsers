@@ -1,0 +1,2 @@
+anytls=bom-01.example.invalid:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=BOM-01
+shadowsocks=bom-02.example.invalid:443, method=chacha20-ietf-poly1305, password=placeholder-password, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=BOM-02

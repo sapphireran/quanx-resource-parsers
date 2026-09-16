@@ -1,0 +1,2 @@
+anytls=usable-a.example.invalid:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=USABLE-A
+anytls=usable-b.example.invalid:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=USABLE-B
