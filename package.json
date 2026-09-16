@@ -1,0 +1,12 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No company code. No live subscription URLs.",
+  "scripts": {
+    "test": "node bench/run.js --check",
+    "bench": "node bench/run.js --check",
+    "dump": "node bench/run.js --dump",
+    "why": "node bench/run.js --why",
+    "gallery": "node bench/run.js --gallery --write"
+  }
+}

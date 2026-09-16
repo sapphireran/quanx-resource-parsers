@@ -1,0 +1,4 @@
+anytls=hk-01.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01
+anytls=sg-01.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01
+anytls=jp-01.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01
+shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, tag=US-01

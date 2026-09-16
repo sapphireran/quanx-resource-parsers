@@ -1,0 +1,279 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "privacy": "Invented hosts only. No live Nexitally URL, account id, or node secret.",
+  "cases": [
+    {
+      "id": "managed-full-profile",
+      "title": "Managed full profile",
+      "group": "happy-path",
+      "file": "examples/cases/managed-full-profile.conf",
+      "expect": { "keepFile": "examples/cases/managed-full-profile.keep" },
+      "notes": "Typical Nexitally-shaped download: keep four nodes, drop the duplicate, English/Chinese banners, and [Premium]."
+    },
+    {
+      "id": "managed-full-profile-crlf-bom",
+      "title": "Managed full profile with UTF-8 BOM + CRLF",
+      "group": "encoding",
+      "file": "examples/cases/managed-full-profile.conf",
+      "transform": "crlf-bom",
+      "expect": { "keepFile": "examples/cases/managed-full-profile.keep" },
+      "notes": "Same body after the parser strips a leading BOM and normalizes CRLF."
+    },
+    {
+      "id": "official-seven-prefixes",
+      "title": "Official seven prefixes",
+      "group": "happy-path",
+      "file": "examples/cases/official-seven-prefixes.conf",
+      "expect": { "keepFile": "examples/cases/official-seven-prefixes.keep" },
+      "notes": "anytls, shadowsocks, vmess, vless, trojan, http, and socks5 from Quantumult X sample.conf."
+    },
+    {
+      "id": "anytls-reality",
+      "title": "AnyTLS Reality + SS2022",
+      "group": "happy-path",
+      "file": "examples/cases/anytls-reality.conf",
+      "expect": { "keepFile": "examples/cases/anytls-reality.keep" },
+      "notes": "Reality fields are opaque to the parser. A supported prefix is enough."
+    },
+    {
+      "id": "ssr-and-ss2022",
+      "title": "SSR and SS2022 sample lines",
+      "group": "happy-path",
+      "file": "examples/cases/ssr-and-ss2022.conf",
+      "expect": { "keepFile": "examples/cases/ssr-and-ss2022.keep" },
+      "notes": "Both still start with shadowsocks=."
+    },
+    {
+      "id": "placeholders-en-zh",
+      "title": "English and Chinese banners",
+      "group": "exclusions",
+      "file": "examples/cases/placeholders-en-zh.conf",
+      "expect": { "keepFile": "examples/cases/placeholders-en-zh.keep" },
+      "notes": "Traffic, Expire, Reset, Days Left, 流量, 到期, 剩余, 套餐."
+    },
+    {
+      "id": "reset-substring-trap",
+      "title": "Reset substring trap",
+      "group": "exclusions",
+      "file": "examples/cases/reset-substring-trap.conf",
+      "expect": { "keepFile": "examples/cases/reset-substring-trap.keep" },
+      "notes": "HK-Reset-01 and HK-Preset-01 drop because Reset is a substring. HK-RST-01 stays."
+    },
+    {
+      "id": "days-left-spacing",
+      "title": "Days Left spacing",
+      "group": "exclusions",
+      "file": "examples/cases/days-left-spacing.conf",
+      "expect": { "keepFile": "examples/cases/days-left-spacing.keep" },
+      "notes": "Only the spaced token Days Left is excluded."
+    },
+    {
+      "id": "premium-as-tag",
+      "title": "[Premium] inside a tag",
+      "group": "exclusions",
+      "file": "examples/cases/premium-as-tag.conf",
+      "expect": { "keepFile": "examples/cases/premium-as-tag.keep" },
+      "notes": "Exclusion regex, not a section cut."
+    },
+    {
+      "id": "premium-as-section",
+      "title": "[Premium] as the next section",
+      "group": "sections",
+      "file": "examples/cases/premium-as-section.conf",
+      "expect": { "keepFile": "examples/cases/premium-as-section.keep" },
+      "notes": "The next [heading] lookahead ends [server_local]. LATE-01 never enters the body."
+    },
+    {
+      "id": "false-friend-password",
+      "title": "Traffic inside password=",
+      "group": "exclusions",
+      "file": "examples/cases/false-friend-password.conf",
+      "expect": { "keepFile": "examples/cases/false-friend-password.keep" },
+      "notes": "Exclusion tokens are unanchored. A password containing Traffic is dropped."
+    },
+    {
+      "id": "comments-duplicates",
+      "title": "Comments and exact duplicates",
+      "group": "filters",
+      "file": "examples/cases/comments-duplicates.conf",
+      "expect": { "keepFile": "examples/cases/comments-duplicates.keep" },
+      "notes": "; # // comments drop. Trimmed exact duplicates drop. Leading/trailing spaces are trimmed before keep."
+    },
+    {
+      "id": "inline-hash-kept",
+      "title": "Inline hash is not a comment",
+      "group": "filters",
+      "file": "examples/cases/inline-hash-kept.conf",
+      "expect": { "keepFile": "examples/cases/inline-hash-kept.keep" },
+      "notes": "Comment detection is prefix-only after trim."
+    },
+    {
+      "id": "block-comment-not-recognized",
+      "title": "C-style block comment is not a comment",
+      "group": "filters",
+      "file": "examples/cases/block-comment-not-recognized.conf",
+      "expect": { "keepFile": "examples/cases/block-comment-not-recognized.keep" },
+      "notes": "/* ... */ is an unsupported prefix, not a Quantumult X comment."
+    },
+    {
+      "id": "mixed-case-header",
+      "title": "Mixed-case heading and prefixes",
+      "group": "sections",
+      "file": "examples/cases/mixed-case-header.conf",
+      "expect": { "keepFile": "examples/cases/mixed-case-header.keep" },
+      "notes": "[Server_Local] and AnyTLS= are accepted. Original spelling is preserved."
+    },
+    {
+      "id": "leading-ws-header",
+      "title": "Indented heading and tabbed line",
+      "group": "sections",
+      "file": "examples/cases/leading-ws-header.conf",
+      "expect": { "keepFile": "examples/cases/leading-ws-header.keep" },
+      "notes": "Optional whitespace is allowed before [server_local] and before a server line."
+    },
+    {
+      "id": "server-local-at-eof",
+      "title": "[server_local] is the last section",
+      "group": "sections",
+      "file": "examples/cases/server-local-at-eof.conf",
+      "expect": { "keepFile": "examples/cases/server-local-at-eof.keep" },
+      "notes": "The section regex can terminate at end of file."
+    },
+    {
+      "id": "first-of-two-sections",
+      "title": "First of two [server_local] sections",
+      "group": "sections",
+      "file": "examples/cases/first-of-two-sections.conf",
+      "expect": { "keepFile": "examples/cases/first-of-two-sections.keep" },
+      "notes": "String.match is not global. SECOND-01 is ignored."
+    },
+    {
+      "id": "section-leak",
+      "title": "No leak from other sections",
+      "group": "sections",
+      "file": "examples/cases/section-leak.conf",
+      "expect": { "keepFile": "examples/cases/section-leak.keep" },
+      "notes": "Server-shaped lines in [policy], [filter_local], and [server_remote] stay out."
+    },
+    {
+      "id": "space-before-equals",
+      "title": "Whitespace before =",
+      "group": "filters",
+      "file": "examples/cases/space-before-equals.conf",
+      "expect": { "keepFile": "examples/cases/space-before-equals.keep" },
+      "notes": "The supported prefix regex allows spaces before the equals sign."
+    },
+    {
+      "id": "http-vs-https",
+      "title": "http= vs https= / socks vs socks5 / ss vs shadowsocks",
+      "group": "filters",
+      "file": "examples/cases/http-vs-https.conf",
+      "expect": { "keepFile": "examples/cases/http-vs-https.keep" },
+      "notes": "https=, socks=, and ss= are unsupported prefixes."
+    },
+    {
+      "id": "ipv6-cjk-tags",
+      "title": "IPv6 hosts and CJK tags",
+      "group": "filters",
+      "file": "examples/cases/ipv6-cjk-tags.conf",
+      "expect": { "keepFile": "examples/cases/ipv6-cjk-tags.keep" },
+      "notes": "香港/日本/新加坡 stay. 剩余-01 drops because 剩余 is an exclusion token."
+    },
+    {
+      "id": "same-host-different-tag",
+      "title": "Same host, different tag",
+      "group": "filters",
+      "file": "examples/cases/same-host-different-tag.conf",
+      "expect": { "keepFile": "examples/cases/same-host-different-tag.keep" },
+      "notes": "Dedup compares the whole trimmed line."
+    },
+    {
+      "id": "glued-header",
+      "title": "Glued [server_local]header",
+      "group": "errors",
+      "file": "examples/cases/glued-header.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "The heading regex requires a newline after [server_local]."
+    },
+    {
+      "id": "inner-spaced-header",
+      "title": "[ server_local ] is not a heading",
+      "group": "errors",
+      "file": "examples/cases/inner-spaced-header.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "Inner spaces break the heading match."
+    },
+    {
+      "id": "header-without-body-newline",
+      "title": "Heading at EOF without a following newline",
+      "group": "errors",
+      "inline": "[server_local]",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "No \\n after the heading, so the section regex fails."
+    },
+    {
+      "id": "missing-server-local",
+      "title": "No [server_local] section",
+      "group": "errors",
+      "file": "examples/cases/missing-server-local.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "A stable profile without a vendor server block."
+    },
+    {
+      "id": "commented-section-name",
+      "title": "[server_local] only in comments",
+      "group": "errors",
+      "file": "examples/cases/commented-section-name.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "A commented heading does not open the section."
+    },
+    {
+      "id": "empty-server-local",
+      "title": "Empty [server_local]",
+      "group": "errors",
+      "file": "examples/cases/empty-server-local.conf",
+      "expect": { "error": "Nexitally parser: no usable server entries were found." },
+      "notes": "Section exists; nothing usable remains."
+    },
+    {
+      "id": "comments-only",
+      "title": "Comments only",
+      "group": "errors",
+      "file": "examples/cases/comments-only.conf",
+      "expect": { "error": "Nexitally parser: no usable server entries were found." },
+      "notes": "Same error as an empty body."
+    },
+    {
+      "id": "unsupported-only",
+      "title": "Unsupported prefixes only",
+      "group": "errors",
+      "file": "examples/cases/unsupported-only.conf",
+      "expect": { "error": "Nexitally parser: no usable server entries were found." },
+      "notes": "hysteria2, tuic, wireguard, ss, socks, https."
+    },
+    {
+      "id": "html-interstitial",
+      "title": "HTML interstitial",
+      "group": "errors",
+      "file": "examples/cases/html-interstitial.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "A login page is not a Quantumult X profile."
+    },
+    {
+      "id": "clash-yaml",
+      "title": "Clash YAML",
+      "group": "errors",
+      "file": "examples/cases/clash-yaml.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "Wrong client format."
+    },
+    {
+      "id": "base64-vmess",
+      "title": "Share-link dump",
+      "group": "errors",
+      "file": "examples/cases/base64-vmess.conf",
+      "expect": { "error": "Nexitally parser: [server_local] section was not found." },
+      "notes": "vmess:// and ss:// lines are not [server_local] entries."
+    }
+  ]
+}

@@ -1,44 +1,63 @@
 # QuanX Resource Parsers
 
-Small, focused resource parsers for Quantumult X.
+Personal Quantumult X resource parsers. This repository is **personal only** — no company or employer configuration.
+
+The committed parser never contains a subscription URL, account id, or node password. Quantumult X downloads the private Nexitally URL on the device; the script only sees `$resource.content`.
 
 ## Nexitally node parser
 
-`nexitally-node-parser.js` converts Nexitally's managed **full Quantumult X configuration** into a server-only resource:
+`nexitally-node-parser.js` turns Nexitally's managed **full Quantumult X configuration** into a server-only resource:
 
-- extracts entries from `[server_local]`;
-- returns only Quantumult X server lines to `[server_remote]`;
-- supports AnyTLS and other common Quantumult X server formats;
-- removes duplicate entries and excludes traffic/expiry information plus `[Premium]` placeholders;
-- contains no subscription URL, account ID, node password, or other private data.
-
-The Nexitally subscription is downloaded directly by Quantumult X. The parser runs in Quantumult X's resource-parser environment.
+- extracts the first `[server_local]` section;
+- returns Quantumult X server lines for `[server_remote]`;
+- keeps `anytls`, `shadowsocks`, `vmess`, `vless`, `trojan`, `http`, and `socks5`;
+- drops comments, exact duplicates, `[Premium]` placeholders, and traffic/expiry banners (`Traffic`, `Expire`, `Reset`, `Days Left`, `流量`, `到期`, `剩余`, `套餐`).
 
 ## Usage
 
-Add the parser URL to `[general]`:
+There is one global parser URL in `[general]`. Point it at **this** repository (`sapphireran/quanx-resource-parsers`). An older personal username used to host the same files; do not keep that path.
 
 ```ini
-resource_parser_url = https://cdn.jsdelivr.net/gh/pang990801/quanx-resource-parsers@main/nexitally-node-parser.js
+resource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js
 ```
 
-Then add your **private** Nexitally Quantumult X full-configuration URL as a server resource:
+```ini
+resource_parser_url = https://raw.githubusercontent.com/sapphireran/quanx-resource-parsers/main/nexitally-node-parser.js
+```
+
+Then add the **private** Nexitally full-configuration URL as a server resource:
 
 ```ini
 [server_remote]
-<YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL>, tag=Nexitally, opt-parser=true, update-interval=21600, enabled=true
+YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL, tag=Nexitally, opt-parser=true, update-interval=21600, enabled=true
 ```
 
-Keep the Nexitally URL only in your local configuration. Never commit it to this repository, a public Gist, or another public service.
+Keep that URL on the device. Never commit it here, to a gist, or to another public host.
 
-After importing your stable Quantumult X profile, refresh **Server Resources → Nexitally** to update nodes. Your `[policy]`, `[filter_remote]`, and other local configuration sections remain unchanged.
+After the stable profile is imported, refresh **Server Resources → Nexitally**. Local `[policy]`, `[filter_remote]`, and other sections stay as you wrote them.
 
 ## Why
 
-Nexitally distributes a complete Quantumult X configuration through **Configuration File → Download**. Re-downloading it replaces the whole active profile. Using a resource parser turns the embedded `[server_local]` section into an independently refreshable `[server_remote]` resource.
+Nexitally's **Configuration File → Download** replaces the whole active profile. A resource parser turns the embedded `[server_local]` block into a refreshable `[server_remote]` list.
 
-If Nexitally provides an official server-only Quantumult X subscription in the future, prefer the official server resource and remove this parser layer.
+If Nexitally ships an official server-only Quantumult X subscription later, use that and delete this parser layer.
+
+## Personal folio and bench
+
+| path | role |
+| --- | --- |
+| [docs/](docs/) | Operator notes: parser contract, keep/drop traps, device wiring |
+| [examples/](examples/) | Invented fixtures and private-profile snippets |
+| [bench/](bench/) | Node `vm` sandbox, reason codes, [gallery](bench/gallery.html) |
+
+```bash
+npm test
+node bench/run.js --dump examples/cases/managed-full-profile.conf
+node bench/run.js --why "anytls=example.com:443, password=pwd, tag=HK-Reset-01"
+```
+
+Fixtures use `*.example.invalid` and official Quantumult X sample fields only.
 
 ## Compatibility
 
-Tested with Quantumult X configurations containing AnyTLS nodes. Requires a Quantumult X version that supports AnyTLS and resource parsers.
+Tested against Quantumult X configurations that include AnyTLS. The app must support AnyTLS and resource parsers. Official sample lines in `examples/cases/` follow [sample.conf](https://raw.githubusercontent.com/crossutility/Quantumult-X/master/sample.conf).

@@ -1,0 +1,3 @@
+anytls=hk-compact.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, tag=DaysLeft-01
+anytls=hk-underscore.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, tag=Days_Left-01
+anytls=hk-ok.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, tag=HK-01
