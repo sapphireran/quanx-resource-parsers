@@ -1,0 +1,2 @@
+# Keep the encoding fixture as committed bytes (UTF-8 BOM + CRLF).
+examples/fixtures/nexitally-crlf-and-bom.conf binary
