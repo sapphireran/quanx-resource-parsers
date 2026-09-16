@@ -1,0 +1,12 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No subscription URLs or account data.",
+  "scripts": {
+    "test": "node scripts/verify-examples.js",
+    "parse": "node scripts/run-parser.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
