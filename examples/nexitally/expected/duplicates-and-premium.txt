@@ -1,0 +1,3 @@
+anytls=hk-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=HK-01
+anytls=hk-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=HK-01-ALT
+anytls=jp-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=JP-01

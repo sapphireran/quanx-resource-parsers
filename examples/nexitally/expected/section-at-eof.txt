@@ -1,0 +1,2 @@
+anytls=eof-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=EOF-01
+anytls=eof-02.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=EOF-02
