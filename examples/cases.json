@@ -1,0 +1,87 @@
+{
+  "description": "Local verification cases for nexitally-node-parser.js. Inputs are sanitized fixtures, not live subscriptions.",
+  "parser": "nexitally-node-parser.js",
+  "cases": [
+    {
+      "name": "full-config",
+      "input": "examples/fixtures/nexitally-full-config.sample.conf",
+      "expect": {
+        "type": "content",
+        "file": "examples/expected/nexitally-full-config.servers.txt"
+      },
+      "notes": "Extracts AnyTLS nodes from a full Quantumult X profile and drops traffic, expiry, Premium, and duplicate lines."
+    },
+    {
+      "name": "full-config-crlf-bom",
+      "input": "examples/fixtures/nexitally-full-config.crlf-bom.sample.conf",
+      "expect": {
+        "type": "content",
+        "file": "examples/expected/nexitally-full-config.servers.txt"
+      },
+      "notes": "Same as full-config, but saved with a UTF-8 BOM and CRLF line endings."
+    },
+    {
+      "name": "duplicates-and-meta",
+      "input": "examples/fixtures/nexitally-duplicates-and-meta.sample.conf",
+      "expect": {
+        "type": "content",
+        "file": "examples/expected/nexitally-duplicates-and-meta.servers.txt"
+      },
+      "notes": "Comments, blank lines, metadata keywords, and exact duplicates are removed. Leading and trailing whitespace is trimmed."
+    },
+    {
+      "name": "mixed-protocols",
+      "input": "examples/fixtures/nexitally-mixed-protocols.sample.conf",
+      "expect": {
+        "type": "content",
+        "file": "examples/expected/nexitally-mixed-protocols.servers.txt"
+      },
+      "notes": "Keeps anytls, shadowsocks, vmess, vless, trojan, http, and socks5. Drops hysteria2, wireguard, and unknown schemes."
+    },
+    {
+      "name": "section-boundaries",
+      "input": "examples/fixtures/nexitally-section-boundaries.sample.conf",
+      "expect": {
+        "type": "content",
+        "file": "examples/expected/nexitally-section-boundaries.servers.txt"
+      },
+      "notes": "Stops reading at the next INI section so nodes pasted under [policy] or [filter_local] cannot leak."
+    },
+    {
+      "name": "case-and-header-variants",
+      "input": "examples/fixtures/nexitally-case-and-header-variants.sample.conf",
+      "expect": {
+        "type": "content",
+        "file": "examples/expected/nexitally-case-and-header-variants.servers.txt"
+      },
+      "notes": "Section header and protocol names are matched case-insensitively. A trailing [server_local] with no following section is valid."
+    },
+    {
+      "name": "missing-server-local",
+      "input": "examples/fixtures/nexitally-missing-server-local.sample.conf",
+      "expect": {
+        "type": "error",
+        "file": "examples/expected-errors/nexitally-missing-server-local.error.txt"
+      },
+      "notes": "A profile without [server_local] fails closed instead of returning an empty resource."
+    },
+    {
+      "name": "empty-servers",
+      "input": "examples/fixtures/nexitally-empty-servers.sample.conf",
+      "expect": {
+        "type": "error",
+        "file": "examples/expected-errors/nexitally-empty-servers.error.txt"
+      },
+      "notes": "Metadata-only [server_local] sections fail closed."
+    },
+    {
+      "name": "comments-only",
+      "input": "examples/fixtures/nexitally-comments-only.sample.conf",
+      "expect": {
+        "type": "error",
+        "file": "examples/expected-errors/nexitally-comments-only.error.txt"
+      },
+      "notes": "Commented server lines are not uncommented."
+    }
+  ]
+}

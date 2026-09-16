@@ -1,0 +1,8 @@
+anytls=anytls.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard
+shadowsocks=ss.example.test:443, method=2022-blake3-aes-128-gcm, password=BJDBGeLKx/JbEACCSN5rRg==, obfs=over-tls, obfs-host=ss.example.test, tls-verification=true, udp-relay=true, tag=ss-tls
+vmess=vmess.example.test:443, method=chacha20-poly1305, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=vmess.example.test, obfs-uri=/ws, udp-relay=true, tag=vmess-wss
+vless=vless.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=vless-reality
+trojan=trojan.example.test:443, password=pwd, over-tls=true, tls-host=trojan.example.test, tls-verification=true, udp-relay=false, tag=trojan-tls
+http=http.example.test:443, username=name, password=pwd, over-tls=true, tls-host=http.example.test, tls-verification=true, tag=http-tls
+socks5=socks.example.test:1080, username=name, password=pwd, fast-open=false, udp-relay=false, tag=socks5-plain
+shadowsocks = spaced-equals.example.test:443, method=aes-128-gcm, password=pwd, tag=spaced-equals-keep
