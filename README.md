@@ -80,7 +80,8 @@ node examples/scripts/run-example.js typical-full-config
 node examples/scripts/run-example.js --list
 ```
 
-Requires Node.js 18+. No npm packages.
+Requires Node.js 18+. No npm packages. `npm run examples` is the same
+verifier if you prefer a named script.
 
 | Case | Result |
 | --- | --- |
@@ -109,3 +110,4 @@ for a device refresh.
 - [Server line reference](docs/quanx-server-line-reference.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Adding another personal parser](docs/adding-a-parser.md)
+- [Worked example: typical-full-config](docs/worked-example-typical-full-config.md)

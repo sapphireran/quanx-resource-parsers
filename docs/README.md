@@ -12,6 +12,7 @@ document and nothing here is company material.
 4. [Server line reference](quanx-server-line-reference.md) — prefixes the parser keeps
 5. [Troubleshooting](troubleshooting.md) — empty lists, stale nodes, parser errors
 6. [Adding another personal parser](adding-a-parser.md) — if a second provider appears
+7. [Worked example: typical-full-config](worked-example-typical-full-config.md) — keep/drop table for the main fixture
 
 Runnable fixtures live in [`examples/`](../examples/README.md). After a parser
 edit, run:
