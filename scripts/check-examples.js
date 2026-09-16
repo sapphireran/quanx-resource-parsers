@@ -5,9 +5,15 @@ const fs = require("node:fs");
 const path = require("node:path");
 const vm = require("node:vm");
 const { parseNexitallyResource } = require("../nexitally-node-parser.js");
+const { extractServerLocal } = require("../examples/parser-template/resource-parser-template.js");
 
 const ROOT = path.resolve(__dirname, "..");
 const MANIFEST = path.join(ROOT, "examples/nexitally/fixtures.json");
+
+const PARSERS = {
+  "nexitally-node-parser.js": parseNexitallyResource,
+  "resource-parser-template.js": extractServerLocal
+};
 
 function normalizeBody(text) {
   return String(text)
@@ -54,59 +60,65 @@ function pass(name) {
   process.stdout.write(`PASS  ${name}\n`);
 }
 
+function runCase(parse, testCase, labelPrefix) {
+  const name = labelPrefix ? `${labelPrefix}${testCase.name}` : testCase.name;
+  const result = parse(readUtf8(testCase.input));
+
+  if (testCase.error) {
+    if (!result.error) {
+      fail(
+        name,
+        `expected error ${JSON.stringify(testCase.error)}, got content (${result.content.split("\n").length} lines)`
+      );
+      return false;
+    }
+    if (result.error !== testCase.error) {
+      fail(
+        name,
+        `error mismatch\n  expected: ${testCase.error}\n  actual:   ${result.error}`
+      );
+      return false;
+    }
+    pass(name);
+    return true;
+  }
+
+  if (result.error) {
+    fail(name, `unexpected error: ${result.error}`);
+    return false;
+  }
+
+  const expected = normalizeBody(readUtf8(testCase.expected));
+  const actual = normalizeBody(result.content);
+  if (actual !== expected) {
+    fail(
+      name,
+      `content mismatch\n  expected:\n${expected}\n  actual:\n${actual}`
+    );
+    return false;
+  }
+
+  pass(name);
+  return true;
+}
+
 function main() {
   const manifest = JSON.parse(fs.readFileSync(MANIFEST, "utf8"));
-  if (manifest.parser !== "nexitally-node-parser.js") {
+  const parse = PARSERS[manifest.parser];
+  if (!parse) {
     throw new Error(`unexpected parser in fixtures.json: ${manifest.parser}`);
   }
 
   let failed = 0;
+  let total = 0;
 
   for (const testCase of manifest.cases) {
-    const result = parseNexitallyResource(readUtf8(testCase.input));
-
-    if (testCase.error) {
-      if (!result.error) {
-        fail(
-          testCase.name,
-          `expected error ${JSON.stringify(testCase.error)}, got content (${result.content.split("\n").length} lines)`
-        );
-        failed += 1;
-        continue;
-      }
-      if (result.error !== testCase.error) {
-        fail(
-          testCase.name,
-          `error mismatch\n  expected: ${testCase.error}\n  actual:   ${result.error}`
-        );
-        failed += 1;
-        continue;
-      }
-      pass(testCase.name);
-      continue;
-    }
-
-    if (result.error) {
-      fail(testCase.name, `unexpected error: ${result.error}`);
-      failed += 1;
-      continue;
-    }
-
-    const expected = normalizeBody(readUtf8(testCase.expected));
-    const actual = normalizeBody(result.content);
-    if (actual !== expected) {
-      fail(
-        testCase.name,
-        `content mismatch\n  expected:\n${expected}\n  actual:\n${actual}`
-      );
-      failed += 1;
-      continue;
-    }
-
-    pass(testCase.name);
+    total += 1;
+    if (!runCase(parse, testCase)) failed += 1;
   }
 
   const qxName = "quantumult-x-$done-runtime";
+  total += 1;
   try {
     const qxResult = runAsQuantumultX(
       readUtf8("examples/nexitally/managed-full-config.conf")
@@ -132,7 +144,24 @@ function main() {
     failed += 1;
   }
 
-  const total = manifest.cases.length + 1;
+  const templateCases = [
+    {
+      name: "managed-full-config-keeps-metadata",
+      input: "examples/nexitally/managed-full-config.conf",
+      expected: "examples/parser-template/expected/managed-full-config.txt"
+    },
+    {
+      name: "mixed-protocols-same-as-nexitally",
+      input: "examples/nexitally/fixtures/mixed-protocols.conf",
+      expected: "examples/nexitally/expected/mixed-protocols.txt"
+    }
+  ];
+
+  for (const testCase of templateCases) {
+    total += 1;
+    if (!runCase(extractServerLocal, testCase, "template:")) failed += 1;
+  }
+
   process.stdout.write(
     `\n${total - failed} passed, ${failed} failed, ${total} total\n`
   );

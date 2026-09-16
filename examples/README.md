@@ -12,7 +12,9 @@ is never stored here.
 | Path | Purpose |
 | --- | --- |
 | [nexitally/](nexitally/) | Managed full-configuration inputs and expected server lists |
+| [nexitally/before-after.md](nexitally/before-after.md) | Side-by-side of the happy-path extraction |
 | [quantumult-x/](quantumult-x/) | Local-profile snippets that *consume* the parsed resource |
+| [parser-template/](parser-template/) | Skeleton parser without Nexitally metadata filters |
 
 ## How to run them
 
@@ -24,6 +26,8 @@ node scripts/run-parser.js examples/nexitally/managed-full-config.conf
 ```
 
 The catalog of fixtures is [../docs/example-catalog.md](../docs/example-catalog.md).
+The happy-path extraction is walked through in
+[nexitally/before-after.md](nexitally/before-after.md).
 
 ## What a fixture is allowed to contain
 

@@ -1,0 +1,10 @@
+anytls=hk-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=HK-01
+anytls=jp-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=JP-01
+anytls=sg-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=SG-01
+anytls=us-01.example.test:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=US-01
+shadowsocks=invalid.example.test:1, method=aes-128-gcm, password=example-password-not-real, tag=Traffic 12.3 GB / 200 GB
+shadowsocks=invalid.example.test:1, method=aes-128-gcm, password=example-password-not-real, tag=Expire 2099-01-01
+shadowsocks=invalid.example.test:1, method=aes-128-gcm, password=example-password-not-real, tag=Days Left 30
+shadowsocks=invalid.example.test:1, method=aes-128-gcm, password=example-password-not-real, tag=流量 剩余 87%
+shadowsocks=invalid.example.test:1, method=aes-128-gcm, password=example-password-not-real, tag=套餐 Reset 2099-02-01
+shadowsocks=invalid.example.test:1, method=aes-128-gcm, password=example-password-not-real, tag=[Premium] Upgrade

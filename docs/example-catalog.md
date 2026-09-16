@@ -104,6 +104,20 @@ on-device entry path. The sandbox uses a fake
 `https://example.test/private-nexitally-url` link to prove the script does not
 need to read `$resource.link`.
 
+## Parser template contrast
+
+[`../examples/parser-template/resource-parser-template.js`](../examples/parser-template/resource-parser-template.js)
+extracts `[server_local]` **without** Nexitally metadata filters. On
+`managed-full-config.conf` it keeps the `Traffic` / `[Premium]` rows that the
+production parser drops. That difference is checked as
+`template:managed-full-config-keeps-metadata`.
+
+On `mixed-protocols` the two parsers must agree, because that fixture has no
+metadata rows.
+
+Walkthrough of the production extraction:
+[`../examples/nexitally/before-after.md`](../examples/nexitally/before-after.md).
+
 ## Local profile snippets (not parser inputs)
 
 These are not in `fixtures.json`. They are copy-paste shapes for a personal
