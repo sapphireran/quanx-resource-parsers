@@ -1,0 +1,11 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No company code, no live subscription URLs.",
+  "license": "MIT",
+  "scripts": {
+    "test": "node test/nexitally-node-parser.test.js",
+    "verify-examples": "node scripts/verify-examples.js",
+    "parse": "node scripts/run-parser.js"
+  }
+}
