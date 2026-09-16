@@ -1,0 +1,12 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No live subscription data.",
+  "scripts": {
+    "test": "node studio/replay.js check",
+    "examples": "node studio/replay.js check",
+    "explain": "node studio/replay.js explain",
+    "report": "node studio/replay.js report",
+    "scan": "node studio/replay.js scan"
+  }
+}

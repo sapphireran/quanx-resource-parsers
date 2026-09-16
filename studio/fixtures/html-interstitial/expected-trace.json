@@ -1,0 +1,55 @@
+{
+  "error": "Nexitally parser: [server_local] section was not found.",
+  "kept": [],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "<!DOCTYPE html>",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 1,
+      "trimmed": "<html><body>",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 2,
+      "trimmed": "<form action=\"https://example.com/login\">",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 3,
+      "trimmed": "<input name=\"user\"/>",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 4,
+      "trimmed": "</form>",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 5,
+      "trimmed": "</body></html>",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 6,
+      "trimmed": "",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "error": "Nexitally parser: [server_local] section was not found.",
+  "kept": [],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "proxies:",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 1,
+      "trimmed": "- name: HK-01",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 2,
+      "trimmed": "type: ss",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 3,
+      "trimmed": "server: example.com",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 4,
+      "trimmed": "port: 443",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 5,
+      "trimmed": "cipher: chacha20-ietf-poly1305",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 6,
+      "trimmed": "password: pwd",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    },
+    {
+      "index": 7,
+      "trimmed": "",
+      "region": "file",
+      "code": "ERROR_NO_SECTION",
+      "detail": "no [server_local] header followed by a newline"
+    }
+  ]
+}

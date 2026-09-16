@@ -1,0 +1,77 @@
+{
+  "error": null,
+  "kept": [
+    "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+    "shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02",
+    "vmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vmess-01",
+    "vless=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vless-01",
+    "trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=trojan-tls-01",
+    "http=example.com:80,fast-open=false, udp-relay=false, tag=http-01",
+    "socks5=example.com:80,fast-open=false, udp-relay=false, tag=socks5-01"
+  ],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "[server_local]",
+      "region": "header",
+      "code": "SECTION_HEADER",
+      "detail": "section header; capture starts on the following line"
+    },
+    {
+      "index": 1,
+      "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 2,
+      "trimmed": "shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, obfs-uri=/resource/file, fast-open=false, udp-relay=false, tag=ss-obfs-http-02",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 3,
+      "trimmed": "vmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vmess-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 4,
+      "trimmed": "vless=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vless-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 5,
+      "trimmed": "trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=trojan-tls-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 6,
+      "trimmed": "http=example.com:80,fast-open=false, udp-relay=false, tag=http-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 7,
+      "trimmed": "socks5=example.com:80,fast-open=false, udp-relay=false, tag=socks5-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 8,
+      "trimmed": "",
+      "region": "after",
+      "code": "OUTSIDE_SECTION",
+      "detail": "outside the first [server_local] capture"
+    }
+  ]
+}

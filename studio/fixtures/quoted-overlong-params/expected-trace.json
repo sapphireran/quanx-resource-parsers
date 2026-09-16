@@ -1,0 +1,37 @@
+{
+  "error": null,
+  "kept": [
+    "http=example.com:443, username=name, password=pwd, over-tls=true, tls-host=example.com, tls-verification=true, tls-pubkey-sha256=eb5ec6684564fd0d04975903ed75342d1b9fdc2096ea54b4cf8caf4740f4ae25, fast-open=false, udp-relay=false, tag=http-tls-02",
+    "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01"
+  ],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "[server_local]",
+      "region": "header",
+      "code": "SECTION_HEADER",
+      "detail": "section header; capture starts on the following line"
+    },
+    {
+      "index": 1,
+      "trimmed": "http=example.com:443, username=name, password=pwd, over-tls=true, tls-host=example.com, tls-verification=true, tls-pubkey-sha256=eb5ec6684564fd0d04975903ed75342d1b9fdc2096ea54b4cf8caf4740f4ae25, fast-open=false, udp-relay=false, tag=http-tls-02",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 2,
+      "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 3,
+      "trimmed": "",
+      "region": "after",
+      "code": "OUTSIDE_SECTION",
+      "detail": "outside the first [server_local] capture"
+    }
+  ]
+}

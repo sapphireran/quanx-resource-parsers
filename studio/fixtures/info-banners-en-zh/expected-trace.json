@@ -1,0 +1,92 @@
+{
+  "error": null,
+  "kept": [
+    "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01"
+  ],
+  "lines": [
+    {
+      "index": 0,
+      "trimmed": "[server_local]",
+      "region": "header",
+      "code": "SECTION_HEADER",
+      "detail": "section header; capture starts on the following line"
+    },
+    {
+      "index": 1,
+      "trimmed": "anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01",
+      "region": "section",
+      "code": "KEEP",
+      "detail": "supported server line"
+    },
+    {
+      "index": 2,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=Traffic",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"Traffic\""
+    },
+    {
+      "index": 3,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=Expire",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"Expire\""
+    },
+    {
+      "index": 4,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=Reset",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"Reset\""
+    },
+    {
+      "index": 5,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=Days Left 3",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"Days Left\""
+    },
+    {
+      "index": 6,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=流量",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"流量\""
+    },
+    {
+      "index": 7,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=到期",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"到期\""
+    },
+    {
+      "index": 8,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=剩余",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"剩余\""
+    },
+    {
+      "index": 9,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=套餐",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"套餐\""
+    },
+    {
+      "index": 10,
+      "trimmed": "anytls=example.com:443, password=pwd, tag=node [Premium] stub",
+      "region": "section",
+      "code": "DROP_EXCLUDED",
+      "detail": "exclusion substring \"[Premium]\""
+    },
+    {
+      "index": 11,
+      "trimmed": "",
+      "region": "after",
+      "code": "OUTSIDE_SECTION",
+      "detail": "outside the first [server_local] capture"
+    }
+  ]
+}

@@ -1,10 +1,14 @@
 /*
  * Quantumult X resource parser for Nexitally managed full configurations.
  *
- * The Nexitally subscription is fetched directly by Quantumult X. This parser
- * receives that response locally, extracts [server_local], and returns only
- * valid server entries to [server_remote]. It contains no subscription URL,
+ * Quantumult X fetches the private URL on the device. This script reads
+ * $resource.content only, extracts the first [server_local] section, and
+ * returns server lines for [server_remote]. It contains no subscription URL,
  * account identifier, node password, or other private information.
+ *
+ * Keep/drop reason codes used by the personal replay studio are documented in
+ * handbook/04-keep-drop-reason-codes.md. The regular expressions below are the
+ * contract; do not change them without a matching fixture and handbook update.
  */
 
 var text = String($resource.content || "")

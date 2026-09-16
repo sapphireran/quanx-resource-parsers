@@ -1,0 +1,2 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01
