@@ -1,10 +1,22 @@
 /*
  * Quantumult X resource parser for Nexitally managed full configurations.
  *
- * The Nexitally subscription is fetched directly by Quantumult X. This parser
- * receives that response locally, extracts [server_local], and returns only
- * valid server entries to [server_remote]. It contains no subscription URL,
- * account identifier, node password, or other private information.
+ * Personal project (sapphireran/quanx-resource-parsers). Not company code.
+ *
+ * Quantumult X downloads the private Nexitally URL on-device and evaluates
+ * this script in the resource-parser sandbox. The script reads only
+ * $resource.content, extracts the first [server_local] section, and returns
+ * supported server lines through $done({ content }). It never reads
+ * $resource.link, so the subscription URL never enters this file.
+ *
+ * Keep: anytls / shadowsocks / vmess / vless / trojan / http / socks5
+ * Drop: comments, exact duplicates, [Premium] placeholders, and traffic /
+ * expiry / plan rows (Traffic, Expire, Reset, Days Left, 流量, 到期, 剩余, 套餐).
+ *
+ * Official sandbox notes (crossutility/Quantumult-X resource-parser.js):
+ * HTTP request and persistent storage APIs are not available here.
+ *
+ * Contract and fixtures: docs/parser-spec.md and lab/fixtures/
  */
 
 var text = String($resource.content || "")
