@@ -69,3 +69,23 @@ Two `[server_local]` blocks. Only `FIRST-01` from the first block is returned. `
 ## exclusion-substring
 
 `tag=HK-01` kept, `tag=HK-Traffic-01` dropped. Makes the substring rule obvious so a future change is deliberate.
+
+## chinese-node-names
+
+`香港-01`, `日本-01`, and `新加坡-标准` are kept. Chinese in a tag is not an exclusion by itself.
+
+## indented-header
+
+Four spaces before `[server_local]`. The section regex allows leading `\s*`.
+
+## html-login-page
+
+A fake HTML login form. Same error as `no-server-local`. This is what a dashboard URL looks like if Quantumult X did not fetch the configuration file.
+
+## clash-yaml
+
+A fake Clash `proxies:` document. Same missing-section error. Use a general converter if the provider only offers Clash.
+
+## typical-full-config.walkthrough.md
+
+Line-by-line notes for the main fixture. Not an input file.

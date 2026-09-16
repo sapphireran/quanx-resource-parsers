@@ -41,6 +41,10 @@ node examples/run-parser.js --input /tmp/redacted-nexitally.conf --dump
 | `glued-header` | header without newline | error | `\n` required after the header |
 | `second-section-ignored` | two `[server_local]` | 1 server line | Only the first section is read |
 | `exclusion-substring` | tag contains `Traffic` | 1 server line | Exclusion is a substring, not a whole-tag match |
+| `chinese-node-names` | `香港` / `日本` tags | 3 server lines | Chinese region names are not exclusion keywords |
+| `indented-header` | spaces before the header | 1 server line | Leading whitespace on `[server_local]` is allowed |
+| `html-login-page` | fake HTML | error | Dashboard / login bodies fail closed |
+| `clash-yaml` | fake Clash YAML | error | Wrong format; this script does not convert Clash |
 
 Details for each file: [`nexitally/README.md`](nexitally/README.md).
 

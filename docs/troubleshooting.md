@@ -29,8 +29,8 @@ Typical causes:
 
 | Cause | What to check |
 | --- | --- |
-| The URL is a landing page or login HTML | The body starts with `<!DOCTYPE` or `<html`. The dashboard URL is not the configuration download. |
-| The URL is Clash / SIP008 / base64 | No INI sections. You need a different parser, or the Quantumult X-specific download. |
+| The URL is a landing page or login HTML | The body starts with `<!DOCTYPE` or `<html`. Replay `html-login-page`. The dashboard URL is not the configuration download. |
+| The URL is Clash / SIP008 / base64 | No INI sections. Replay `clash-yaml`. You need a different parser, or the Quantumult X-specific download. |
 | The URL is already a server-only list | There is no `[server_local]` wrapper. Point `[server_remote]` at it **without** this parser. |
 | Header uses inner spaces | `[ server_local ]` does not match. |
 | Header and first line are glued together | `[server_local]anytls=...` has no newline after the header. |

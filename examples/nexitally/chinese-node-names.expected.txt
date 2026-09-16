@@ -1,0 +1,3 @@
+anytls=node-hk.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=香港-01
+anytls=node-jp.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=日本-01
+anytls=node-sg.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=新加坡-标准

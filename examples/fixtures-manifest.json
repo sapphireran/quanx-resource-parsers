@@ -128,6 +128,42 @@
         "kind": "content",
         "file": "nexitally/exclusion-substring.expected.txt"
       }
+    },
+    {
+      "id": "chinese-node-names",
+      "description": "Chinese region tags are kept; only 流量 / 到期 / 剩余 / 套餐 are excluded.",
+      "input": "nexitally/chinese-node-names.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/chinese-node-names.expected.txt"
+      }
+    },
+    {
+      "id": "indented-header",
+      "description": "Spaces before [server_local] are allowed by the section regex.",
+      "input": "nexitally/indented-header.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/indented-header.expected.txt"
+      }
+    },
+    {
+      "id": "html-login-page",
+      "description": "An HTML login page has no [server_local] section.",
+      "input": "nexitally/html-login-page.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/html-login-page.expected.json"
+      }
+    },
+    {
+      "id": "clash-yaml",
+      "description": "Clash YAML is the wrong resource type for this parser.",
+      "input": "nexitally/clash-yaml.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/clash-yaml.expected.json"
+      }
     }
   ]
 }
