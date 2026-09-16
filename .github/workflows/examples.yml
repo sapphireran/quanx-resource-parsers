@@ -1,0 +1,16 @@
+name: examples
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check example fixtures against the parser
+        run: node scripts/check-examples.js
