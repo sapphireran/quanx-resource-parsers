@@ -5,6 +5,10 @@
  * receives that response locally, extracts [server_local], and returns only
  * valid server entries to [server_remote]. It contains no subscription URL,
  * account identifier, node password, or other private information.
+ *
+ * Docs and synthetic examples: docs/README.md, examples/nexitally/.
+ * Keep vs drop: docs/parser-keep-drop.md
+ * Local Node harness: node test/harness.js <file>
  */
 
 var text = String($resource.content || "")
