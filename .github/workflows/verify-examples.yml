@@ -1,0 +1,24 @@
+name: Verify examples
+
+on:
+  push:
+    branches:
+      - main
+      - "cursor/**"
+  pull_request:
+
+jobs:
+  verify:
+    name: Parser fixtures
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run fixture suite
+        run: node scripts/verify-examples.js

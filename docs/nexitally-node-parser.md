@@ -25,6 +25,21 @@ The script does not notify, retry, or read `$resource.link`.
 
 ## Algorithm
 
+```mermaid
+flowchart TD
+  A["Quantumult X downloads the private full-config URL"] --> B["Parser receives $resource.content"]
+  B --> C["Strip BOM and normalize CRLF"]
+  C --> D{"[server_local] present?"}
+  D -->|no| E["$done error: section not found"]
+  D -->|yes| F["Read until the next INI section"]
+  F --> G["Drop comments, blanks, metadata, Premium, duplicates"]
+  G --> H{"Any supported server lines left?"}
+  H -->|no| I["$done error: no usable servers"]
+  H -->|yes| J["$done content: server lines only"]
+  J --> K["[server_remote] stores nodes"]
+  K --> L["Local policies / filters stay unchanged"]
+```
+
 The implementation is intentionally small. The steps are:
 
 1. Coerce `$resource.content` to a string.
