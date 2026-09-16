@@ -1,0 +1,3 @@
+# Preserve the BOM + CRLF fixture exactly. Git must not rewrite its line endings.
+examples/nexitally/crlf-and-bom.conf binary
+examples/nexitally/header-only-no-newline.conf binary
