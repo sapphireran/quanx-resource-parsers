@@ -1,0 +1,7 @@
+node_modules/
+tmp/
+scratch/
+secrets/
+*.local.conf
+.DS_Store
+npm-debug.log*

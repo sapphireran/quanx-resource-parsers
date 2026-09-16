@@ -1,0 +1,8 @@
+* text=auto eol=lf
+*.conf text eol=lf
+*.keep text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+examples/cases/*.crlf.conf binary

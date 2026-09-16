@@ -1,0 +1,2 @@
+anytls=hk-01.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, tag=HK-01
+anytls=sg-01.example.invalid:443, password=pwd, over-tls=true, tls-host=apple.com, tag=SG-01

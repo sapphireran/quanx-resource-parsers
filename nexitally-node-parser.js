@@ -1,10 +1,12 @@
 /*
  * Quantumult X resource parser for Nexitally managed full configurations.
  *
- * The Nexitally subscription is fetched directly by Quantumult X. This parser
- * receives that response locally, extracts [server_local], and returns only
- * valid server entries to [server_remote]. It contains no subscription URL,
- * account identifier, node password, or other private information.
+ * Content-only contract: Quantumult X fetches the private Nexitally URL on
+ * the device. This script reads $resource.content, extracts [server_local],
+ * and returns server lines through $done. It must not read $resource.link
+ * and it contains no subscription URL, account identifier, or node secret.
+ *
+ * Personal notes and sanitized fixtures: docs/ and examples/.
  */
 
 var text = String($resource.content || "")
