@@ -1,0 +1,12 @@
+# Policy groups that consume the parsed Nexitally server resource.
+# resource-tag-regex matches the tag= on the [server_remote] line, not
+# individual node names. Rename both together if you change the tag.
+#
+# img-url is optional decoration. Direct is listed so you can fail open
+# while testing the group from the policy picker.
+
+static = Nexitally, resource-tag-regex=^Nexitally, img-url=https://example.com/icons/nexitally.png
+static = Final, Nexitally, direct
+
+# Optional: latency-based selection across the same resource.
+;url-latency-benchmark = Nexitally-Bench, resource-tag-regex=^Nexitally, check-interval=600, alive-checking=false, tolerance=50
