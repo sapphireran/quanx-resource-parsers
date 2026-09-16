@@ -1,0 +1,2 @@
+anytls = bom.example.com:443, password=placeholder, over-tls=true, tag=BOM-CRLF-AnyTLS
+shadowsocks = bom.example.com:8388, method=chacha20-ietf-poly1305, password=placeholder, tag=BOM-CRLF-SS

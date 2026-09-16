@@ -1,0 +1,7 @@
+anytls = anytls.example.com:443, password=placeholder-anytls, over-tls=true, tls-verification=true, tls-host=anytls.example.com, udp-relay=true, tag=Example-HK-AnyTLS
+shadowsocks = ss.example.com:8388, method=chacha20-ietf-poly1305, password=placeholder-ss, fast-open=false, udp-relay=true, tag=Example-JP-SS
+vmess = vmess.example.com:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000001, obfs=wss, obfs-host=vmess.example.com, obfs-uri=/vmess, tls13=true, tag=Example-SG-VMess
+vless = vless.example.com:443, method=none, password=00000000-0000-4000-8000-000000000002, obfs=wss, obfs-host=vless.example.com, obfs-uri=/vless, tag=Example-US-VLESS
+trojan = trojan.example.com:443, password=placeholder-trojan, over-tls=true, tls-verification=true, tls-host=trojan.example.com, tag=Example-TW-Trojan
+http = http.example.com:8443, username=example-user, password=placeholder-http, over-tls=true, tls-verification=true, tag=Example-HTTP
+socks5 = socks.example.com:1080, username=example-user, password=placeholder-socks, over-tls=false, tag=Example-SOCKS5

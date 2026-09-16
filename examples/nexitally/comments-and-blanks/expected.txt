@@ -1,0 +1,2 @@
+anytls = keep.example.com:443, password=placeholder, over-tls=true, tag=Keep-After-Comments
+vmess = keep-two.example.com:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000005, tag=Keep-Second
