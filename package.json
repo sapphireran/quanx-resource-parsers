@@ -1,0 +1,9 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers and example fixtures.",
+  "scripts": {
+    "test": "node test/nexitally-node-parser.test.js",
+    "parse": "node test/harness.js"
+  }
+}
