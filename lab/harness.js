@@ -156,7 +156,7 @@ function loadCatalog() {
   const catalog = JSON.parse(fs.readFileSync(catalogPath, "utf8"));
   return catalog.fixtures.map(function (entry) {
     const inputBuf = readRepoFile(entry.input);
-    const raw = entry.binary ? inputBuf : inputBuf.toString("utf8");
+    const raw = Buffer.isBuffer(inputBuf) ? inputBuf.toString("utf8") : String(inputBuf);
     const expectPath = entry.expect;
     const expectKind = entry.kind;
     const expected = fs.readFileSync(path.resolve(REPO_ROOT, expectPath), "utf8").replace(/\r\n/g, "\n").replace(/\n$/, "");

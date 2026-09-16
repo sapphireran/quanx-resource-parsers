@@ -139,7 +139,23 @@ function runSuite() {
     }
   });
 
-  process.stdout.write("\n" + passed + " passed, " + failures.length + " failed, " + fixtures.length + " fixtures\n");
+  try {
+    const executable = fs.readFileSync(harness.PARSER_PATH, "utf8").replace(/\/\*[\s\S]*?\*\//g, "");
+    if (/\$resource\.link\b/.test(executable)) {
+      throw new Error("executable parser body must not read $resource.link");
+    }
+    const parsed = harness.runParser("[server_local]\nanytls=probe.example.invalid:443, password=placeholder, tag=Probe\n");
+    if (parsed.error || !parsed.content || parsed.content.indexOf("probe.example.invalid") === -1) {
+      throw new Error("sandbox probe parse failed: " + JSON.stringify(parsed));
+    }
+    passed += 1;
+    process.stdout.write(GREEN + "ok   " + RESET + "sandbox-no-link" + DIM + "  parser does not read $resource.link" + RESET + "\n");
+  } catch (err) {
+    failures.push({ id: "sandbox-no-link", error: err });
+    process.stdout.write(RED + "fail " + RESET + "sandbox-no-link  " + err.message.split("\n")[0] + "\n");
+  }
+
+  process.stdout.write("\n" + passed + " passed, " + failures.length + " failed, " + (fixtures.length + 1) + " checks\n");
   if (failures.length) {
     failures.forEach(function (item) {
       process.stderr.write("\n" + RED + item.id + RESET + "\n" + item.error.stack + "\n");
