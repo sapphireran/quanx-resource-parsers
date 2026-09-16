@@ -1,0 +1,11 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No live subscriptions.",
+  "scripts": {
+    "replay": "node scripts/replay.js",
+    "test": "node scripts/verify.js",
+    "verify": "node scripts/verify.js",
+    "report": "node scripts/replay.js --catalog --report"
+  }
+}
