@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+npm-debug.log
+
+# Local copies of real Quantumult X profiles or subscription bodies.
+# Keep placeholders in examples/; put live files under private/.
+private/**
+!private/README.md
+*.local.conf
+*.local.txt
+.env
+.env.*

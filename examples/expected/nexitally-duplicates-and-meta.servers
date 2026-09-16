@@ -1,0 +1,3 @@
+anytls = keep-01.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=KEEP-01
+anytls = keep-02.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=KEEP-02
+anytls = keep-03.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=KEEP-03

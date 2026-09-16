@@ -1,0 +1,2 @@
+anytls = edge-01.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=EDGE-01
+anytls = edge-02.nodes.example.test:443, password=example-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=EDGE-02

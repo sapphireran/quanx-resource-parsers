@@ -1,0 +1,100 @@
+[
+  {
+    "id": "full-config",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-full-config.conf",
+    "expected": "expected/nexitally-full-config.servers",
+    "summary": "Typical managed full profile: keep usable nodes, drop metadata, Premium placeholders, comments, and exact duplicates."
+  },
+  {
+    "id": "mixed-protocols",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-mixed-protocols.conf",
+    "expected": "expected/nexitally-mixed-protocols.servers",
+    "summary": "Every protocol prefix the parser accepts: anytls, shadowsocks, vmess, vless, trojan, http, socks5."
+  },
+  {
+    "id": "duplicates-and-meta",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-duplicates-and-meta.conf",
+    "expected": "expected/nexitally-duplicates-and-meta.servers",
+    "summary": "Traffic/expiry/plan lines, Chinese metadata, [Premium] tags, unsupported protocols, and repeated server lines."
+  },
+  {
+    "id": "section-order",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-section-order.conf",
+    "expected": "expected/nexitally-section-order.servers",
+    "summary": "[server_local] sits between other sections; later [filter_local] lines must not leak into the output."
+  },
+  {
+    "id": "indented-header",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-indented-header.conf",
+    "expected": "expected/nexitally-indented-header.servers",
+    "summary": "Leading whitespace before [server_local] is accepted."
+  },
+  {
+    "id": "uppercase-header",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-uppercase-header.conf",
+    "expected": "expected/nexitally-uppercase-header.servers",
+    "summary": "Section header matching is case-insensitive."
+  },
+  {
+    "id": "crlf-and-bom",
+    "kind": "content",
+    "fixture": "fixtures/nexitally-crlf-and-bom.conf",
+    "expected": "expected/nexitally-crlf-and-bom.servers",
+    "summary": "UTF-8 BOM and CRLF line endings are normalized before extraction."
+  },
+  {
+    "id": "exclusion-in-tag",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-exclusion-in-tag.conf",
+    "expected": "expected/nexitally-exclusion-in-tag.error",
+    "summary": "Otherwise valid server lines are dropped when the tag contains Traffic, Expire, or 套餐."
+  },
+  {
+    "id": "empty-section",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-empty-section.conf",
+    "expected": "expected/nexitally-empty-section.error",
+    "summary": "[server_local] exists but contains no usable server lines."
+  },
+  {
+    "id": "missing-section",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-missing-section.conf",
+    "expected": "expected/nexitally-missing-section.error",
+    "summary": "Managed profile without a [server_local] section."
+  },
+  {
+    "id": "comments-only",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-comments-only.conf",
+    "expected": "expected/nexitally-comments-only.error",
+    "summary": "Section contains only ; # // comments."
+  },
+  {
+    "id": "header-no-newline",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-header-no-newline.conf",
+    "expected": "expected/nexitally-header-no-newline.error",
+    "summary": "A [server_local] header without a following newline does not match."
+  },
+  {
+    "id": "unsupported-only",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-unsupported-only.conf",
+    "expected": "expected/nexitally-unsupported-only.error",
+    "summary": "Hysteria2 / WireGuard-style lines are ignored because they are not Quantumult X server prefixes this parser emits."
+  },
+  {
+    "id": "blank-content",
+    "kind": "error",
+    "fixture": "fixtures/nexitally-blank-content.conf",
+    "expected": "expected/nexitally-blank-content.error",
+    "summary": "Empty resource body."
+  }
+]
