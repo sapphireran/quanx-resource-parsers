@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+lab/.tmp/
+.idea/
+.vscode/

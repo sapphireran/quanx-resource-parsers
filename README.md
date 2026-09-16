@@ -1,44 +1,88 @@
 # QuanX Resource Parsers
 
-Small, focused resource parsers for Quantumult X.
+Personal Quantumult X resource parsers. **Not company code.**
+
+The first parser turns a Nexitally-managed **full Quantumult X configuration** into a server-only resource so a local profile can refresh nodes without **Configuration File → Download** replacing `[policy]`, filters, and rewrites.
 
 ## Nexitally node parser
 
-`nexitally-node-parser.js` converts Nexitally's managed **full Quantumult X configuration** into a server-only resource:
+[`nexitally-node-parser.js`](nexitally-node-parser.js) runs in Quantumult X's resource-parser sandbox:
 
-- extracts entries from `[server_local]`;
-- returns only Quantumult X server lines to `[server_remote]`;
-- supports AnyTLS and other common Quantumult X server formats;
-- removes duplicate entries and excludes traffic/expiry information plus `[Premium]` placeholders;
-- contains no subscription URL, account ID, node password, or other private data.
+1. Quantumult X downloads the private Nexitally URL on-device.
+2. The script reads `$resource.content` only, extracts the first `[server_local]` section, and keeps supported server lines.
+3. `$done({ content })` returns those lines to `[server_remote]`.
 
-The Nexitally subscription is downloaded directly by Quantumult X. The parser runs in Quantumult X's resource-parser environment.
+| Keep | Drop |
+| --- | --- |
+| `anytls`, `shadowsocks`, `vmess`, `vless`, `trojan`, `http`, `socks5` | comments, exact duplicates, `[Premium]` stubs, traffic / expiry / plan rows (`Traffic`, `Expire`, `Reset`, `Days Left`, `流量`, `到期`, `剩余`, `套餐`) |
 
-## Usage
+The file contains no subscription URL, account id, or live node password. See [docs/privacy.md](docs/privacy.md).
 
-Add the parser URL to `[general]`:
+It is not a Clash/Surge converter. Quantumult X has one `resource_parser_url`; set `opt-parser=true` only on the Nexitally resource.
+
+## Quick start
+
+Raw GitHub is the source of truth. jsDelivr can lag `main`.
 
 ```ini
-resource_parser_url = https://cdn.jsdelivr.net/gh/pang990801/quanx-resource-parsers@main/nexitally-node-parser.js
+[general]
+resource_parser_url = https://raw.githubusercontent.com/sapphireran/quanx-resource-parsers/main/nexitally-node-parser.js
 ```
 
-Then add your **private** Nexitally Quantumult X full-configuration URL as a server resource:
+```ini
+;resource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js
+```
+
+Add the **private** Nexitally full-configuration URL as a server resource. Do not import that download as the active profile.
 
 ```ini
 [server_remote]
 <YOUR_PRIVATE_NEXITALLY_QUANTUMULT_X_URL>, tag=Nexitally, opt-parser=true, update-interval=21600, enabled=true
 ```
 
-Keep the Nexitally URL only in your local configuration. Never commit it to this repository, a public Gist, or another public service.
+Keep the URL on the device. Do not commit it here.
 
-After importing your stable Quantumult X profile, refresh **Server Resources → Nexitally** to update nodes. Your `[policy]`, `[filter_remote]`, and other local configuration sections remain unchanged.
+Refresh **Server Resources → Nexitally**. Longer fragments: [`lab/profiles/`](lab/profiles/).
 
-## Why
+## Example
 
-Nexitally distributes a complete Quantumult X configuration through **Configuration File → Download**. Re-downloading it replaces the whole active profile. Using a resource parser turns the embedded `[server_local]` section into an independently refreshable `[server_remote]` resource.
+[`lab/fixtures/nexitally-style-full.conf`](lab/fixtures/nexitally-style-full.conf) is a sanitized Nexitally-style export (Chinese tags, traffic rows, a `[Premium]` section, a duplicate). The parser output is:
 
-If Nexitally provides an official server-only Quantumult X subscription in the future, prefer the official server resource and remove this parser layer.
+```text
+anytls=hk-iplc-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=香港 IPLC 01
+anytls=jp-iepl-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=日本 IEPL 01
+anytls=sg-anycast-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=新加坡 Anycast 01
+```
+
+Replay without Quantumult X (Node.js 18+):
+
+```bash
+npm test
+node lab/run.js --explain lab/fixtures/nexitally-style-full.conf
+```
+
+Open the generated gallery at [`lab/gallery.html`](lab/gallery.html) after `npm run gallery`.
+
+## Docs
+
+| Path | Topic |
+| --- | --- |
+| [docs/lab-notebook.md](docs/lab-notebook.md) | Why this exists |
+| [docs/parser-spec.md](docs/parser-spec.md) | Extract / filter / error contract |
+| [docs/resource-parser-contract.md](docs/resource-parser-contract.md) | Official `$resource` / `$done` surface |
+| [docs/server-line-grammar.md](docs/server-line-grammar.md) | AnyTLS / Reality field names |
+| [docs/migration-cookbook.md](docs/migration-cookbook.md) | Profile migration |
+| [docs/keep-drop-matrix.md](docs/keep-drop-matrix.md) | Catalog counts |
+| [docs/troubleshooting.md](docs/troubleshooting.md) | Failed refresh |
+| [docs/zh/README.md](docs/zh/README.md) | 中文 |
+| [lab/README.md](lab/README.md) | Fixture catalog and CLI |
 
 ## Compatibility
 
-Tested with Quantumult X configurations containing AnyTLS nodes. Requires a Quantumult X version that supports AnyTLS and resource parsers.
+- Resource parsers: Quantumult X v1.0.8-build253+
+- AnyTLS: Quantumult X 1.6.0 (App Store, 2026-05-21) or 1.5.6 TestFlight build 914+
+- If Nexitally publishes an official server-only Quantumult X subscription, use that and remove this parser
+
+## License
+
+[MIT](LICENSE)

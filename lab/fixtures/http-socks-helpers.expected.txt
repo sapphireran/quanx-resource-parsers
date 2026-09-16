@@ -1,0 +1,2 @@
+http=helper.example.invalid:443, username=demo, password=placeholder, over-tls=true, tls-host=www.apple.com, tls-verification=true, tag=Helper HTTP
+socks5=helper.example.invalid:1080, username=demo, password=placeholder, tag=Helper SOCKS5
