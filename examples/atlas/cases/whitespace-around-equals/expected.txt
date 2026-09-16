@@ -1,0 +1,2 @@
+anytls = example.com:443, password=pwd, over-tls=true, tag=SPACED
+vmess= example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, tag=VM-SP

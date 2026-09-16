@@ -1,0 +1,2 @@
+anytls=example.com:443, password=pwd, over-tls=true, tag=香港 01
+anytls=example.net:443, password=pwd, over-tls=true, tag=東京-01

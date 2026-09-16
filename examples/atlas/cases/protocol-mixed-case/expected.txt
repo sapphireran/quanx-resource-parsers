@@ -1,0 +1,3 @@
+ANYTLS=example.com:443, password=pwd, over-tls=true, tag=UP
+Vmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, tag=MIX-VM
+ShadowSocks=example.com:80, method=chacha20, password=pwd, tag=MIX-SS
