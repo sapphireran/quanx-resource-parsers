@@ -1,0 +1,2 @@
+http=example.com:80, username=name, password=pwd, udp-relay=false, tag=HTTP-01
+socks5=example.com:80, username=name, password=pwd, udp-relay=false, tag=SOCKS5-01

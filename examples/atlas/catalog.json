@@ -1,0 +1,210 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "privacy": "synthetic Quantumult X only — no live subscription URLs or account data",
+  "cases": [
+    {
+      "id": "managed-full-profile",
+      "title": "Typical managed full configuration",
+      "outcome": "content",
+      "summary": "Extracts usable AnyTLS, Shadowsocks, and VMess lines from a full profile and drops banners, a Premium tag, and a duplicate."
+    },
+    {
+      "id": "protocol-roster",
+      "title": "All seven supported prefixes",
+      "outcome": "content",
+      "summary": "Keeps anytls, shadowsocks, vmess, vless, trojan, http, and socks5."
+    },
+    {
+      "id": "anytls-reality",
+      "title": "AnyTLS standard TLS and Reality",
+      "outcome": "content",
+      "summary": "Reality parameters are preserved; they are not metadata."
+    },
+    {
+      "id": "ss2022-and-ssr-shaped",
+      "title": "SS2022 and SSR-shaped Shadowsocks",
+      "outcome": "content",
+      "summary": "Both lines start with shadowsocks= and are kept."
+    },
+    {
+      "id": "comments-duplicates-meta",
+      "title": "Comments, trimmed duplicates, Traffic stub",
+      "outcome": "content",
+      "summary": "Three comment styles and a whitespace-padded duplicate are dropped."
+    },
+    {
+      "id": "en-zh-banners",
+      "title": "English and Chinese account banners",
+      "outcome": "content",
+      "summary": "Traffic / Expire / Reset / Days Left / 剩余 / 套餐 / 到期 lines are excluded."
+    },
+    {
+      "id": "premium-in-tag",
+      "title": "[Premium] inside a node tag",
+      "outcome": "content",
+      "summary": "Drops that one line without ending the section."
+    },
+    {
+      "id": "premium-section-terminator",
+      "title": "[Premium] as a later section header",
+      "outcome": "content",
+      "summary": "Terminates [server_local]; later nodes are invisible."
+    },
+    {
+      "id": "reset-substring",
+      "title": "Unanchored Reset in a tag",
+      "outcome": "content",
+      "summary": "tag=Reset-HK is dropped; a nearby ordinary tag is kept."
+    },
+    {
+      "id": "days-left-spacing",
+      "title": "Days Left versus DaysLeft",
+      "outcome": "content",
+      "summary": "Only the single-space phrase Days Left matches the exclusion."
+    },
+    {
+      "id": "bom-crlf",
+      "title": "UTF-8 BOM and CRLF",
+      "outcome": "content",
+      "summary": "BOM is stripped and Windows newlines are normalized."
+    },
+    {
+      "id": "header-mixed-case",
+      "title": "Mixed-case section header",
+      "outcome": "content",
+      "summary": "[Server_Local] matches."
+    },
+    {
+      "id": "header-indented",
+      "title": "Indented section header",
+      "outcome": "content",
+      "summary": "Leading tabs and spaces before the header are allowed."
+    },
+    {
+      "id": "server-local-at-eof",
+      "title": "Section runs to end of file",
+      "outcome": "content",
+      "summary": "No following [section] is required."
+    },
+    {
+      "id": "first-of-two-server-local",
+      "title": "Second [server_local] is ignored",
+      "outcome": "content",
+      "summary": "The first match wins."
+    },
+    {
+      "id": "missing-server-local",
+      "title": "No server_local header",
+      "outcome": "error",
+      "summary": "Returns the section-not-found error."
+    },
+    {
+      "id": "empty-usable",
+      "title": "Section with no usable servers",
+      "outcome": "error",
+      "summary": "Returns the no-usable-server-entries error."
+    },
+    {
+      "id": "already-server-only",
+      "title": "Already a server-only list",
+      "outcome": "error",
+      "summary": "This parser does not accept bodies that skip [server_local]."
+    },
+    {
+      "id": "glued-header",
+      "title": "Header glued to the first server line",
+      "outcome": "error",
+      "summary": "A newline after ] is required."
+    },
+    {
+      "id": "header-no-newline",
+      "title": "Header without a trailing newline",
+      "outcome": "error",
+      "summary": "A file that is only [server_local] does not match."
+    },
+    {
+      "id": "filter-rules-inside-section",
+      "title": "Filter rules inside the body",
+      "outcome": "content",
+      "summary": "host / ip-cidr lines are unsupported and dropped."
+    },
+    {
+      "id": "policy-lookalikes",
+      "title": "Policy lines inside the body",
+      "outcome": "content",
+      "summary": "static= and available= are not server prefixes."
+    },
+    {
+      "id": "unsupported-protocols",
+      "title": "Unsupported protocol prefixes",
+      "outcome": "content",
+      "summary": "hysteria2, tuic, wireguard, https, and socks are dropped."
+    },
+    {
+      "id": "https-and-socks-not-kept",
+      "title": "http/socks5 versus https/socks",
+      "outcome": "content",
+      "summary": "Only the shorter http and socks5 prefixes are accepted."
+    },
+    {
+      "id": "ipv6-and-tabs",
+      "title": "Tab indentation and IPv6 host",
+      "outcome": "content",
+      "summary": "Trim removes tabs; 2001:db8::1 is kept."
+    },
+    {
+      "id": "whitespace-around-equals",
+      "title": "Spaces around the protocol equals sign",
+      "outcome": "content",
+      "summary": "The supported-prefix regex allows optional spaces."
+    },
+    {
+      "id": "protocol-mixed-case",
+      "title": "Mixed-case protocol names",
+      "outcome": "content",
+      "summary": "ANYTLS, Vmess, and ShadowSocks all match."
+    },
+    {
+      "id": "html-interstitial",
+      "title": "HTML login page",
+      "outcome": "error",
+      "summary": "No Quantumult X header."
+    },
+    {
+      "id": "clash-yaml",
+      "title": "Clash YAML subscription",
+      "outcome": "error",
+      "summary": "Wrong format for this parser."
+    },
+    {
+      "id": "comment-false-header",
+      "title": "Commented header in the preamble",
+      "outcome": "content",
+      "summary": ";[server_local] is not a header. The later real header is."
+    },
+    {
+      "id": "inner-spaced-header",
+      "title": "[server local] as a terminator",
+      "outcome": "content",
+      "summary": "A spaced name cannot open the section but can close it."
+    },
+    {
+      "id": "empty-file",
+      "title": "Empty body",
+      "outcome": "error",
+      "summary": "Missing content is treated as an empty string."
+    },
+    {
+      "id": "unicode-tags",
+      "title": "Unicode node tags",
+      "outcome": "content",
+      "summary": "Hong Kong and Tokyo tags are not metadata exclusions."
+    },
+    {
+      "id": "preamble-banner",
+      "title": "Free text before the first section",
+      "outcome": "content",
+      "summary": "Preamble server-looking lines are ignored until [server_local]."
+    }
+  ]
+}

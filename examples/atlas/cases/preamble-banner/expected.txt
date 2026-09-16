@@ -1,0 +1,1 @@
+anytls=example.net:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01
