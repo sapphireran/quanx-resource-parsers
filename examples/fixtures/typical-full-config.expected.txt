@@ -1,0 +1,7 @@
+anytls=hk-01.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01
+anytls=jp-01.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-01
+anytls=us-01.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=US-01
+anytls=sg-01.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=SG-01
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=anytls-reality-tls-01
+shadowsocks=ss-01.example.com:80, method=2022-blake3-aes-128-gcm, password=BJDBGeLKx/JbEACCSN5rRg==, udp-relay=true, tag=SS-01
+trojan=trojan-01.example.com:443, password=pwd, over-tls=true, tls-verification=true, udp-relay=true, tag=Trojan-01

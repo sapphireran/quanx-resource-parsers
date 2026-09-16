@@ -1,0 +1,9 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-standard-tls-01
+shadowsocks=example.com:80, method=2022-blake3-aes-128-gcm, password=BJDBGeLKx/JbEACCSN5rRg==, udp-relay=true, tag=ss2022-blake3-aes-128-gcm
+vmess=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vmess-01
+vless=example.com:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, fast-open=false, udp-relay=false, tag=vless-01
+trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, fast-open=false, udp-relay=false, tag=trojan-tls-01
+http=example.com:80, username=name, password=pwd, fast-open=false, udp-relay=false, tag=http-02
+socks5=example.com:80, username=name, password=pwd, fast-open=false, udp-relay=false, tag=socks5-02
+AnyTLS=mixed-case.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=anytls-mixed-case
+Shadowsocks=mixed-case.example.com:80, method=chacha20, password=pwd, udp-relay=true, tag=ss-mixed-case

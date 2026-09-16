@@ -1,0 +1,2 @@
+anytls=keep.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=KEEP
+anytls=keep-2.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=KEEP-2

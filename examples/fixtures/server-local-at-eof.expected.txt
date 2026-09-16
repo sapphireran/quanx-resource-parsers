@@ -1,0 +1,2 @@
+anytls=eof-01.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=EOF-01
+anytls=eof-02.example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=EOF-02
