@@ -1,0 +1,2 @@
+anytls = in-bom-01.example.test:443, password=example-anytls-password, over-tls=true, tls-verification=true, tls-host=in-bom-01.example.test, tag=IN-Bom-01
+shadowsocks = in-bom-02.example.test:443, method=chacha20-ietf-poly1305, password=example-ss-password, tag=IN-Bom-02

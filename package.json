@@ -1,0 +1,9 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers and sanitized examples",
+  "scripts": {
+    "examples": "node examples/scripts/verify-examples.js",
+    "example": "node examples/scripts/run-example.js"
+  }
+}

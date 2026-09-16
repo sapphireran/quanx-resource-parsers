@@ -1,0 +1,2 @@
+anytls = ca-yvr-01.example.test:443, password=example-anytls-password, over-tls=true, tls-verification=true, tls-host=ca-yvr-01.example.test, tag=CA-Yvr-01
+trojan = fr-cdg-01.example.test:443, password=example-trojan-password, over-tls=true, tls-host=fr-cdg-01.example.test, tls-verification=true, tag=FR-Cdg-01
