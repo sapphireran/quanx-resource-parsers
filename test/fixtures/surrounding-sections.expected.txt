@@ -1,0 +1,2 @@
+anytls=keep.example.com:443, password=example-password-not-real, over-tls=true, tls-host=www.example.com, tag=KEEP-01
+shadowsocks=drop.example.com:80, method=aes-128-gcm, password=unused, tag=other-resource-must-not-leak

@@ -1,0 +1,5 @@
+anytls=hk-1.example.com:443, password=example-password-not-real, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=HK-01
+anytls=hk-2.example.com:443, password=example-password-not-real, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=HK-02
+anytls=jp-1.example.com:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=JP-01
+anytls=us-1.example.com:443, password=example-password-not-real, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=US-01
+anytls=jp-reality.example.com:443, password=example-password-not-real, over-tls=true, tls-host=www.apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=JP-02-Reality
