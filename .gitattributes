@@ -1,0 +1,3 @@
+# Keep the BOM + CRLF fixture byte-for-byte so checkouts do not
+# convert it to LF or strip U+FEFF.
+examples/nexitally/crlf-and-bom.conf -text

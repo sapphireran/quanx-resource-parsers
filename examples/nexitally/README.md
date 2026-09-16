@@ -52,3 +52,5 @@ node scripts/run-parser.js examples/nexitally/typical-full-profile.conf
 4. Run `node scripts/check-examples.js`.
 
 Never paste a real subscription body into a fixture. If you need a new edge case, invent hosts under `example.invalid`.
+
+`crlf-and-bom.conf` is marked `-text` in `.gitattributes` so Git does not strip the UTF-8 BOM or rewrite CRLF to LF.
