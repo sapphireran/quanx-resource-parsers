@@ -1,0 +1,38 @@
+{
+  "input": "/workspace/examples/cases/tabs-trimmed/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "tabs-trimmed",
+  "title": "Leading tabs trimmed",
+  "group": "keep-drop"
+}

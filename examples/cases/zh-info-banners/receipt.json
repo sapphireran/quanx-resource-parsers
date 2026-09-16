@@ -1,0 +1,62 @@
+{
+  "input": "/workspace/examples/cases/zh-info-banners/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=流量: 12.3/100GB",
+      "needle": "流量"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=到期: 2099-12-31",
+      "needle": "到期"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=剩余: 5天",
+      "needle": "剩余"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "shadowsocks=info.example.test:443, method=aes-128-gcm, password=pwd, tag=套餐: 标准",
+      "needle": "套餐"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "zh-info-banners",
+  "title": "Chinese 流量/到期/剩余/套餐",
+  "group": "keep-drop"
+}

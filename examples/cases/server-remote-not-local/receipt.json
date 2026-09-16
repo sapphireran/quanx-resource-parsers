@@ -1,0 +1,37 @@
+{
+  "input": "/workspace/examples/cases/server-remote-not-local/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[server_remote]"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    }
+  ],
+  "id": "server-remote-not-local",
+  "title": "Servers listed under [server_remote]",
+  "group": "errors"
+}

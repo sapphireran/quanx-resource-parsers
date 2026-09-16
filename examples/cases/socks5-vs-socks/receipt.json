@@ -1,0 +1,43 @@
+{
+  "input": "/workspace/examples/cases/socks5-vs-socks/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "socks5=helper-b.nodes.example.test:1080, username=user, password=pwd, over-tls=false, tag=Helper-SOCKS5",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "socks5=helper-b.nodes.example.test:1080, username=user, password=pwd, over-tls=false, tag=Helper-SOCKS5"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "socks=legacy.nodes.example.test:1080, username=user, password=pwd, tag=SOCKS-Drop"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "socks5-vs-socks",
+  "title": "socks5 kept, socks dropped",
+  "group": "keep-drop"
+}

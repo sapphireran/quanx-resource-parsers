@@ -1,0 +1,48 @@
+{
+  "input": "/workspace/examples/cases/preamble-then-section/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "Nexitally Quantumult X"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "Traffic notice: ignore this preamble"
+    },
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "preamble-then-section",
+  "title": "Banner text before [server_local]",
+  "group": "header"
+}

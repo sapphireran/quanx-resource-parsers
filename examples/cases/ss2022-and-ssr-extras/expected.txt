@@ -1,0 +1,2 @@
+shadowsocks=ss2022.nodes.example.test:80, method=2022-blake3-aes-128-gcm, password=placeholder, udp-relay=true, tag=SS2022-A
+shadowsocks=ssr-extra.nodes.example.test:443, method=chacha20, password=pwd, ssr-protocol=auth_chain_b, ssr-protocol-param=def, obfs=tls1.2_ticket_fastauth, obfs-host=apple.com, tag=SSR-as-SS

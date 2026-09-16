@@ -1,0 +1,1 @@
+socks5=helper-b.nodes.example.test:1080, username=user, password=pwd, over-tls=false, tag=Helper-SOCKS5

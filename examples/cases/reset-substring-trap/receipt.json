@@ -1,0 +1,44 @@
+{
+  "input": "/workspace/examples/cases/reset-substring-trap/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=hk-restart.nodes.example.test:443, password=pwd, over-tls=true, tag=restart-HK-01",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_INFO",
+      "text": "anytls=hk-reset.nodes.example.test:443, password=pwd, over-tls=true, tag=Reset-HK-01",
+      "needle": "reset"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=hk-restart.nodes.example.test:443, password=pwd, over-tls=true, tag=restart-HK-01"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "reset-substring-trap",
+  "title": "Reset as a substring of a real tag",
+  "group": "keep-drop"
+}

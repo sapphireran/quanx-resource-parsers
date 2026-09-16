@@ -1,0 +1,27 @@
+{
+  "input": "/workspace/examples/cases/header-no-newline/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[server_local]"
+    }
+  ],
+  "id": "header-no-newline",
+  "title": "[server_local] at EOF without body newline",
+  "group": "errors"
+}

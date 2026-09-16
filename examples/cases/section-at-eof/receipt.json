@@ -1,0 +1,53 @@
+{
+  "input": "/workspace/examples/cases/section-at-eof/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 2
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A\nshadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A",
+    "lineCount": 2
+  },
+  "lines": [
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[general]"
+    },
+    {
+      "where": "before",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "server_check_url = http://www.apple.com/generate_204"
+    },
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "section-at-eof",
+  "title": "[server_local] last section",
+  "group": "header"
+}

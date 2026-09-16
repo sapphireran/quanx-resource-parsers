@@ -1,0 +1,48 @@
+{
+  "input": "/workspace/examples/cases/ss2022-and-ssr-extras/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 2
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "shadowsocks=ss2022.nodes.example.test:80, method=2022-blake3-aes-128-gcm, password=placeholder, udp-relay=true, tag=SS2022-A\nshadowsocks=ssr-extra.nodes.example.test:443, method=chacha20, password=pwd, ssr-protocol=auth_chain_b, ssr-protocol-param=def, obfs=tls1.2_ticket_fastauth, obfs-host=apple.com, tag=SSR-as-SS",
+    "lineCount": 2
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "shadowsocks=ss2022.nodes.example.test:80, method=2022-blake3-aes-128-gcm, password=placeholder, udp-relay=true, tag=SS2022-A"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "shadowsocks=ssr-extra.nodes.example.test:443, method=chacha20, password=pwd, ssr-protocol=auth_chain_b, ssr-protocol-param=def, obfs=tls1.2_ticket_fastauth, obfs-host=apple.com, tag=SSR-as-SS"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "shadowsocksr=not-a-prefix.nodes.example.test:443, password=pwd, tag=SSR-Drop"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "ss2022-and-ssr-extras",
+  "title": "Shadowsocks 2022 and ssr-protocol extras",
+  "group": "happy-path"
+}

@@ -1,0 +1,53 @@
+{
+  "input": "/workspace/examples/cases/premium-section-terminator/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "next-section",
+    "nextHeader": "[Premium]"
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "cut",
+      "decision": "SECTION_CUT",
+      "text": "[Premium]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "[Premium]"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": "shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A"
+    },
+    {
+      "where": "after",
+      "decision": "OUTSIDE_AFTER",
+      "text": ""
+    }
+  ],
+  "id": "premium-section-terminator",
+  "title": "[Premium] as a section header ends the cut",
+  "group": "header"
+}

@@ -1,0 +1,62 @@
+{
+  "input": "/workspace/examples/cases/clash-yaml/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "proxies:"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "- name: JP-Tokyo-A"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "type: ss"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "server: tokyo-a.nodes.example.test"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "port: 443"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "cipher: chacha20-ietf-poly1305"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "password: pwd"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    }
+  ],
+  "id": "clash-yaml",
+  "title": "Clash YAML body",
+  "group": "errors"
+}

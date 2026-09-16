@@ -1,0 +1,63 @@
+{
+  "input": "/workspace/examples/cases/unsupported-family/input.conf",
+  "wrap": null,
+  "section": {
+    "found": true,
+    "endReason": "eof",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "content",
+    "lineCount": 1
+  },
+  "classifier": {
+    "kind": "content",
+    "content": "shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A",
+    "lineCount": 1
+  },
+  "lines": [
+    {
+      "where": "header",
+      "decision": "HEADER",
+      "text": "[server_local]"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "hysteria=hy.example.test:443, password=pwd, tag=HY"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "hysteria2=hy2.example.test:443, password=pwd, tag=HY2"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "tuic=tuic.example.test:443, password=pwd, tag=TUIC"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "wireguard=wg.example.test:51820, tag=WG"
+    },
+    {
+      "where": "inside",
+      "decision": "DROP_SCHEME",
+      "text": "vmess://example.test"
+    },
+    {
+      "where": "inside",
+      "decision": "KEEP",
+      "text": "shadowsocks=hk-a.nodes.example.test:443, method=chacha20-ietf-poly1305, password=pwd, obfs=wss, obfs-host=www.apple.com, udp-relay=true, tag=HK-A"
+    },
+    {
+      "where": "inside",
+      "decision": "BLANK",
+      "text": ""
+    }
+  ],
+  "id": "unsupported-family",
+  "title": "Hysteria, TUIC, WireGuard, URI lines",
+  "group": "keep-drop"
+}

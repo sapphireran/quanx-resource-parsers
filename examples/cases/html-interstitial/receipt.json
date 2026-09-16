@@ -1,0 +1,67 @@
+{
+  "input": "/workspace/examples/cases/html-interstitial/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "<!doctype html>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "<html>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "<head><title>Sign in</title></head>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "<body>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "<h1>Sign in</h1>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "<p>This is not a Quantumult X configuration.</p>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "</body>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "</html>"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    }
+  ],
+  "id": "html-interstitial",
+  "title": "HTML login/interstitial page",
+  "group": "errors"
+}

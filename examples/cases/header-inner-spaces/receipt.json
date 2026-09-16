@@ -1,0 +1,37 @@
+{
+  "input": "/workspace/examples/cases/header-inner-spaces/input.conf",
+  "wrap": null,
+  "section": {
+    "found": false,
+    "endReason": "no-section",
+    "nextHeader": null
+  },
+  "parser": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "classifier": {
+    "kind": "error",
+    "error": "Nexitally parser: [server_local] section was not found."
+  },
+  "lines": [
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "[ server_local ]"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": "anytls=tokyo-a.nodes.example.test:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=JP-Tokyo-A"
+    },
+    {
+      "where": "outside",
+      "decision": "OUTSIDE_BEFORE",
+      "text": ""
+    }
+  ],
+  "id": "header-inner-spaces",
+  "title": "[ server_local ] does not match",
+  "group": "header"
+}
