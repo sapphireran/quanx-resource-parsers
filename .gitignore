@@ -1,0 +1,8 @@
+node_modules/
+tmp/
+scratch/
+local/
+*.nexitally.url
+.env
+.env.*
+.DS_Store
