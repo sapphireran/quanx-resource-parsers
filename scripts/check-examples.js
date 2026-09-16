@@ -2,7 +2,7 @@
 "use strict";
 
 /**
- * Validate every examples/*/manifest.json case against the named parser.
+ * Validate every examples/<name>/manifest.json case against the named parser.
  *
  * Success cases compare $done({content}) to a fixture file.
  * Error cases compare $done({error}) to an exact string.
