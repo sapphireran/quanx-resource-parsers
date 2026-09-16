@@ -1,0 +1,4 @@
+*.local.conf
+secrets/
+.DS_Store
+node_modules/

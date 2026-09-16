@@ -1,0 +1,8 @@
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, udp-relay=true, tag=HK-01
+anytls=example.com:443, password=pwd, over-tls=true, tls-host=apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=JP-01
+trojan=example.com:443, password=pwd, over-tls=true, tls-verification=true, tag=SG-01
+vmess=example.com:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, tag=US-01
+vless=example.com:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-uri=/ws, tag=US-02
+http=example.com:443, username=name, password=pwd, over-tls=true, tls-host=example.com, tls-verification=true, tag=HTTP-01
+socks5=example.com:80, username=name, password=pwd, tag=SOCKS-01
+shadowsocks=example.com:80, method=chacha20, password=pwd, obfs=http, obfs-host=apple.com, tag=SS-01

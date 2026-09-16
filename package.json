@@ -1,0 +1,8 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers and sanitized fixtures",
+  "scripts": {
+    "test": "node examples/run-fixtures.js"
+  }
+}

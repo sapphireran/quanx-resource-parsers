@@ -1,0 +1,83 @@
+{
+  "parser": "../nexitally-node-parser.js",
+  "cases": [
+    {
+      "id": "nexitally-full-config",
+      "input": "fixtures/nexitally-full-config.sample.conf",
+      "kind": "content",
+      "expected": "expected/nexitally-full-config.txt"
+    },
+    {
+      "id": "crlf-and-bom",
+      "input": "fixtures/crlf-and-bom.conf",
+      "kind": "content",
+      "expected": "expected/mixed-protocols.txt"
+    },
+    {
+      "id": "mixed-protocols",
+      "input": "fixtures/mixed-protocols.conf",
+      "kind": "content",
+      "expected": "expected/mixed-protocols.txt"
+    },
+    {
+      "id": "server-local-at-eof",
+      "input": "fixtures/server-local-at-eof.conf",
+      "kind": "content",
+      "expected": "expected/server-local-at-eof.txt"
+    },
+    {
+      "id": "case-and-spacing",
+      "input": "fixtures/case-and-spacing.conf",
+      "kind": "content",
+      "expected": "expected/case-and-spacing.txt"
+    },
+    {
+      "id": "duplicates-and-comments",
+      "input": "fixtures/duplicates-and-comments.conf",
+      "kind": "content",
+      "expected": "expected/duplicates-and-comments.txt"
+    },
+    {
+      "id": "whitespace-and-blank-lines",
+      "input": "fixtures/whitespace-and-blank-lines.conf",
+      "kind": "content",
+      "expected": "expected/whitespace-and-blank-lines.txt"
+    },
+    {
+      "id": "exclusion-false-friends",
+      "input": "fixtures/exclusion-false-friends.conf",
+      "kind": "content",
+      "expected": "expected/exclusion-false-friends.txt"
+    },
+    {
+      "id": "missing-server-local",
+      "input": "fixtures/missing-server-local.conf",
+      "kind": "error",
+      "expectedError": "Nexitally parser: [server_local] section was not found."
+    },
+    {
+      "id": "only-traffic-and-premium",
+      "input": "fixtures/only-traffic-and-premium.conf",
+      "kind": "error",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "id": "empty-server-local",
+      "input": "fixtures/empty-server-local.conf",
+      "kind": "error",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "id": "server-local-header-only-no-newline",
+      "input": "fixtures/server-local-header-only-no-newline.conf",
+      "kind": "error",
+      "expectedError": "Nexitally parser: [server_local] section was not found."
+    },
+    {
+      "id": "clash-yaml-not-qx",
+      "input": "fixtures/clash-yaml-not-qx.conf",
+      "kind": "error",
+      "expectedError": "Nexitally parser: [server_local] section was not found."
+    }
+  ]
+}
