@@ -1,0 +1,10 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers, example fixtures, and a local checker.",
+  "scripts": {
+    "check-examples": "node scripts/check-examples.js",
+    "run-parser": "node scripts/run-parser.js",
+    "test": "node scripts/check-examples.js"
+  }
+}
