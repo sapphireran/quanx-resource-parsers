@@ -1,0 +1,13 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers for managed full configurations.",
+  "scripts": {
+    "test": "node tests/run.js",
+    "examples": "node tests/run.js --list",
+    "dump": "node tests/run.js --dump"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
