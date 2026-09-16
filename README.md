@@ -93,6 +93,8 @@ verifier if you prefer a named script.
 | `missing-server-local` | Error |
 | `empty-server-local` | Error |
 | `unsupported-only` | Error |
+| `mixed-case-header` | Mixed-case `[Server_Local]` |
+| `server-local-at-eof` | Section at end of file |
 
 ## Compatibility
 

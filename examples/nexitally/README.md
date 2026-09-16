@@ -16,6 +16,8 @@ downloaded the managed full configuration.
 | `missing-server-local` | error | Profile with no `[server_local]` at all |
 | `empty-server-local` | error | Section present but only comments |
 | `unsupported-only` | error | WireGuard / unknown lines that the parser does not emit |
+| `mixed-case-header` | servers | `[Server_Local]` then `[POLICY]` |
+| `server-local-at-eof` | servers | Section is last; no following header |
 
 ## Quantumult X snippet
 
