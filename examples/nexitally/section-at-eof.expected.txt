@@ -1,0 +1,2 @@
+anytls=eof-a.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=EOF-A
+anytls=eof-b.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=EOF-B

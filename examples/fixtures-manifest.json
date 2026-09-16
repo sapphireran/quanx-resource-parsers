@@ -1,0 +1,169 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "description": "Sanitized Quantumult X bodies for nexitally-node-parser.js. Hosts and passwords are fake.",
+  "fixtures": [
+    {
+      "id": "typical-full-config",
+      "description": "Full managed profile: keep eight official-prefix servers; drop comments, Premium, duplicates, ss=, shadowsocksr=, and 套餐.",
+      "input": "nexitally/typical-full-config.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/typical-full-config.expected.txt"
+      }
+    },
+    {
+      "id": "section-at-eof",
+      "description": "[server_local] is the last section; capture must run through EOF.",
+      "input": "nexitally/section-at-eof.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/section-at-eof.expected.txt"
+      }
+    },
+    {
+      "id": "mixed-case-header",
+      "description": "[SERVER_LOCAL] matches the case-insensitive section regex.",
+      "input": "nexitally/mixed-case-header.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/mixed-case-header.expected.txt"
+      }
+    },
+    {
+      "id": "crlf-and-bom",
+      "description": "UTF-8 BOM plus CRLF newlines still extract the two AnyTLS lines.",
+      "input": "nexitally/crlf-and-bom.source.conf",
+      "transform": "bom-crlf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/crlf-and-bom.expected.txt"
+      }
+    },
+    {
+      "id": "comments-and-duplicates",
+      "description": "Comment prefixes and exact-line duplicates are removed; order is kept.",
+      "input": "nexitally/comments-and-duplicates.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/comments-and-duplicates.expected.txt"
+      }
+    },
+    {
+      "id": "spaced-protocol-equals",
+      "description": "Whitespace around the protocol equals sign is allowed.",
+      "input": "nexitally/spaced-protocol-equals.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/spaced-protocol-equals.expected.txt"
+      }
+    },
+    {
+      "id": "unsupported-prefixes",
+      "description": "ss=, shadowsocksr=, and hysteria2= are not in the allow-list.",
+      "input": "nexitally/unsupported-prefixes.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/unsupported-prefixes.expected.json"
+      }
+    },
+    {
+      "id": "placeholders-only",
+      "description": "Premium placeholders and traffic keywords leave the section empty.",
+      "input": "nexitally/placeholders-only.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/placeholders-only.expected.json"
+      }
+    },
+    {
+      "id": "empty-server-local",
+      "description": "A present but empty [server_local] is not a missing-section error.",
+      "input": "nexitally/empty-server-local.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/empty-server-local.expected.json"
+      }
+    },
+    {
+      "id": "no-server-local",
+      "description": "A profile without [server_local] (or HTML/Clash) fails closed.",
+      "input": "nexitally/no-server-local.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/no-server-local.expected.json"
+      }
+    },
+    {
+      "id": "inner-spaced-header",
+      "description": "[ server_local ] with inner spaces does not match.",
+      "input": "nexitally/inner-spaced-header.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/inner-spaced-header.expected.json"
+      }
+    },
+    {
+      "id": "glued-header",
+      "description": "A header glued to the first server line has no trailing newline.",
+      "input": "nexitally/glued-header.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/glued-header.expected.json"
+      }
+    },
+    {
+      "id": "second-section-ignored",
+      "description": "Only the first [server_local] block is read.",
+      "input": "nexitally/second-section-ignored.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/second-section-ignored.expected.txt"
+      }
+    },
+    {
+      "id": "exclusion-substring",
+      "description": "Traffic / Expire / Days Left inside a tag drops that line only.",
+      "input": "nexitally/exclusion-substring.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/exclusion-substring.expected.txt"
+      }
+    },
+    {
+      "id": "chinese-node-names",
+      "description": "Chinese region tags are kept; only 流量 / 到期 / 剩余 / 套餐 are excluded.",
+      "input": "nexitally/chinese-node-names.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/chinese-node-names.expected.txt"
+      }
+    },
+    {
+      "id": "indented-header",
+      "description": "Spaces before [server_local] are allowed by the section regex.",
+      "input": "nexitally/indented-header.conf",
+      "expect": {
+        "kind": "content",
+        "file": "nexitally/indented-header.expected.txt"
+      }
+    },
+    {
+      "id": "html-login-page",
+      "description": "An HTML login page has no [server_local] section.",
+      "input": "nexitally/html-login-page.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/html-login-page.expected.json"
+      }
+    },
+    {
+      "id": "clash-yaml",
+      "description": "Clash YAML is the wrong resource type for this parser.",
+      "input": "nexitally/clash-yaml.conf",
+      "expect": {
+        "kind": "error",
+        "file": "nexitally/clash-yaml.expected.json"
+      }
+    }
+  ]
+}

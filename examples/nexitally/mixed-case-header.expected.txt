@@ -1,0 +1,1 @@
+anytls=mixed-case.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=Mixed-Case
