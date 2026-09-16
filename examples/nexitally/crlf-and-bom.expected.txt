@@ -1,0 +1,2 @@
+anytls=bom-a.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=BOM-A
+anytls=bom-b.example.com:443, password=example-password, over-tls=true, tls-host=www.example.com, udp-relay=true, tag=BOM-B
