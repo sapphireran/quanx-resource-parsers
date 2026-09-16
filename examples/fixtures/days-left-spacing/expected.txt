@@ -1,0 +1,2 @@
+anytls=tight.nodes.example.test:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=DaysLeft-01
+anytls=double.nodes.example.test:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Days  Left-01

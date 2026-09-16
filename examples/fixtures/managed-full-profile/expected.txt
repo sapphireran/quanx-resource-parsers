@@ -1,0 +1,4 @@
+anytls=hk-01.nodes.example.test:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=HK-01
+anytls=jp-02.nodes.example.test:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=JP-02
+shadowsocks=sg-03.nodes.example.test:80, method=chacha20, password=pwd, udp-relay=true, tag=SG-03
+vmess=us-04.nodes.example.test:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, udp-relay=false, tag=US-04

@@ -1,0 +1,2 @@
+anytls=keep.nodes.example.test:443, password=placeholder-password, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=KEEP
+trojan=other.nodes.example.test:443, password=pwd, over-tls=true, tag=OTHER
