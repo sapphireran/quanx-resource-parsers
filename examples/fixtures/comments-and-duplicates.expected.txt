@@ -1,0 +1,2 @@
+anytls = keep.example.com:443, password=example-password-not-real, over-tls=true, tls-host=keep.example.com, udp-relay=true, tag=Keep-01
+anytls = keep-02.example.com:443, password=example-password-not-real, over-tls=true, tls-host=keep-02.example.com, udp-relay=true, tag=Keep-02

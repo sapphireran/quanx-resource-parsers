@@ -1,0 +1,2 @@
+anytls = keep.example.com:443, password=example-password-not-real, over-tls=true, tls-host=keep.example.com, udp-relay=true, tag=Keep-AnyTLS
+trojan = keep-trojan.example.com:443, password=example-password-not-real, over-tls=true, tls-verification=true, tag=Keep-Trojan
