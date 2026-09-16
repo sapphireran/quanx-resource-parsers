@@ -1,0 +1,1 @@
+anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local

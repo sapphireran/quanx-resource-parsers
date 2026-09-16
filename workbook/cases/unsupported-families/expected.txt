@@ -1,0 +1,1 @@
+socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5

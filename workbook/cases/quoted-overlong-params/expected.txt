@@ -1,0 +1,2 @@
+anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01
+vless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01

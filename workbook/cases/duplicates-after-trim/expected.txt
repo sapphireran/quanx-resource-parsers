@@ -1,0 +1,1 @@
+anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01

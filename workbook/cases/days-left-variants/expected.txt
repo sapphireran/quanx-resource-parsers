@@ -1,0 +1,1 @@
+anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12
