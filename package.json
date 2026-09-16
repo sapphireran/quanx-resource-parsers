@@ -1,0 +1,11 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers and a local atlas for nexitally-node-parser.js",
+  "scripts": {
+    "test": "node scripts/atlas.js verify",
+    "atlas": "node scripts/atlas.js",
+    "trace": "node scripts/atlas.js trace",
+    "gallery": "node scripts/atlas.js gallery"
+  }
+}

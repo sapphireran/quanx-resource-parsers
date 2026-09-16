@@ -5,6 +5,9 @@
  * receives that response locally, extracts [server_local], and returns only
  * valid server entries to [server_remote]. It contains no subscription URL,
  * account identifier, node password, or other private information.
+ *
+ * Keep / drop rules: docs/parser-specification.md
+ * Synthetic fixtures: examples/atlas/
  */
 
 var text = String($resource.content || "")
