@@ -1,0 +1,16 @@
+name: check-examples
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  examples:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Verify Nexitally example fixtures
+        run: node scripts/check-examples.js
