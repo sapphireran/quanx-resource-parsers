@@ -11,6 +11,7 @@ provider dump and will not connect to any paid node.
 | [input-full-config.conf](input-full-config.conf) | Fictional full profile: `[general]`, `[server_local]`, `[policy]`, filters. |
 | [expected-servers.snippet](expected-servers.snippet) | Server lines the parser must return, in file order. |
 | [usage.quantumult.conf](usage.quantumult.conf) | How to attach the private URL as `[server_remote]` on a device. |
+| [before-after.md](before-after.md) | Abridged before/after view of the typical fixture. |
 
 `input-full-config.conf` includes the keep/drop mix documented in
 [docs/nexitally-parser.md](../../docs/nexitally-parser.md):
