@@ -1,10 +1,21 @@
 /*
  * Quantumult X resource parser for Nexitally managed full configurations.
  *
- * The Nexitally subscription is fetched directly by Quantumult X. This parser
- * receives that response locally, extracts [server_local], and returns only
- * valid server entries to [server_remote]. It contains no subscription URL,
- * account identifier, node password, or other private information.
+ * Quantumult X downloads the private Nexitally URL and injects the body as
+ * $resource.content. This script never fetches, stores, or embeds that URL.
+ * It also contains no account identifier, node password, or other private
+ * data.
+ *
+ * Contract (see docs/parser-behavior.md and docs/examples/):
+ *   - Strip a UTF-8 BOM and normalize CRLF.
+ *   - Read the first [server_local] section only.
+ *   - Keep anytls, shadowsocks, vmess, vless, trojan, http, and socks5 lines.
+ *   - Drop comments, [Premium] stubs, traffic/expiry/plan placeholders, and
+ *     exact duplicate lines.
+ *   - $done({ content }) with those server lines, or $done({ error }).
+ *
+ * Not a generic Clash/Surge converter. Enable opt-parser only on the
+ * Nexitally [server_remote] resource while this file is resource_parser_url.
  */
 
 var text = String($resource.content || "")
