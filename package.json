@@ -1,0 +1,12 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. Extracts server lines from managed full configurations such as Nexitally.",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "parse": "node tools/run-parser.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

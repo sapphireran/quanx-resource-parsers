@@ -1,0 +1,8 @@
+# Already a server-only resource. The parser should pass these through
+# even though [server_local] is absent — useful if a provider later
+# ships a node list instead of a full profile.
+
+anytls=hk-01.example.test:443, password=placeholder-not-a-real-secret, over-tls=true, tls-host=hk-01.example.test, udp-relay=true, tag=HK-01
+anytls=sg-01.example.test:443, password=placeholder-not-a-real-secret, over-tls=true, tls-host=sg-01.example.test, udp-relay=true, tag=SG-01
+# this comment is ignored
+shadowsocks=info.example.test:1, method=aes-128-gcm, password=0, tag=Traffic: 1.00 GB
