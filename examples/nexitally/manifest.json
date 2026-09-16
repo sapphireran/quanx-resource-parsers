@@ -1,0 +1,76 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "description": "Fictional Quantumult X fixtures for the Nexitally node parser. Hosts, passwords, and UUIDs are placeholders. Never replace these with a live subscription export.",
+  "cases": [
+    {
+      "name": "happy-path-full-profile",
+      "input": "examples/nexitally/happy-path/input.conf",
+      "expected": "examples/nexitally/happy-path/expected.txt",
+      "notes": "Full fictional profile: mixed protocols, comments, traffic lines, a Premium placeholder, and one exact duplicate."
+    },
+    {
+      "name": "mixed-protocols-keep-supported-drop-unknown",
+      "input": "examples/nexitally/mixed-protocols/input.conf",
+      "expected": "examples/nexitally/mixed-protocols/expected.txt",
+      "notes": "Keeps anytls, shadowsocks, vmess, vless, trojan, http, socks5. Drops ssr and wireguard."
+    },
+    {
+      "name": "comments-and-blanks",
+      "input": "examples/nexitally/comments-and-blanks/input.conf",
+      "expected": "examples/nexitally/comments-and-blanks/expected.txt",
+      "notes": "Semicolon, hash, and slash-slash comments plus blank lines are ignored."
+    },
+    {
+      "name": "duplicates-first-wins",
+      "input": "examples/nexitally/duplicates/input.conf",
+      "expected": "examples/nexitally/duplicates/expected.txt",
+      "notes": "Exact trimmed duplicates are removed. The first copy is kept."
+    },
+    {
+      "name": "premium-and-traffic-excluded",
+      "input": "examples/nexitally/premium-and-traffic/input.conf",
+      "expected": "examples/nexitally/premium-and-traffic/expected.txt",
+      "notes": "Lines matching [Premium], Traffic, Expire, Reset, Days Left, 流量, 到期, 剩余, or 套餐 are dropped even when they look like servers."
+    },
+    {
+      "name": "section-order-and-case",
+      "input": "examples/nexitally/section-order/input.conf",
+      "expected": "examples/nexitally/section-order/expected.txt",
+      "notes": "[SERVER_LOCAL] is matched case-insensitively. Earlier [policy] and later [filter_local] stay out of the result."
+    },
+    {
+      "name": "crlf-and-bom",
+      "input": "examples/nexitally/crlf-and-bom/input.conf",
+      "expected": "examples/nexitally/crlf-and-bom/expected.txt",
+      "transform": "bom-crlf",
+      "notes": "Stored as LF in git. The harness prepends a UTF-8 BOM and converts newlines to CRLF before parsing."
+    },
+    {
+      "name": "server-local-until-eof",
+      "input": "examples/nexitally/server-local-until-eof/input.conf",
+      "expected": "examples/nexitally/server-local-until-eof/expected.txt",
+      "notes": "When [server_local] is the last section, every remaining non-excluded server line is kept."
+    },
+    {
+      "name": "whitespace-around-equals",
+      "input": "examples/nexitally/whitespace-around-equals/input.conf",
+      "expected": "examples/nexitally/whitespace-around-equals/expected.txt",
+      "notes": "Protocol prefixes may have optional spaces before '='."
+    },
+    {
+      "name": "missing-server-local",
+      "input": "examples/nexitally/missing-server-local/input.conf",
+      "expectedError": "examples/nexitally/missing-server-local/expected-error.txt"
+    },
+    {
+      "name": "empty-server-local",
+      "input": "examples/nexitally/empty-server-local/input.conf",
+      "expectedError": "examples/nexitally/empty-server-local/expected-error.txt"
+    },
+    {
+      "name": "only-comments-and-excluded",
+      "input": "examples/nexitally/only-comments-and-excluded/input.conf",
+      "expectedError": "examples/nexitally/only-comments-and-excluded/expected-error.txt"
+    }
+  ]
+}

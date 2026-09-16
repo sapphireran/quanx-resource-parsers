@@ -1,0 +1,2 @@
+socks5 = eof.example.com:1080, username=user, password=placeholder, tag=EOF-SOCKS5
+http = eof.example.com:8080, username=user, password=placeholder, tag=EOF-HTTP

@@ -1,0 +1,2 @@
+anytls = after-policy.example.com:443, password=placeholder, over-tls=true, tag=From-Uppercase-Section
+trojan = after-policy.example.com:8443, password=placeholder, over-tls=true, tag=Second-From-Section
