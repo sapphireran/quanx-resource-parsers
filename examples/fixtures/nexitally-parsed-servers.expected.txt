@@ -1,0 +1,8 @@
+anytls = hk-01.nodes.example.com:443, password=example-password-not-real, over-tls=true, tls-host=hk-01.nodes.example.com, udp-relay=true, tag=HK-01
+anytls = jp-01.nodes.example.com:443, password=example-password-not-real, over-tls=true, tls-host=jp-01.nodes.example.com, udp-relay=true, tag=JP-01
+anytls = sg-01.nodes.example.com:443, password=example-password-not-real, over-tls=true, tls-host=sg-01.nodes.example.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=SG-01
+shadowsocks = us-01.nodes.example.com:443, method=2022-blake3-aes-128-gcm, password=BJDBGeLKx/JbEACCSN5rRg==, obfs=over-tls, obfs-host=us-01.nodes.example.com, tls-verification=true, udp-relay=true, tag=US-01
+trojan = de-01.nodes.example.com:443, password=example-password-not-real, over-tls=true, tls-host=de-01.nodes.example.com, tls-verification=true, udp-relay=true, tag=DE-01
+vmess = tw-01.nodes.example.com:443, method=chacha20-poly1305, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=tw-01.nodes.example.com, obfs-uri=/example, udp-relay=true, tag=TW-01
+vless = kr-01.nodes.example.com:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=kr-01.nodes.example.com, udp-relay=true, tag=KR-01
+ANYTLS = au-01.nodes.example.com:443, password=example-password-not-real, over-tls=true, tls-host=au-01.nodes.example.com, udp-relay=true, tag=AU-01
