@@ -1,0 +1,7 @@
+anytls=anytls.nodes.example.test:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=anytls-standard
+shadowsocks=ss.nodes.example.test:80, method=chacha20, password=pwd, udp-relay=true, tag=ss-plain
+vmess=vmess.nodes.example.test:80, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, udp-relay=false, tag=vmess-plain
+vless=vless.nodes.example.test:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, udp-relay=false, tag=vless-tls
+trojan=trojan.nodes.example.test:443, password=pwd, over-tls=true, tls-verification=true, udp-relay=false, tag=trojan-tls
+http=http.nodes.example.test:80, username=name, password=pwd, udp-relay=false, tag=http-plain
+socks5=socks5.nodes.example.test:80, username=name, password=pwd, udp-relay=false, tag=socks5-plain

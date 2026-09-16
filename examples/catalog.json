@@ -1,0 +1,179 @@
+{
+  "parser": "nexitally-node-parser.js",
+  "notes": "Personal synthetic fixtures. encode flags are applied at load time so on-disk files stay LF/UTF-8.",
+  "fixtures": [
+    {
+      "id": "managed-full-profile",
+      "title": "Synthetic Nexitally-style full configuration",
+      "expect": "content"
+    },
+    {
+      "id": "official-seven-prefixes",
+      "title": "All seven supported Quantumult X prefixes",
+      "expect": "content"
+    },
+    {
+      "id": "anytls-reality",
+      "title": "AnyTLS with Reality parameters",
+      "expect": "content"
+    },
+    {
+      "id": "bom-crlf",
+      "title": "UTF-8 BOM plus CRLF newlines",
+      "expect": "content",
+      "encode": { "bom": true, "newlines": "crlf" }
+    },
+    {
+      "id": "section-at-eof",
+      "title": "[server_local] runs to end of file",
+      "expect": "content"
+    },
+    {
+      "id": "missing-server-local",
+      "title": "Profile with no [server_local] header",
+      "expect": "error"
+    },
+    {
+      "id": "info-only",
+      "title": "Only traffic and expiry banner lines",
+      "expect": "error"
+    },
+    {
+      "id": "empty-usable",
+      "title": "Section exists but only comments",
+      "expect": "error"
+    },
+    {
+      "id": "empty-file",
+      "title": "Zero-length download",
+      "expect": "error"
+    },
+    {
+      "id": "comments-and-duplicates",
+      "title": "Comment styles and trimmed-line dedupe",
+      "expect": "content"
+    },
+    {
+      "id": "false-friend-preset-unexpired",
+      "title": "Preset/Reset and unexpired/Expire false friends",
+      "expect": "content"
+    },
+    {
+      "id": "days-left-spacing",
+      "title": "Days Left token requires one interior space",
+      "expect": "content"
+    },
+    {
+      "id": "en-zh-banners",
+      "title": "Uncommented English and Chinese banner tags",
+      "expect": "content"
+    },
+    {
+      "id": "first-of-two-sections",
+      "title": "Only the first [server_local] is captured",
+      "expect": "content"
+    },
+    {
+      "id": "premium-as-tag",
+      "title": "[Premium] inside a server tag",
+      "expect": "content"
+    },
+    {
+      "id": "premium-as-section",
+      "title": "[Premium] as a following section header",
+      "expect": "content"
+    },
+    {
+      "id": "glued-header",
+      "title": "No newline after [server_local]",
+      "expect": "error"
+    },
+    {
+      "id": "header-no-newline",
+      "title": "Header at EOF without a trailing newline",
+      "expect": "error",
+      "encode": { "stripTrailingNewline": true }
+    },
+    {
+      "id": "inner-spaced-header",
+      "title": "Spaces inside [ server_local ]",
+      "expect": "error"
+    },
+    {
+      "id": "header-indented",
+      "title": "Indented mixed-case section header",
+      "expect": "content"
+    },
+    {
+      "id": "https-and-socks-not-kept",
+      "title": "https= and socks= are not http=/socks5=",
+      "expect": "content"
+    },
+    {
+      "id": "shadowsocks2022-prefix",
+      "title": "shadowsocks2022= vs method=2022-…",
+      "expect": "content"
+    },
+    {
+      "id": "ipv6-and-tabs",
+      "title": "Leading tabs and documentation IPv6 literals",
+      "expect": "content"
+    },
+    {
+      "id": "clash-yaml",
+      "title": "Clash YAML is not a Quantumult X profile",
+      "expect": "error"
+    },
+    {
+      "id": "html-interstitial",
+      "title": "HTML captive-portal body",
+      "expect": "error"
+    },
+    {
+      "id": "filter-rules-inside-section",
+      "title": "Filter and policy lines leaked into [server_local]",
+      "expect": "content"
+    },
+    {
+      "id": "already-server-only",
+      "title": "Flat server list without a section header",
+      "expect": "error"
+    },
+    {
+      "id": "inline-hash-kept",
+      "title": "Inline # is not a comment",
+      "expect": "content"
+    },
+    {
+      "id": "same-host-different-tag",
+      "title": "Same host with two tags is two servers",
+      "expect": "content"
+    },
+    {
+      "id": "space-before-equals",
+      "title": "Spaces before = and mixed-case prefixes",
+      "expect": "content"
+    },
+    {
+      "id": "commented-section-name",
+      "title": "Commented header is ignored; later real header is used",
+      "expect": "content"
+    },
+    {
+      "id": "cr-only-newlines",
+      "title": "Classic Mac CR-only line endings",
+      "expect": "error",
+      "encode": { "newlines": "cr" }
+    },
+    {
+      "id": "unsupported-only",
+      "title": "Section of unsupported schemes and share URIs",
+      "expect": "error"
+    },
+    {
+      "id": "block-comment-not-recognized",
+      "title": "C-style block comment is not a QX comment",
+      "expect": "content"
+    }
+  ]
+}
