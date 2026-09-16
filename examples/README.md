@@ -27,6 +27,10 @@ Every hostname ends in `example.invalid`. Passwords, Reality parameters, and tag
 | `missing-server-local` | Profiles that only have `[server_remote]` fail with a clear error. |
 | `empty-server-local` | A present but comment-only section fails instead of returning an empty resource. |
 | `traffic-only` | A section that contains only quota / expiry / `[Premium]` rows fails the same way. |
+| `first-section-wins` | Only the first `[server_local]` block is read. |
+| `leading-server-local` | The section may be the first header in the file. |
+
+`typical-full-config.md` is a line-by-line walkthrough of the main success fixture. It is not executed by the test runner.
 
 ## Running a fixture
 

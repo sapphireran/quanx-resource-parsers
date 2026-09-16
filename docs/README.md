@@ -10,6 +10,7 @@ This folder is a local reference for the scripts in this repository. It is not a
 | [privacy.md](privacy.md) | What must never be committed |
 | [troubleshooting.md](troubleshooting.md) | Refresh failures and empty node lists |
 | [local-testing.md](local-testing.md) | Running the fixtures on a desktop |
+| [device-setup.md](device-setup.md) | On-device checklist for attaching the parser |
 
 Related trees:
 

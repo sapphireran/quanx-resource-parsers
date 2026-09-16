@@ -49,7 +49,7 @@ Tested with Quantumult X configurations that contain AnyTLS nodes. Requires a Qu
 
 | Path | Contents |
 | --- | --- |
-| [docs/](docs/README.md) | Parser behavior, `$resource` / `$done` notes, server-line shapes, privacy, troubleshooting |
+| [docs/](docs/README.md) | Parser behavior, `$resource` / `$done` notes, server-line shapes, privacy, troubleshooting, device setup |
 | [examples/](examples/README.md) | Sanitized fixtures and a local profile sketch |
 | [docs/local-testing.md](docs/local-testing.md) | Desktop harness that runs the Quantumult X script in Node |
 

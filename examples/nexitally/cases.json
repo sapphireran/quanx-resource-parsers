@@ -49,6 +49,18 @@
       "input": "traffic-only.conf",
       "error": "Nexitally parser: no usable server entries were found.",
       "notes": "Info rows that look like servers still match the exclusion list."
+    },
+    {
+      "name": "first-section-wins",
+      "input": "first-section-wins.conf",
+      "expected": "first-section-wins.expected.txt",
+      "notes": "A second [server_local] after [policy] is not merged into the result."
+    },
+    {
+      "name": "leading-server-local",
+      "input": "leading-server-local.conf",
+      "expected": "leading-server-local.expected.txt",
+      "notes": "[server_local] may be the first section in the file."
     }
   ]
 }
