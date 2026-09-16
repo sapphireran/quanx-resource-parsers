@@ -1,0 +1,2 @@
+anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01
+anytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继

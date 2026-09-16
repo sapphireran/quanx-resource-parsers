@@ -1,0 +1,7 @@
+anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01
+shadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01
+vmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01
+vless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01
+trojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01
+http = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01
+socks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01

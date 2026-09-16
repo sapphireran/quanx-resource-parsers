@@ -1,0 +1,798 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal QuanX parser workbook</title>
+  <style>
+    :root {
+      --ink: #1b1a17;
+      --paper: #f6f1e7;
+      --rule: #d7cbb6;
+      --keep: #215c3a;
+      --drop: #7a3b2e;
+      --err: #6b2d5b;
+      --muted: #6d6558;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font: 16px/1.5 "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    header.hero, nav, main { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+    header.hero { padding-top: 2.5rem; }
+    header.hero h1 { margin: 0 0 0.4rem; font-size: 2rem; }
+    header.hero p { margin: 0 0 0.75rem; color: var(--muted); }
+    .banner {
+      border: 1px solid var(--rule);
+      padding: 0.75rem 1rem;
+      background: #efe6d4;
+    }
+    nav { padding: 1.25rem; }
+    nav ol { columns: 2; padding-left: 1.2rem; }
+    nav a { color: var(--ink); }
+    article.case {
+      border-top: 1px solid var(--rule);
+      padding: 1.75rem 0 2rem;
+    }
+    .kicker { text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem; color: var(--muted); margin-bottom: 0.2rem; }
+    h2 { margin: 0 0 0.35rem; }
+    .meta, .notes { color: var(--muted); }
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    pre, table { width: 100%; font: 12px/1.45 ui-monospace, "SF Mono", Menlo, monospace; }
+    pre {
+      background: #fffdf8;
+      border: 1px solid var(--rule);
+      padding: 0.75rem;
+      overflow: auto;
+      white-space: pre-wrap;
+    }
+    table { border-collapse: collapse; margin-top: 1rem; }
+    th, td { border-bottom: 1px solid var(--rule); text-align: left; padding: 0.35rem 0.4rem; vertical-align: top; }
+    tr.keep td:nth-child(2), tr.keep td:nth-child(3) { color: var(--keep); }
+    tr.drop td:nth-child(2), tr.drop td:nth-child(3) { color: var(--drop); }
+    article.case[data-expect="error"] .kicker { color: var(--err); }
+    .empty { color: var(--muted); font-style: italic; }
+    @media (max-width: 800px) {
+      nav ol { columns: 1; }
+      .split { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <h1>Personal QuanX parser workbook</h1>
+    <p>34 sanitized cases for <code>nexitally-node-parser.js</code>. No live subscription URLs. No company profiles.</p>
+    <p class="banner">Quantumult X downloads the managed file. The parser only slices <code>[server_local]</code> and returns server lines. Hosts here are <code>*.example.invalid</code>, <code>192.0.2.0/24</code>, and <code>2001:db8::/32</code>.</p>
+  </header>
+  <nav>
+    <ol>
+      <li><a href="#managed-full-profile">Managed full profile</a></li>
+      <li><a href="#info-banners-en-zh">English and Chinese info banners</a></li>
+      <li><a href="#comment-styles">Comment styles and blanks</a></li>
+      <li><a href="#comment-false-header">Commented [server_local] text</a></li>
+      <li><a href="#duplicates-after-trim">Duplicates after trim</a></li>
+      <li><a href="#protocol-roster">All supported prefixes</a></li>
+      <li><a href="#section-fence-filter-policy">Section fence</a></li>
+      <li><a href="#header-mixed-case">Mixed-case header</a></li>
+      <li><a href="#header-indented">Indented header</a></li>
+      <li><a href="#header-trailing-space">Trailing space on the header</a></li>
+      <li><a href="#section-at-eof">Section at end of file</a></li>
+      <li><a href="#bom-crlf">UTF-8 BOM and CRLF</a></li>
+      <li><a href="#substring-reset-trap">Reset / Traffic substring trap</a></li>
+      <li><a href="#days-left-variants">Days Left versus DaysLeft</a></li>
+      <li><a href="#unicode-and-ipv6">Unicode tags and IPv6 host</a></li>
+      <li><a href="#first-of-two-server-local">First of two [server_local] blocks</a></li>
+      <li><a href="#policy-lookalikes">Policy lines inside [server_local]</a></li>
+      <li><a href="#filter-rules-inside-section">Filter rules inside [server_local]</a></li>
+      <li><a href="#unsupported-families">Unsupported families</a></li>
+      <li><a href="#quoted-overlong-params">Long parameter lists</a></li>
+      <li><a href="#protocol-mixed-case">Mixed-case schemes</a></li>
+      <li><a href="#spaced-protocol-equals">Spaces around =</a></li>
+      <li><a href="#tab-prefixed-server">Tab before a server line</a></li>
+      <li><a href="#preamble-banner">Preamble then section</a></li>
+      <li><a href="#premium-section-terminator">[Premium] as a section fence</a></li>
+      <li><a href="#missing-server-local">No [server_local] section</a></li>
+      <li><a href="#empty-usable">Section with no keepers</a></li>
+      <li><a href="#html-interstitial">HTML interstitial</a></li>
+      <li><a href="#clash-yaml">Clash YAML is not Quantumult X</a></li>
+      <li><a href="#glued-header">Header glued to the first server</a></li>
+      <li><a href="#header-no-newline">Header without a trailing newline</a></li>
+      <li><a href="#inner-spaced-header">Spaces inside the header brackets</a></li>
+      <li><a href="#server-remote-only">Official server-only list</a></li>
+      <li><a href="#empty-file">Empty download</a></li>
+    </ol>
+  </nav>
+  <main>
+<article class="case" id="managed-full-profile" data-expect="content">
+  <header>
+    <p class="kicker">01 · content</p>
+    <h2>Managed full profile</h2>
+    <p class="summary">Nexitally-shaped Quantumult X file: keep four nodes, drop dashboard chrome, ignore later sections.</p>
+    <p class="meta"><code>managed-full-profile</code> · section found · keep 4 · drop 5</p>
+  </header>
+  <p class="notes">This is the happy path the device sees after Configuration File → Download.
+Traffic / Expire / 流量 / [Premium] rows are not servers.
+[policy] and [filter_local] must not leak into the resource.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre># Fictional Quantumult X export. Hosts are documentation-only.
+[general]
+resource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js
+dns_exclusion_list = *.example.invalid
+
+[dns]
+server = 192.0.2.53
+server = 192.0.2.54
+
+[policy]
+static = Nexitally, Nexitally, img-url=https://example.invalid/nexitally.png
+static = Proxy, Nexitally, direct
+
+[server_local]
+; dashboard chrome — not nodes
+shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic: 128.00 GB / 500.00 GB
+shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Expire: 2099-12-31
+shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=流量: 128.00 GB
+anytls = premium.example.invalid:443, password=example-password, tls-host=premium.example.invalid, tag=[Premium] Reserved
+anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01
+shadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01
+vmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01
+trojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01
+
+[filter_local]
+host, example.invalid, direct
+ip-cidr, 192.0.2.0/24, direct
+anytls = leaked.example.invalid:443, password=example-password, tag=Must-Not-Leak
+
+[rewrite_local]
+
+[mitm]
+hostname = *.example.invalid
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01
+shadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01
+vmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01
+trojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>comment</td><td><code>; dashboard chrome — not nodes</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>info-or-premium</td><td><code>shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic: 128.00 GB / 500.00 GB</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>info-or-premium</td><td><code>shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Expire: 2099-12-31</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>info-or-premium</td><td><code>shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=流量: 128.00 GB</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>info-or-premium</td><td><code>anytls = premium.example.invalid:443, password=example-password, tls-host=premium.example.invalid, tag=[Premium] Reserved</code></td></tr><tr class="keep"><td>6</td><td>keep</td><td>server</td><td><code>anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01</code></td></tr><tr class="keep"><td>7</td><td>keep</td><td>server</td><td><code>shadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01</code></td></tr><tr class="keep"><td>8</td><td>keep</td><td>server</td><td><code>vmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01</code></td></tr><tr class="keep"><td>9</td><td>keep</td><td>server</td><td><code>trojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01</code></td></tr></tbody></table>
+</article>
+<article class="case" id="info-banners-en-zh" data-expect="content">
+  <header>
+    <p class="kicker">02 · content</p>
+    <h2>English and Chinese info banners</h2>
+    <p class="summary">Every excluded substring appears once; one ordinary node remains.</p>
+    <p class="meta"><code>info-banners-en-zh</code> · section found · keep 1 · drop 9</p>
+  </header>
+  <p class="notes">Excluded: Traffic, Expire, Reset, Days Left, 流量, 到期, 剩余, 套餐, [Premium].</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01
+anytls = info.example.invalid:443, password=example-password, tag=Traffic: 12 GB
+anytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31
+anytls = info.example.invalid:443, password=example-password, tag=Reset on the 1st
+anytls = info.example.invalid:443, password=example-password, tag=Days Left: 12
+anytls = info.example.invalid:443, password=example-password, tag=流量: 12 GB
+anytls = info.example.invalid:443, password=example-password, tag=到期: 2099-12-31
+anytls = info.example.invalid:443, password=example-password, tag=剩余: 12
+anytls = info.example.invalid:443, password=example-password, tag=套餐: Premium
+anytls = info.example.invalid:443, password=example-password, tag=[Premium] Slot
+[filter_local]
+geoip, cn, direct
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=Traffic: 12 GB</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=Reset on the 1st</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=Days Left: 12</code></td></tr><tr class="drop"><td>6</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=流量: 12 GB</code></td></tr><tr class="drop"><td>7</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=到期: 2099-12-31</code></td></tr><tr class="drop"><td>8</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=剩余: 12</code></td></tr><tr class="drop"><td>9</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=套餐: Premium</code></td></tr><tr class="drop"><td>10</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=[Premium] Slot</code></td></tr></tbody></table>
+</article>
+<article class="case" id="comment-styles" data-expect="content">
+  <header>
+    <p class="kicker">03 · content</p>
+    <h2>Comment styles and blanks</h2>
+    <p class="summary">; # // and empty lines are ignored after trim.</p>
+    <p class="meta"><code>comment-styles</code> · section found · keep 1 · drop 6</p>
+  </header>
+  <p class="notes">A commented-out server line is still a comment, not a node.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+
+; semicolon comment
+# hash comment
+// slash comment
+; anytls = hidden.example.invalid:443, password=example-password, tag=Hidden
+   
+anytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>comment</td><td><code>; semicolon comment</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>comment</td><td><code># hash comment</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>comment</td><td><code>// slash comment</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>comment</td><td><code>; anytls = hidden.example.invalid:443, password=example-password, tag=Hidden</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>empty</td><td><code></code></td></tr><tr class="keep"><td>6</td><td>keep</td><td>server</td><td><code>anytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01</code></td></tr><tr class="drop"><td>7</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="comment-false-header" data-expect="content">
+  <header>
+    <p class="kicker">04 · content</p>
+    <h2>Commented [server_local] text</h2>
+    <p class="summary">A comment that mentions [server_local] does not start or end the section.</p>
+    <p class="meta"><code>comment-false-header</code> · section found · keep 1 · drop 2</p>
+  </header>
+  <p class="notes">The section regex requires the header at the start of a line with only indent before `[`.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+; [server_local]
+# [server_local]
+anytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01
+[dns]
+server = 192.0.2.53
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>comment</td><td><code>; [server_local]</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>comment</td><td><code># [server_local]</code></td></tr><tr class="keep"><td>3</td><td>keep</td><td>server</td><td><code>anytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01</code></td></tr></tbody></table>
+</article>
+<article class="case" id="duplicates-after-trim" data-expect="content">
+  <header>
+    <p class="kicker">05 · content</p>
+    <h2>Duplicates after trim</h2>
+    <p class="summary">The same server written twice, once indented, is kept once.</p>
+    <p class="meta"><code>duplicates-after-trim</code> · section found · keep 1 · drop 3</p>
+  </header>
+  <p class="notes">Dedup key is the trimmed line, not the raw line.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01
+  anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01
+anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>duplicate</td><td><code>anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>duplicate</td><td><code>anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="protocol-roster" data-expect="content">
+  <header>
+    <p class="kicker">06 · content</p>
+    <h2>All supported prefixes</h2>
+    <p class="summary">anytls, shadowsocks, vmess, vless, trojan, http, socks5.</p>
+    <p class="meta"><code>protocol-roster</code> · section found · keep 7 · drop 1</p>
+  </header>
+  <p class="notes">The parser does not validate methods or ports. Prefix plus exclusions is enough.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01
+shadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01
+vmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01
+vless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01
+trojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01
+http = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01
+socks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01
+shadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01
+vmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01
+vless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01
+trojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01
+http = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01
+socks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>shadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01</code></td></tr><tr class="keep"><td>3</td><td>keep</td><td>server</td><td><code>vmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01</code></td></tr><tr class="keep"><td>4</td><td>keep</td><td>server</td><td><code>vless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01</code></td></tr><tr class="keep"><td>5</td><td>keep</td><td>server</td><td><code>trojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01</code></td></tr><tr class="keep"><td>6</td><td>keep</td><td>server</td><td><code>http = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01</code></td></tr><tr class="keep"><td>7</td><td>keep</td><td>server</td><td><code>socks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01</code></td></tr><tr class="drop"><td>8</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="section-fence-filter-policy" data-expect="content">
+  <header>
+    <p class="kicker">07 · content</p>
+    <h2>Section fence</h2>
+    <p class="summary">Lookalike server lines after [policy] / [filter_local] must not appear.</p>
+    <p class="meta"><code>section-fence-filter-policy</code> · section found · keep 1 · drop 0</p>
+  </header>
+  <p class="notes">The slice is non-greedy up to the next [section] line.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local
+[policy]
+anytls = policy.example.invalid:443, password=example-password, tag=Leaked-From-Policy
+static = Nexitally, Only-In-Server-Local
+[filter_local]
+anytls = filter.example.invalid:443, password=example-password, tag=Leaked-From-Filter
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local</code></td></tr></tbody></table>
+</article>
+<article class="case" id="header-mixed-case" data-expect="content">
+  <header>
+    <p class="kicker">08 · content</p>
+    <h2>Mixed-case header</h2>
+    <p class="summary">[Server_Local] matches; [POLICY] still terminates.</p>
+    <p class="meta"><code>header-mixed-case</code> · section found · keep 1 · drop 0</p>
+  </header>
+  <p class="notes">The /i flag applies to the header, not to later classification only.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[Server_Local]
+anytls = case.example.invalid:443, password=example-password, tag=Case-01
+[POLICY]
+static = Nexitally, Case-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = case.example.invalid:443, password=example-password, tag=Case-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = case.example.invalid:443, password=example-password, tag=Case-01</code></td></tr></tbody></table>
+</article>
+<article class="case" id="header-indented" data-expect="content">
+  <header>
+    <p class="kicker">09 · content</p>
+    <h2>Indented header</h2>
+    <p class="summary">Spaces before [server_local] are allowed.</p>
+    <p class="meta"><code>header-indented</code> · section found · keep 1 · drop 0</p>
+  </header>
+  <p class="notes">\s* sits between the newline (or start) and the bracket.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[general]
+profile_img_url = https://example.invalid/profile.png
+  [server_local]
+anytls = indent.example.invalid:443, password=example-password, tag=Indent-01
+[filter_remote]
+https://example.invalid/rules.txt, tag=Rules, enabled=true
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = indent.example.invalid:443, password=example-password, tag=Indent-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = indent.example.invalid:443, password=example-password, tag=Indent-01</code></td></tr></tbody></table>
+</article>
+<article class="case" id="header-trailing-space" data-expect="content">
+  <header>
+    <p class="kicker">10 · content</p>
+    <h2>Trailing space on the header</h2>
+    <p class="summary">[server_local] followed by spaces still matches.</p>
+    <p class="meta"><code>header-trailing-space</code> · section found · keep 1 · drop 1</p>
+  </header>
+  <p class="notes">The regex is \[server_local\]\s*\n.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]   
+anytls = trail.example.invalid:443, password=example-password, tag=Trail-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = trail.example.invalid:443, password=example-password, tag=Trail-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = trail.example.invalid:443, password=example-password, tag=Trail-01</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="section-at-eof" data-expect="content">
+  <header>
+    <p class="kicker">11 · content</p>
+    <h2>Section at end of file</h2>
+    <p class="summary">No following [section]; the slice runs to EOF.</p>
+    <p class="meta"><code>section-at-eof</code> · section found · keep 2 · drop 0</p>
+  </header>
+  <p class="notes">The lookahead alternates with $.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[general]
+server_check_url = https://example.invalid/generate_204
+[server_local]
+anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A
+anytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A
+anytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>anytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B</code></td></tr></tbody></table>
+</article>
+<article class="case" id="bom-crlf" data-expect="content">
+  <header>
+    <p class="kicker">12 · content</p>
+    <h2>UTF-8 BOM and CRLF</h2>
+    <p class="summary">Leading BOM is stripped; CRLF becomes LF before the section regex.</p>
+    <p class="meta"><code>bom-crlf</code> · section found · keep 2 · drop 0</p>
+  </header>
+  <p class="notes">Materialize writes this file as UTF-8 BOM + CRLF bytes.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A
+anytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B
+[filter_local]
+final, proxy</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A
+anytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>anytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B</code></td></tr></tbody></table>
+</article>
+<article class="case" id="substring-reset-trap" data-expect="content">
+  <header>
+    <p class="kicker">13 · content</p>
+    <h2>Reset / Traffic substring trap</h2>
+    <p class="summary">HK-Reset-01 is dropped; HK-RST-01 is kept. Traffic-Info is dropped.</p>
+    <p class="meta"><code>substring-reset-trap</code> · section found · keep 1 · drop 3</p>
+  </header>
+  <p class="notes">excluded is a substring test. Rename personal tags if they contain Reset or Traffic.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = reset.example.invalid:443, password=example-password, tag=HK-Reset-01
+anytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01
+shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic-Info
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>info-or-premium</td><td><code>anytls = reset.example.invalid:443, password=example-password, tag=HK-Reset-01</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>anytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>info-or-premium</td><td><code>shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic-Info</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="days-left-variants" data-expect="content">
+  <header>
+    <p class="kicker">14 · content</p>
+    <h2>Days Left versus DaysLeft</h2>
+    <p class="summary">The exclusion is the two-word phrase. DaysLeft survives.</p>
+    <p class="meta"><code>days-left-variants</code> · section found · keep 1 · drop 3</p>
+  </header>
+  <p class="notes">days left (any case) still matches the phrase. DaysLeft does not.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = spaced.example.invalid:443, password=example-password, tag=Days Left: 12
+anytls = lower.example.invalid:443, password=example-password, tag=days left: 12
+anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>info-or-premium</td><td><code>anytls = spaced.example.invalid:443, password=example-password, tag=Days Left: 12</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>info-or-premium</td><td><code>anytls = lower.example.invalid:443, password=example-password, tag=days left: 12</code></td></tr><tr class="keep"><td>3</td><td>keep</td><td>server</td><td><code>anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="unicode-and-ipv6" data-expect="content">
+  <header>
+    <p class="kicker">15 · content</p>
+    <h2>Unicode tags and IPv6 host</h2>
+    <p class="summary">Documentation IPv6 and CJK tags are ordinary server lines.</p>
+    <p class="meta"><code>unicode-and-ipv6</code> · section found · keep 2 · drop 1</p>
+  </header>
+  <p class="notes">2001:db8::/32 only. Do not commit a real IPv6 node address.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01
+anytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01
+anytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>anytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="first-of-two-server-local" data-expect="content">
+  <header>
+    <p class="kicker">16 · content</p>
+    <h2>First of two [server_local] blocks</h2>
+    <p class="summary">String.match returns the first slice only.</p>
+    <p class="meta"><code>first-of-two-server-local</code> · section found · keep 1 · drop 0</p>
+  </header>
+  <p class="notes">A vendor file should not have two of these. If it does, the second is invisible.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = first.example.invalid:443, password=example-password, tag=First-Block
+[filter_local]
+host, example.invalid, direct
+[server_local]
+anytls = second.example.invalid:443, password=example-password, tag=Second-Block
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = first.example.invalid:443, password=example-password, tag=First-Block</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = first.example.invalid:443, password=example-password, tag=First-Block</code></td></tr></tbody></table>
+</article>
+<article class="case" id="policy-lookalikes" data-expect="content">
+  <header>
+    <p class="kicker">17 · content</p>
+    <h2>Policy lines inside [server_local]</h2>
+    <p class="summary">static= / available= / round-robin= are unsupported prefixes.</p>
+    <p class="meta"><code>policy-lookalikes</code> · section found · keep 1 · drop 4</p>
+  </header>
+  <p class="notes">If a vendor pastes a policy group into server_local, those lines are dropped, not converted.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+static = Nexitally, Real-01, direct
+available = Auto, Real-01
+round-robin = Rotate, Real-01
+anytls = real.example.invalid:443, password=example-password, tag=Real-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = real.example.invalid:443, password=example-password, tag=Real-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>unsupported-prefix</td><td><code>static = Nexitally, Real-01, direct</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>unsupported-prefix</td><td><code>available = Auto, Real-01</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>unsupported-prefix</td><td><code>round-robin = Rotate, Real-01</code></td></tr><tr class="keep"><td>4</td><td>keep</td><td>server</td><td><code>anytls = real.example.invalid:443, password=example-password, tag=Real-01</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="filter-rules-inside-section" data-expect="content">
+  <header>
+    <p class="kicker">18 · content</p>
+    <h2>Filter rules inside [server_local]</h2>
+    <p class="summary">host, and ip-cidr, lines are not servers.</p>
+    <p class="meta"><code>filter-rules-inside-section</code> · section found · keep 1 · drop 4</p>
+  </header>
+  <p class="notes">Comma-style Quantumult X filters never match the prefix regex.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+host, example.invalid, direct
+ip-cidr, 192.0.2.0/24, direct
+geoip, cn, direct
+anytls = keep.example.invalid:443, password=example-password, tag=Keep-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = keep.example.invalid:443, password=example-password, tag=Keep-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>unsupported-prefix</td><td><code>host, example.invalid, direct</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>unsupported-prefix</td><td><code>ip-cidr, 192.0.2.0/24, direct</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>unsupported-prefix</td><td><code>geoip, cn, direct</code></td></tr><tr class="keep"><td>4</td><td>keep</td><td>server</td><td><code>anytls = keep.example.invalid:443, password=example-password, tag=Keep-01</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="unsupported-families" data-expect="content">
+  <header>
+    <p class="kicker">19 · content</p>
+    <h2>Unsupported families</h2>
+    <p class="summary">Keep socks5; drop wireguard, hysteria2, tuic, and a vmess:// URI.</p>
+    <p class="meta"><code>unsupported-families</code> · section found · keep 1 · drop 5</p>
+  </header>
+  <p class="notes">URI shares are a different dialect. This parser will not grow a translator.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5
+wireguard = 192.0.2.8:51820, private-key=example-password, tag=WG-01
+hysteria2 = hy2.example.invalid:443, password=example-password, tag=HY2-01
+tuic = tuic.example.invalid:443, password=example-password, tag=TUIC-01
+vmess://example-not-a-real-share
+</pre></section>
+    <section><h3>Parser result</h3><pre>socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>unsupported-prefix</td><td><code>wireguard = 192.0.2.8:51820, private-key=example-password, tag=WG-01</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>unsupported-prefix</td><td><code>hysteria2 = hy2.example.invalid:443, password=example-password, tag=HY2-01</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>unsupported-prefix</td><td><code>tuic = tuic.example.invalid:443, password=example-password, tag=TUIC-01</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>unsupported-prefix</td><td><code>vmess://example-not-a-real-share</code></td></tr><tr class="drop"><td>6</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="quoted-overlong-params" data-expect="content">
+  <header>
+    <p class="kicker">20 · content</p>
+    <h2>Long parameter lists</h2>
+    <p class="summary">AnyTLS Reality-style extras and VLESS+ws; parser ignores fields it does not know.</p>
+    <p class="meta"><code>quoted-overlong-params</code> · section found · keep 2 · drop 1</p>
+  </header>
+  <p class="notes">public-key here is the documentation word examplepublickey, not a live Reality key.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01
+vless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01
+vless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>vless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="protocol-mixed-case" data-expect="content">
+  <header>
+    <p class="kicker">21 · content</p>
+    <h2>Mixed-case schemes</h2>
+    <p class="summary">AnyTLS= and Shadowsocks = both match supported.</p>
+    <p class="meta"><code>protocol-mixed-case</code> · section found · keep 2 · drop 1</p>
+  </header>
+  <p class="notes">Kept lines are emitted as trimmed, not lowercased.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+AnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A
+Shadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B
+</pre></section>
+    <section><h3>Parser result</h3><pre>AnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A
+Shadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>AnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>Shadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="spaced-protocol-equals" data-expect="content">
+  <header>
+    <p class="kicker">22 · content</p>
+    <h2>Spaces around =</h2>
+    <p class="summary">supported allows whitespace between the scheme and =.</p>
+    <p class="meta"><code>spaced-protocol-equals</code> · section found · keep 2 · drop 1</p>
+  </header>
+  <p class="notes">No space is required. Extra space is allowed.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = space.example.invalid:443, password=example-password, tag=Space-01
+trojan=tight.example.invalid:443, password=example-password, tag=Tight-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = space.example.invalid:443, password=example-password, tag=Space-01
+trojan=tight.example.invalid:443, password=example-password, tag=Tight-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = space.example.invalid:443, password=example-password, tag=Space-01</code></td></tr><tr class="keep"><td>2</td><td>keep</td><td>server</td><td><code>trojan=tight.example.invalid:443, password=example-password, tag=Tight-01</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="tab-prefixed-server" data-expect="content">
+  <header>
+    <p class="kicker">23 · content</p>
+    <h2>Tab before a server line</h2>
+    <p class="summary">trim() removes the tab; the line is kept without it.</p>
+    <p class="meta"><code>tab-prefixed-server</code> · section found · keep 1 · drop 1</p>
+  </header>
+  <p class="notes">Output is the trimmed line, so the tab does not survive into [server_remote].</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+	anytls = tab.example.invalid:443, password=example-password, tag=Tab-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = tab.example.invalid:443, password=example-password, tag=Tab-01</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = tab.example.invalid:443, password=example-password, tag=Tab-01</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="preamble-banner" data-expect="content">
+  <header>
+    <p class="kicker">24 · content</p>
+    <h2>Preamble then section</h2>
+    <p class="summary">Vendor banners above the first [section] are ignored.</p>
+    <p class="meta"><code>preamble-banner</code> · section found · keep 1 · drop 0</p>
+  </header>
+  <p class="notes">The header may appear after arbitrary text as long as it starts a line.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>Nexitally Quantumult X (fictional sample)
+Do not commit a live download.
+
+[server_local]
+anytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner
+[mitm]
+hostname = -*.example.invalid
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner</code></td></tr></tbody></table>
+</article>
+<article class="case" id="premium-section-terminator" data-expect="content">
+  <header>
+    <p class="kicker">25 · content</p>
+    <h2>[Premium] as a section fence</h2>
+    <p class="summary">A later [Premium] header ends the slice. The node after it is never classified.</p>
+    <p class="meta"><code>premium-section-terminator</code> · section found · keep 1 · drop 0</p>
+  </header>
+  <p class="notes">This is different from tag=[Premium], which is a line-level exclusion.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+anytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium
+[Premium]
+anytls = after-premium.example.invalid:443, password=example-password, tag=After-Premium
+</pre></section>
+    <section><h3>Parser result</h3><pre>anytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="keep"><td>1</td><td>keep</td><td>server</td><td><code>anytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium</code></td></tr></tbody></table>
+</article>
+<article class="case" id="missing-server-local" data-expect="error">
+  <header>
+    <p class="kicker">26 · error</p>
+    <h2>No [server_local] section</h2>
+    <p class="summary">A local-looking profile that never declares the section.</p>
+    <p class="meta"><code>missing-server-local</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">This is the error you want when the wrong URL was pasted into [server_remote].</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[general]
+resource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js
+[policy]
+static = Proxy, direct
+[filter_local]
+final, direct
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="empty-usable" data-expect="error">
+  <header>
+    <p class="kicker">27 · error</p>
+    <h2>Section with no keepers</h2>
+    <p class="summary">Comments plus info rows plus a premium placeholder.</p>
+    <p class="meta"><code>empty-usable</code> · section found · keep 0 · drop 5</p>
+  </header>
+  <p class="notes">The section regex succeeded. The filter loop emptied the list.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]
+; nothing usable below
+anytls = info.example.invalid:443, password=example-password, tag=Traffic: 0 GB
+anytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31
+anytls = info.example.invalid:443, password=example-password, tag=[Premium] Empty
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: no usable server entries were found.</pre></section>
+  </div>
+  <table><thead><tr><th></th><th>Action</th><th>Reason</th><th>Line</th></tr></thead><tbody><tr class="drop"><td>1</td><td>drop</td><td>comment</td><td><code>; nothing usable below</code></td></tr><tr class="drop"><td>2</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=Traffic: 0 GB</code></td></tr><tr class="drop"><td>3</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31</code></td></tr><tr class="drop"><td>4</td><td>drop</td><td>info-or-premium</td><td><code>anytls = info.example.invalid:443, password=example-password, tag=[Premium] Empty</code></td></tr><tr class="drop"><td>5</td><td>drop</td><td>empty</td><td><code></code></td></tr></tbody></table>
+</article>
+<article class="case" id="html-interstitial" data-expect="error">
+  <header>
+    <p class="kicker">28 · error</p>
+    <h2>HTML interstitial</h2>
+    <p class="summary">A login or payment page has no [server_local].</p>
+    <p class="meta"><code>html-interstitial</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">The parser does not special-case HTML. Missing section is enough.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;&lt;title&gt;Sign in&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;Please sign in to download your Quantumult X file.&lt;/p&gt;
+&lt;form action=&quot;https://example.invalid/login&quot; method=&quot;post&quot;&gt;
+&lt;input name=&quot;user&quot; value=&quot;example-user&quot;&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="clash-yaml" data-expect="error">
+  <header>
+    <p class="kicker">29 · error</p>
+    <h2>Clash YAML is not Quantumult X</h2>
+    <p class="summary">proxies: mappings never contain [server_local].</p>
+    <p class="meta"><code>clash-yaml</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">Use an official Clash subscription elsewhere. Do not translate YAML in this repo.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>port: 7890
+socks-port: 7891
+proxies:
+  - name: JP-Tokyo-01
+    type: ss
+    server: jp.example.invalid
+    port: 443
+    cipher: chacha20-ietf-poly1305
+    password: example-password
+proxy-groups:
+  - name: PROXY
+    type: select
+    proxies: [JP-Tokyo-01]
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="glued-header" data-expect="error">
+  <header>
+    <p class="kicker">30 · error</p>
+    <h2>Header glued to the first server</h2>
+    <p class="summary">A newline after ] is required.</p>
+    <p class="meta"><code>glued-header</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">Looks almost valid to a human. The regex rejects it.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]anytls = glued.example.invalid:443, password=example-password, tag=Glued-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="header-no-newline" data-expect="error">
+  <header>
+    <p class="kicker">31 · error</p>
+    <h2>Header without a trailing newline</h2>
+    <p class="summary">A file that is only [server_local] does not match.</p>
+    <p class="meta"><code>header-no-newline</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">\s*\n is mandatory after the header.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_local]</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="inner-spaced-header" data-expect="error">
+  <header>
+    <p class="kicker">32 · error</p>
+    <h2>Spaces inside the header brackets</h2>
+    <p class="summary">[ server_local ] is not [server_local].</p>
+    <p class="meta"><code>inner-spaced-header</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">Do not loosen this without a vendor sample that actually ships that spelling.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[ server_local ]
+anytls = inner.example.invalid:443, password=example-password, tag=Inner-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="server-remote-only" data-expect="error">
+  <header>
+    <p class="kicker">33 · error</p>
+    <h2>Official server-only list</h2>
+    <p class="summary">[server_remote] is the wrong section for this parser.</p>
+    <p class="meta"><code>server-remote-only</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">If a vendor already publishes this shape, drop opt-parser=true.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre>[server_remote]
+https://example.invalid/official-server-only, tag=Official, enabled=true
+anytls = official.example.invalid:443, password=example-password, tag=Official-01
+</pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+<article class="case" id="empty-file" data-expect="error">
+  <header>
+    <p class="kicker">34 · error</p>
+    <h2>Empty download</h2>
+    <p class="summary">Zero bytes after String() normalization.</p>
+    <p class="meta"><code>empty-file</code> · section missing · keep 0 · drop 0</p>
+  </header>
+  <p class="notes">Quantumult X still calls the parser. The script must not throw.</p>
+  <div class="split">
+    <section><h3>Input</h3><pre></pre></section>
+    <section><h3>Parser result</h3><pre>Nexitally parser: [server_local] section was not found.</pre></section>
+  </div>
+  <p class="empty">No section body to classify.</p>
+</article>
+  </main>
+</body>
+</html>

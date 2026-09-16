@@ -1,0 +1,4 @@
+anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01
+shadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01
+vmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01
+trojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01

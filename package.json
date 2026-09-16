@@ -1,0 +1,13 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No company code, no live subscription data.",
+  "scripts": {
+    "workbook": "node workbook/run.js",
+    "trace": "node workbook/trace.js",
+    "scan": "node workbook/scan-secrets.js",
+    "book": "node workbook/build-book.js",
+    "materialize": "node workbook/materialize.js",
+    "test": "node workbook/run.js && node workbook/scan-secrets.js"
+  }
+}

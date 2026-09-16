@@ -1,0 +1,950 @@
+[
+  {
+    "id": "managed-full-profile",
+    "title": "Managed full profile",
+    "summary": "Nexitally-shaped Quantumult X file: keep four nodes, drop dashboard chrome, ignore later sections.",
+    "notes": "This is the happy path the device sees after Configuration File → Download.\nTraffic / Expire / 流量 / [Premium] rows are not servers.\n[policy] and [filter_local] must not leak into the resource.",
+    "expect": "content",
+    "expected": "anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01\nshadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01\nvmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01\ntrojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01",
+    "input": "# Fictional Quantumult X export. Hosts are documentation-only.\n[general]\nresource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js\ndns_exclusion_list = *.example.invalid\n\n[dns]\nserver = 192.0.2.53\nserver = 192.0.2.54\n\n[policy]\nstatic = Nexitally, Nexitally, img-url=https://example.invalid/nexitally.png\nstatic = Proxy, Nexitally, direct\n\n[server_local]\n; dashboard chrome — not nodes\nshadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic: 128.00 GB / 500.00 GB\nshadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Expire: 2099-12-31\nshadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=流量: 128.00 GB\nanytls = premium.example.invalid:443, password=example-password, tls-host=premium.example.invalid, tag=[Premium] Reserved\nanytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01\nshadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01\nvmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01\ntrojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01\n\n[filter_local]\nhost, example.invalid, direct\nip-cidr, 192.0.2.0/24, direct\nanytls = leaked.example.invalid:443, password=example-password, tag=Must-Not-Leak\n\n[rewrite_local]\n\n[mitm]\nhostname = *.example.invalid\n",
+    "resultKind": "content",
+    "resultText": "anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01\nshadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01\nvmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01\ntrojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "; dashboard chrome — not nodes"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic: 128.00 GB / 500.00 GB"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Expire: 2099-12-31"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=流量: 128.00 GB"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = premium.example.invalid:443, password=example-password, tls-host=premium.example.invalid, tag=[Premium] Reserved"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = jp.example.invalid:443, password=example-password, tls-verification=true, tls-host=jp.example.invalid, tag=JP-Tokyo-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "shadowsocks = hk.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, obfs=http, obfs-host=hk.example.invalid, tag=HK-Central-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "vmess = us.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=us.example.invalid, obfs-uri=/vmess, tls13=true, tag=US-SJC-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "trojan = sg.example.invalid:443, password=example-password, over-tls=true, tls-host=sg.example.invalid, tls-verification=true, tag=SG-CBD-01"
+      }
+    ]
+  },
+  {
+    "id": "info-banners-en-zh",
+    "title": "English and Chinese info banners",
+    "summary": "Every excluded substring appears once; one ordinary node remains.",
+    "notes": "Excluded: Traffic, Expire, Reset, Days Left, 流量, 到期, 剩余, 套餐, [Premium].",
+    "expect": "content",
+    "expected": "anytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01",
+    "input": "[server_local]\nanytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01\nanytls = info.example.invalid:443, password=example-password, tag=Traffic: 12 GB\nanytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31\nanytls = info.example.invalid:443, password=example-password, tag=Reset on the 1st\nanytls = info.example.invalid:443, password=example-password, tag=Days Left: 12\nanytls = info.example.invalid:443, password=example-password, tag=流量: 12 GB\nanytls = info.example.invalid:443, password=example-password, tag=到期: 2099-12-31\nanytls = info.example.invalid:443, password=example-password, tag=剩余: 12\nanytls = info.example.invalid:443, password=example-password, tag=套餐: Premium\nanytls = info.example.invalid:443, password=example-password, tag=[Premium] Slot\n[filter_local]\ngeoip, cn, direct\n",
+    "resultKind": "content",
+    "resultText": "anytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = osaka.example.invalid:443, password=example-password, tls-host=osaka.example.invalid, tag=JP-Osaka-01"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=Traffic: 12 GB"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=Reset on the 1st"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=Days Left: 12"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=流量: 12 GB"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=到期: 2099-12-31"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=剩余: 12"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=套餐: Premium"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=[Premium] Slot"
+      }
+    ]
+  },
+  {
+    "id": "comment-styles",
+    "title": "Comment styles and blanks",
+    "summary": "; # // and empty lines are ignored after trim.",
+    "notes": "A commented-out server line is still a comment, not a node.",
+    "expect": "content",
+    "expected": "anytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01",
+    "input": "[server_local]\n\n; semicolon comment\n# hash comment\n// slash comment\n; anytls = hidden.example.invalid:443, password=example-password, tag=Hidden\n   \nanytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "; semicolon comment"
+      },
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "# hash comment"
+      },
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "// slash comment"
+      },
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "; anytls = hidden.example.invalid:443, password=example-password, tag=Hidden"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = kyoto.example.invalid:443, password=example-password, tag=JP-Kyoto-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "comment-false-header",
+    "title": "Commented [server_local] text",
+    "summary": "A comment that mentions [server_local] does not start or end the section.",
+    "notes": "The section regex requires the header at the start of a line with only indent before `[`.",
+    "expect": "content",
+    "expected": "anytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01",
+    "input": "[server_local]\n; [server_local]\n# [server_local]\nanytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01\n[dns]\nserver = 192.0.2.53\n",
+    "resultKind": "content",
+    "resultText": "anytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "; [server_local]"
+      },
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "# [server_local]"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = nagoya.example.invalid:443, password=example-password, tag=JP-Nagoya-01"
+      }
+    ]
+  },
+  {
+    "id": "duplicates-after-trim",
+    "title": "Duplicates after trim",
+    "summary": "The same server written twice, once indented, is kept once.",
+    "notes": "Dedup key is the trimmed line, not the raw line.",
+    "expect": "content",
+    "expected": "anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01",
+    "input": "[server_local]\nanytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01\n  anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01\nanytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01"
+      },
+      {
+        "action": "drop",
+        "reason": "duplicate",
+        "line": "anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01"
+      },
+      {
+        "action": "drop",
+        "reason": "duplicate",
+        "line": "anytls = fukuoka.example.invalid:443, password=example-password, tag=JP-Fukuoka-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "protocol-roster",
+    "title": "All supported prefixes",
+    "summary": "anytls, shadowsocks, vmess, vless, trojan, http, socks5.",
+    "notes": "The parser does not validate methods or ports. Prefix plus exclusions is enough.",
+    "expect": "content",
+    "expected": "anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01\nshadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01\nvmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01\nvless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01\ntrojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01\nhttp = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01\nsocks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01",
+    "input": "[server_local]\nanytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01\nshadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01\nvmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01\nvless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01\ntrojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01\nhttp = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01\nsocks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01\nshadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01\nvmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01\nvless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01\ntrojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01\nhttp = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01\nsocks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = a.example.invalid:443, password=example-password, tag=AnyTLS-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "shadowsocks = b.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=SS-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "vmess = c.example.invalid:443, method=aes-128-gcm, password=00000000-0000-4000-8000-000000000000, tag=VMess-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "vless = d.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, tag=VLESS-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "trojan = e.example.invalid:443, password=example-password, over-tls=true, tag=Trojan-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "http = f.example.invalid:8443, username=example-user, password=example-password, over-tls=true, tag=HTTP-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "socks5 = g.example.invalid:1080, username=example-user, password=example-password, over-tls=true, tag=SOCKS5-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "section-fence-filter-policy",
+    "title": "Section fence",
+    "summary": "Lookalike server lines after [policy] / [filter_local] must not appear.",
+    "notes": "The slice is non-greedy up to the next [section] line.",
+    "expect": "content",
+    "expected": "anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local",
+    "input": "[server_local]\nanytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local\n[policy]\nanytls = policy.example.invalid:443, password=example-password, tag=Leaked-From-Policy\nstatic = Nexitally, Only-In-Server-Local\n[filter_local]\nanytls = filter.example.invalid:443, password=example-password, tag=Leaked-From-Filter\n",
+    "resultKind": "content",
+    "resultText": "anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = only.example.invalid:443, password=example-password, tag=Only-In-Server-Local"
+      }
+    ]
+  },
+  {
+    "id": "header-mixed-case",
+    "title": "Mixed-case header",
+    "summary": "[Server_Local] matches; [POLICY] still terminates.",
+    "notes": "The /i flag applies to the header, not to later classification only.",
+    "expect": "content",
+    "expected": "anytls = case.example.invalid:443, password=example-password, tag=Case-01",
+    "input": "[Server_Local]\nanytls = case.example.invalid:443, password=example-password, tag=Case-01\n[POLICY]\nstatic = Nexitally, Case-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = case.example.invalid:443, password=example-password, tag=Case-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = case.example.invalid:443, password=example-password, tag=Case-01"
+      }
+    ]
+  },
+  {
+    "id": "header-indented",
+    "title": "Indented header",
+    "summary": "Spaces before [server_local] are allowed.",
+    "notes": "\\s* sits between the newline (or start) and the bracket.",
+    "expect": "content",
+    "expected": "anytls = indent.example.invalid:443, password=example-password, tag=Indent-01",
+    "input": "[general]\nprofile_img_url = https://example.invalid/profile.png\n  [server_local]\nanytls = indent.example.invalid:443, password=example-password, tag=Indent-01\n[filter_remote]\nhttps://example.invalid/rules.txt, tag=Rules, enabled=true\n",
+    "resultKind": "content",
+    "resultText": "anytls = indent.example.invalid:443, password=example-password, tag=Indent-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = indent.example.invalid:443, password=example-password, tag=Indent-01"
+      }
+    ]
+  },
+  {
+    "id": "header-trailing-space",
+    "title": "Trailing space on the header",
+    "summary": "[server_local] followed by spaces still matches.",
+    "notes": "The regex is \\[server_local\\]\\s*\\n.",
+    "expect": "content",
+    "expected": "anytls = trail.example.invalid:443, password=example-password, tag=Trail-01",
+    "input": "[server_local]   \nanytls = trail.example.invalid:443, password=example-password, tag=Trail-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = trail.example.invalid:443, password=example-password, tag=Trail-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = trail.example.invalid:443, password=example-password, tag=Trail-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "section-at-eof",
+    "title": "Section at end of file",
+    "summary": "No following [section]; the slice runs to EOF.",
+    "notes": "The lookahead alternates with $.",
+    "expect": "content",
+    "expected": "anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A\nanytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B",
+    "input": "[general]\nserver_check_url = https://example.invalid/generate_204\n[server_local]\nanytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A\nanytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B",
+    "resultKind": "content",
+    "resultText": "anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A\nanytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B"
+      }
+    ]
+  },
+  {
+    "id": "bom-crlf",
+    "title": "UTF-8 BOM and CRLF",
+    "summary": "Leading BOM is stripped; CRLF becomes LF before the section regex.",
+    "notes": "Materialize writes this file as UTF-8 BOM + CRLF bytes.",
+    "expect": "content",
+    "expected": "anytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A\nanytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B",
+    "input": "[server_local]\nanytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A\nanytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B\n[filter_local]\nfinal, proxy",
+    "resultKind": "content",
+    "resultText": "anytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A\nanytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = bom-a.example.invalid:443, password=example-password, tag=BOM-A"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = bom-b.example.invalid:443, password=example-password, tag=BOM-B"
+      }
+    ]
+  },
+  {
+    "id": "substring-reset-trap",
+    "title": "Reset / Traffic substring trap",
+    "summary": "HK-Reset-01 is dropped; HK-RST-01 is kept. Traffic-Info is dropped.",
+    "notes": "excluded is a substring test. Rename personal tags if they contain Reset or Traffic.",
+    "expect": "content",
+    "expected": "anytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01",
+    "input": "[server_local]\nanytls = reset.example.invalid:443, password=example-password, tag=HK-Reset-01\nanytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01\nshadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic-Info\n",
+    "resultKind": "content",
+    "resultText": "anytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = reset.example.invalid:443, password=example-password, tag=HK-Reset-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = rst.example.invalid:443, password=example-password, tag=HK-RST-01"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "shadowsocks = info.example.invalid:443, method=chacha20-ietf-poly1305, password=example-password, tag=Traffic-Info"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "days-left-variants",
+    "title": "Days Left versus DaysLeft",
+    "summary": "The exclusion is the two-word phrase. DaysLeft survives.",
+    "notes": "days left (any case) still matches the phrase. DaysLeft does not.",
+    "expect": "content",
+    "expected": "anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12",
+    "input": "[server_local]\nanytls = spaced.example.invalid:443, password=example-password, tag=Days Left: 12\nanytls = lower.example.invalid:443, password=example-password, tag=days left: 12\nanytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12\n",
+    "resultKind": "content",
+    "resultText": "anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = spaced.example.invalid:443, password=example-password, tag=Days Left: 12"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = lower.example.invalid:443, password=example-password, tag=days left: 12"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = compact.example.invalid:443, password=example-password, tag=DaysLeft-12"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "unicode-and-ipv6",
+    "title": "Unicode tags and IPv6 host",
+    "summary": "Documentation IPv6 and CJK tags are ordinary server lines.",
+    "notes": "2001:db8::/32 only. Do not commit a real IPv6 node address.",
+    "expect": "content",
+    "expected": "anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01\nanytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继",
+    "input": "[server_local]\nanytls = tokyo.example.invalid:443, password=example-password, tag=东京-01\nanytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继\n",
+    "resultKind": "content",
+    "resultText": "anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01\nanytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = tokyo.example.invalid:443, password=example-password, tag=东京-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = [2001:db8::10]:443, password=example-password, tls-host=ipv6.example.invalid, tag=香港-中继"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "first-of-two-server-local",
+    "title": "First of two [server_local] blocks",
+    "summary": "String.match returns the first slice only.",
+    "notes": "A vendor file should not have two of these. If it does, the second is invisible.",
+    "expect": "content",
+    "expected": "anytls = first.example.invalid:443, password=example-password, tag=First-Block",
+    "input": "[server_local]\nanytls = first.example.invalid:443, password=example-password, tag=First-Block\n[filter_local]\nhost, example.invalid, direct\n[server_local]\nanytls = second.example.invalid:443, password=example-password, tag=Second-Block\n",
+    "resultKind": "content",
+    "resultText": "anytls = first.example.invalid:443, password=example-password, tag=First-Block",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = first.example.invalid:443, password=example-password, tag=First-Block"
+      }
+    ]
+  },
+  {
+    "id": "policy-lookalikes",
+    "title": "Policy lines inside [server_local]",
+    "summary": "static= / available= / round-robin= are unsupported prefixes.",
+    "notes": "If a vendor pastes a policy group into server_local, those lines are dropped, not converted.",
+    "expect": "content",
+    "expected": "anytls = real.example.invalid:443, password=example-password, tag=Real-01",
+    "input": "[server_local]\nstatic = Nexitally, Real-01, direct\navailable = Auto, Real-01\nround-robin = Rotate, Real-01\nanytls = real.example.invalid:443, password=example-password, tag=Real-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = real.example.invalid:443, password=example-password, tag=Real-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "static = Nexitally, Real-01, direct"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "available = Auto, Real-01"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "round-robin = Rotate, Real-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = real.example.invalid:443, password=example-password, tag=Real-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "filter-rules-inside-section",
+    "title": "Filter rules inside [server_local]",
+    "summary": "host, and ip-cidr, lines are not servers.",
+    "notes": "Comma-style Quantumult X filters never match the prefix regex.",
+    "expect": "content",
+    "expected": "anytls = keep.example.invalid:443, password=example-password, tag=Keep-01",
+    "input": "[server_local]\nhost, example.invalid, direct\nip-cidr, 192.0.2.0/24, direct\ngeoip, cn, direct\nanytls = keep.example.invalid:443, password=example-password, tag=Keep-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = keep.example.invalid:443, password=example-password, tag=Keep-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "host, example.invalid, direct"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "ip-cidr, 192.0.2.0/24, direct"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "geoip, cn, direct"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = keep.example.invalid:443, password=example-password, tag=Keep-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "unsupported-families",
+    "title": "Unsupported families",
+    "summary": "Keep socks5; drop wireguard, hysteria2, tuic, and a vmess:// URI.",
+    "notes": "URI shares are a different dialect. This parser will not grow a translator.",
+    "expect": "content",
+    "expected": "socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5",
+    "input": "[server_local]\nsocks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5\nwireguard = 192.0.2.8:51820, private-key=example-password, tag=WG-01\nhysteria2 = hy2.example.invalid:443, password=example-password, tag=HY2-01\ntuic = tuic.example.invalid:443, password=example-password, tag=TUIC-01\nvmess://example-not-a-real-share\n",
+    "resultKind": "content",
+    "resultText": "socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "socks5 = helper.example.invalid:1080, username=example-user, password=example-password, tag=Helper-SOCKS5"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "wireguard = 192.0.2.8:51820, private-key=example-password, tag=WG-01"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "hysteria2 = hy2.example.invalid:443, password=example-password, tag=HY2-01"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "tuic = tuic.example.invalid:443, password=example-password, tag=TUIC-01"
+      },
+      {
+        "action": "drop",
+        "reason": "unsupported-prefix",
+        "line": "vmess://example-not-a-real-share"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "quoted-overlong-params",
+    "title": "Long parameter lists",
+    "summary": "AnyTLS Reality-style extras and VLESS+ws; parser ignores fields it does not know.",
+    "notes": "public-key here is the documentation word examplepublickey, not a live Reality key.",
+    "expect": "content",
+    "expected": "anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01\nvless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01",
+    "input": "[server_local]\nanytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01\nvless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01\nvless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = reality.example.invalid:443, password=example-password, tls-host=reality.example.invalid, tls-verification=true, public-key=examplepublickey, short-id=abcd, server-name=reality.example.invalid, tag=AnyTLS-Reality-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "vless = ws.example.invalid:443, method=none, password=00000000-0000-4000-8000-000000000000, obfs=wss, obfs-host=ws.example.invalid, obfs-uri=/vless, tls13=true, fast-open=false, udp-relay=true, tag=VLESS-WS-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "protocol-mixed-case",
+    "title": "Mixed-case schemes",
+    "summary": "AnyTLS= and Shadowsocks = both match supported.",
+    "notes": "Kept lines are emitted as trimmed, not lowercased.",
+    "expect": "content",
+    "expected": "AnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A\nShadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B",
+    "input": "[server_local]\nAnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A\nShadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B\n",
+    "resultKind": "content",
+    "resultText": "AnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A\nShadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "AnyTLS=mix-a.example.invalid:443, password=example-password, tag=Mix-A"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "Shadowsocks = mix-b.example.invalid:443, method=aes-128-gcm, password=example-password, tag=Mix-B"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "spaced-protocol-equals",
+    "title": "Spaces around =",
+    "summary": "supported allows whitespace between the scheme and =.",
+    "notes": "No space is required. Extra space is allowed.",
+    "expect": "content",
+    "expected": "anytls = space.example.invalid:443, password=example-password, tag=Space-01\ntrojan=tight.example.invalid:443, password=example-password, tag=Tight-01",
+    "input": "[server_local]\nanytls = space.example.invalid:443, password=example-password, tag=Space-01\ntrojan=tight.example.invalid:443, password=example-password, tag=Tight-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = space.example.invalid:443, password=example-password, tag=Space-01\ntrojan=tight.example.invalid:443, password=example-password, tag=Tight-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = space.example.invalid:443, password=example-password, tag=Space-01"
+      },
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "trojan=tight.example.invalid:443, password=example-password, tag=Tight-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "tab-prefixed-server",
+    "title": "Tab before a server line",
+    "summary": "trim() removes the tab; the line is kept without it.",
+    "notes": "Output is the trimmed line, so the tab does not survive into [server_remote].",
+    "expect": "content",
+    "expected": "anytls = tab.example.invalid:443, password=example-password, tag=Tab-01",
+    "input": "[server_local]\n\tanytls = tab.example.invalid:443, password=example-password, tag=Tab-01\n",
+    "resultKind": "content",
+    "resultText": "anytls = tab.example.invalid:443, password=example-password, tag=Tab-01",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = tab.example.invalid:443, password=example-password, tag=Tab-01"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "preamble-banner",
+    "title": "Preamble then section",
+    "summary": "Vendor banners above the first [section] are ignored.",
+    "notes": "The header may appear after arbitrary text as long as it starts a line.",
+    "expect": "content",
+    "expected": "anytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner",
+    "input": "Nexitally Quantumult X (fictional sample)\nDo not commit a live download.\n\n[server_local]\nanytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner\n[mitm]\nhostname = -*.example.invalid\n",
+    "resultKind": "content",
+    "resultText": "anytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = after-banner.example.invalid:443, password=example-password, tag=After-Banner"
+      }
+    ]
+  },
+  {
+    "id": "premium-section-terminator",
+    "title": "[Premium] as a section fence",
+    "summary": "A later [Premium] header ends the slice. The node after it is never classified.",
+    "notes": "This is different from tag=[Premium], which is a line-level exclusion.",
+    "expect": "content",
+    "expected": "anytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium",
+    "input": "[server_local]\nanytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium\n[Premium]\nanytls = after-premium.example.invalid:443, password=example-password, tag=After-Premium\n",
+    "resultKind": "content",
+    "resultText": "anytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "keep",
+        "reason": "server",
+        "line": "anytls = before-premium.example.invalid:443, password=example-password, tag=Before-Premium"
+      }
+    ]
+  },
+  {
+    "id": "missing-server-local",
+    "title": "No [server_local] section",
+    "summary": "A local-looking profile that never declares the section.",
+    "notes": "This is the error you want when the wrong URL was pasted into [server_remote].",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "[general]\nresource_parser_url = https://cdn.jsdelivr.net/gh/sapphireran/quanx-resource-parsers@main/nexitally-node-parser.js\n[policy]\nstatic = Proxy, direct\n[filter_local]\nfinal, direct\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "empty-usable",
+    "title": "Section with no keepers",
+    "summary": "Comments plus info rows plus a premium placeholder.",
+    "notes": "The section regex succeeded. The filter loop emptied the list.",
+    "expect": "error",
+    "expected": "Nexitally parser: no usable server entries were found.",
+    "input": "[server_local]\n; nothing usable below\nanytls = info.example.invalid:443, password=example-password, tag=Traffic: 0 GB\nanytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31\nanytls = info.example.invalid:443, password=example-password, tag=[Premium] Empty\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: no usable server entries were found.",
+    "sectionFound": true,
+    "rows": [
+      {
+        "action": "drop",
+        "reason": "comment",
+        "line": "; nothing usable below"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=Traffic: 0 GB"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=Expire: 2099-12-31"
+      },
+      {
+        "action": "drop",
+        "reason": "info-or-premium",
+        "line": "anytls = info.example.invalid:443, password=example-password, tag=[Premium] Empty"
+      },
+      {
+        "action": "drop",
+        "reason": "empty",
+        "line": ""
+      }
+    ]
+  },
+  {
+    "id": "html-interstitial",
+    "title": "HTML interstitial",
+    "summary": "A login or payment page has no [server_local].",
+    "notes": "The parser does not special-case HTML. Missing section is enough.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "<!doctype html>\n<html lang=\"en\">\n<head><title>Sign in</title></head>\n<body>\n<p>Please sign in to download your Quantumult X file.</p>\n<form action=\"https://example.invalid/login\" method=\"post\">\n<input name=\"user\" value=\"example-user\">\n</form>\n</body>\n</html>\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "clash-yaml",
+    "title": "Clash YAML is not Quantumult X",
+    "summary": "proxies: mappings never contain [server_local].",
+    "notes": "Use an official Clash subscription elsewhere. Do not translate YAML in this repo.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "port: 7890\nsocks-port: 7891\nproxies:\n  - name: JP-Tokyo-01\n    type: ss\n    server: jp.example.invalid\n    port: 443\n    cipher: chacha20-ietf-poly1305\n    password: example-password\nproxy-groups:\n  - name: PROXY\n    type: select\n    proxies: [JP-Tokyo-01]\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "glued-header",
+    "title": "Header glued to the first server",
+    "summary": "A newline after ] is required.",
+    "notes": "Looks almost valid to a human. The regex rejects it.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "[server_local]anytls = glued.example.invalid:443, password=example-password, tag=Glued-01\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "header-no-newline",
+    "title": "Header without a trailing newline",
+    "summary": "A file that is only [server_local] does not match.",
+    "notes": "\\s*\\n is mandatory after the header.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "[server_local]",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "inner-spaced-header",
+    "title": "Spaces inside the header brackets",
+    "summary": "[ server_local ] is not [server_local].",
+    "notes": "Do not loosen this without a vendor sample that actually ships that spelling.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "[ server_local ]\nanytls = inner.example.invalid:443, password=example-password, tag=Inner-01\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "server-remote-only",
+    "title": "Official server-only list",
+    "summary": "[server_remote] is the wrong section for this parser.",
+    "notes": "If a vendor already publishes this shape, drop opt-parser=true.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "[server_remote]\nhttps://example.invalid/official-server-only, tag=Official, enabled=true\nanytls = official.example.invalid:443, password=example-password, tag=Official-01\n",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  },
+  {
+    "id": "empty-file",
+    "title": "Empty download",
+    "summary": "Zero bytes after String() normalization.",
+    "notes": "Quantumult X still calls the parser. The script must not throw.",
+    "expect": "error",
+    "expected": "Nexitally parser: [server_local] section was not found.",
+    "input": "",
+    "resultKind": "error",
+    "resultText": "Nexitally parser: [server_local] section was not found.",
+    "sectionFound": false,
+    "rows": []
+  }
+]

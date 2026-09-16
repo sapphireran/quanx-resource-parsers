@@ -1,0 +1,6 @@
+workbook/cases/bom-crlf/input.conf binary
+*.conf text
+*.md text eol=lf
+*.js text eol=lf
+*.cjs text eol=lf
+*.json text eol=lf

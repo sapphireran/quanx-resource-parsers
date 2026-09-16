@@ -1,0 +1,2 @@
+anytls = eof-a.example.invalid:443, password=example-password, tag=EOF-A
+anytls = eof-b.example.invalid:443, password=example-password, tag=EOF-B
