@@ -11,4 +11,6 @@ node scripts/run-parser.js --json examples/nexitally/fixtures/missing-section.co
 
 `check-examples.js` also loads `nexitally-node-parser.js` inside a
 `$resource` / `$done` sandbox so the Quantumult X entry path is covered, not
-only the Node `require` export.
+only the Node `require` export. It compares the Nexitally parser with
+`examples/parser-template/resource-parser-template.js` so metadata filtering
+stays an explicit Nexitally policy.

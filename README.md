@@ -61,6 +61,7 @@ future, prefer the official server resource and remove this parser layer.
 | [docs/](docs/README.md) | Parser runtime, extraction rules, privacy, troubleshooting |
 | [examples/nexitally/](examples/nexitally/) | Redacted managed files and expected server lists |
 | [examples/quantumult-x/](examples/quantumult-x/) | Local-profile snippets that consume the parsed resource |
+| [examples/parser-template/](examples/parser-template/) | Skeleton parser without Nexitally metadata filters |
 | [scripts/](scripts/README.md) | Local runner that does not download any subscription |
 
 ```bash
