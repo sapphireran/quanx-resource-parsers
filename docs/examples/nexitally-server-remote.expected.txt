@@ -1,0 +1,9 @@
+anytls=hk-iplc-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=HK IPLC 01
+anytls=jp-iepl-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=JP IEPL 01
+anytls=sg-anycast-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, reality-base64-pubkey=k4Uxez0sjl8bKaZH2Vgi8-WDFshML51QkxKFLWFIONk, reality-hex-shortid=0123456789abcdef, udp-relay=true, tag=SG Anycast Reality 01
+shadowsocks=us-ss-01.example.invalid:443, method=2022-blake3-aes-128-gcm, password=BJDBGeLKx/JbEACCSN5rRg==, obfs=over-tls, obfs-host=www.apple.com, tls-verification=true, udp-relay=true, tag=US SS2022 01
+vmess=us-vmess-01.example.invalid:443, method=chacha20-poly1305, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=wss, obfs-host=www.apple.com, obfs-uri=/ws, udp-relay=true, tag=US VMess 01
+vless=us-vless-01.example.invalid:443, method=none, password=23ad6b10-8d1a-40f7-8ad0-e3e35cd32291, obfs=over-tls, obfs-host=www.apple.com, udp-relay=true, tag=US VLESS 01
+trojan=us-trojan-01.example.invalid:443, password=placeholder, over-tls=true, tls-host=www.apple.com, tls-verification=true, udp-relay=true, tag=US Trojan 01
+http=helper.example.invalid:443, username=demo, password=placeholder, over-tls=true, tls-host=www.apple.com, tls-verification=true, tag=Helper HTTP 01
+socks5=helper.example.invalid:1080, username=demo, password=placeholder, tag=Helper SOCKS5 01
