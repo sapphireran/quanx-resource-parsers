@@ -11,6 +11,7 @@ Personal notes for the Quantumult X parsers in this repository.
 | [Local testing](local-testing.md) | `npm test` and `tools/run-parser.js` |
 | [Troubleshooting](troubleshooting.md) | Common Quantumult X failures |
 | [Writing a parser](writing-a-parser.md) | Checklist for another single-purpose script |
+| [Example walkthrough](examples-walkthrough.md) | Line-level reading of the synthetic full profile |
 
 Synthetic configs live in [`examples/`](../examples/README.md). Run them with
 Node; do not paste a live Nexitally download into git.

@@ -46,4 +46,7 @@ Only `quantumult-x.local.example.conf` is a profile sketch. Copy the
 example URL with the private Nexitally configuration URL from the provider
 dashboard. Leave that URL on the device.
 
+A line-level reading of the full-config fixture is
+[docs/examples-walkthrough.md](../docs/examples-walkthrough.md).
+
 Do not paste a real Nexitally response into this folder.

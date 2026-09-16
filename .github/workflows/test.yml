@@ -1,0 +1,31 @@
+name: test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 22]
+    name: Node ${{ matrix.node }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Run parser tests
+        run: npm test
+      - name: Replay example snapshots
+        run: |
+          set -e
+          node tools/run-parser.js examples/nexitally-full-config.example.conf \
+            | diff -u examples/nexitally-expected-servers.txt -
+          node tools/run-parser.js examples/nexitally-full-config.example.conf \
+            --link 'https://subscription.example.test/quantumult-x#in=HK' \
+            | diff -u examples/hash-in-hk.expected.txt -
+          node tools/run-parser.js examples/already-server-list.example.txt \
+            | diff -u examples/already-server-list.expected.txt -

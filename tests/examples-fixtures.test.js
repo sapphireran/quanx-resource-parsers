@@ -25,6 +25,7 @@ test("full-config example matches nexitally-expected-servers.txt", function () {
   var result = parser.parseContent(readExample("nexitally-full-config.example.conf"));
   assert.equal(result.error, undefined, result.error);
   assert.deepEqual(result.content.split("\n"), expectedLines("nexitally-expected-servers.txt"));
+  assert.equal(result.content.split("\n").length, 13);
 });
 
 test("full-config example with #in=HK matches hash-in-hk.expected.txt", function () {

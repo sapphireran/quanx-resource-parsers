@@ -87,6 +87,7 @@ The example profile is synthetic (`.example.test` hosts). See
 - [Local testing](docs/local-testing.md) — Node CLI and library usage
 - [Troubleshooting](docs/troubleshooting.md) — empty parser, missing section, caches
 - [Writing a parser](docs/writing-a-parser.md) — notes for the next script in this repo
+- [Example walkthrough](docs/examples-walkthrough.md) — what the synthetic fixture keeps and drops
 
 ## Why
 
