@@ -5,6 +5,10 @@
  * receives that response locally, extracts [server_local], and returns only
  * valid server entries to [server_remote]. It contains no subscription URL,
  * account identifier, node password, or other private information.
+ *
+ * Docs: docs/nexitally.md
+ * Fixtures: examples/fixtures/
+ * Desktop runner: node scripts/run-nexitally-parser.js
  */
 
 var text = String($resource.content || "")
