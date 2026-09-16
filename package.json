@@ -1,0 +1,9 @@
+{
+  "name": "quanx-resource-parsers",
+  "private": true,
+  "description": "Personal Quantumult X resource parsers. No company code.",
+  "scripts": {
+    "test": "node scripts/test-nexitally-parser.js",
+    "parse": "node scripts/run-nexitally-parser.js"
+  }
+}

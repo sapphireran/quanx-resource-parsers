@@ -1,0 +1,2 @@
+anytls=hk-01.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Hong Kong 01
+anytls=jp-02.nodes.example.invalid:443, password=pwd, over-tls=true, tls-host=www.apple.com, udp-relay=true, tag=Tokyo 02

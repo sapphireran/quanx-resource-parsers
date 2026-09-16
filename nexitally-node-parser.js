@@ -5,6 +5,9 @@
  * receives that response locally, extracts [server_local], and returns only
  * valid server entries to [server_remote]. It contains no subscription URL,
  * account identifier, node password, or other private information.
+ *
+ * Behavior, fixtures, and the desktop harness are documented under docs/ and
+ * examples/nexitally/ in this repository.
  */
 
 var text = String($resource.content || "")

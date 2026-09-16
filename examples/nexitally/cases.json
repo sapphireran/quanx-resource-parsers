@@ -1,0 +1,66 @@
+{
+  "description": "Local fixtures for nexitally-node-parser.js. Hosts, passwords, and tags are fictional. Do not replace these with a real subscription.",
+  "parser": "../../nexitally-node-parser.js",
+  "cases": [
+    {
+      "name": "typical-full-config",
+      "input": "typical-full-config.conf",
+      "expected": "typical-full-config.expected.txt",
+      "notes": "A Nexitally-style full Quantumult X download: info lines, AnyTLS nodes, a [Premium] placeholder, and later policy/filter sections that must not leak into the server resource."
+    },
+    {
+      "name": "mixed-protocols",
+      "input": "mixed-protocols.conf",
+      "expected": "mixed-protocols.expected.txt",
+      "notes": "Every protocol the parser accepts, plus an unsupported line that must be dropped."
+    },
+    {
+      "name": "duplicates-and-placeholders",
+      "input": "duplicates-and-placeholders.conf",
+      "expected": "duplicates-and-placeholders.expected.txt",
+      "notes": "Exact-line de-duplication and exclusion of traffic, expiry, remaining-quota, and [Premium] rows."
+    },
+    {
+      "name": "comments-whitespace-and-crlf",
+      "input": "comments-whitespace-and-crlf.conf",
+      "expected": "comments-whitespace-and-crlf.expected.txt",
+      "notes": "BOM, Windows newlines, padded section headers, and comment prefixes ; # //."
+    },
+    {
+      "name": "section-case-and-trailing-content",
+      "input": "section-case-and-trailing-content.conf",
+      "expected": "section-case-and-trailing-content.expected.txt",
+      "notes": "Case-insensitive [SERVER_LOCAL] and a file that ends inside that section."
+    },
+    {
+      "name": "missing-server-local",
+      "input": "missing-server-local.conf",
+      "error": "Nexitally parser: [server_local] section was not found.",
+      "notes": "A full profile that only has [server_remote] must fail clearly."
+    },
+    {
+      "name": "empty-server-local",
+      "input": "empty-server-local.conf",
+      "error": "Nexitally parser: no usable server entries were found.",
+      "notes": "The section exists but contains only comments."
+    },
+    {
+      "name": "traffic-only",
+      "input": "traffic-only.conf",
+      "error": "Nexitally parser: no usable server entries were found.",
+      "notes": "Info rows that look like servers still match the exclusion list."
+    },
+    {
+      "name": "first-section-wins",
+      "input": "first-section-wins.conf",
+      "expected": "first-section-wins.expected.txt",
+      "notes": "A second [server_local] after [policy] is not merged into the result."
+    },
+    {
+      "name": "leading-server-local",
+      "input": "leading-server-local.conf",
+      "expected": "leading-server-local.expected.txt",
+      "notes": "[server_local] may be the first section in the file."
+    }
+  ]
+}
