@@ -1,0 +1,95 @@
+{
+  "parser": "../../nexitally-node-parser.js",
+  "title": "Nexitally node parser fixtures",
+  "notes": [
+    "Every host, password, and UUID is reserved example data.",
+    "These files imitate a managed full Quantumult X configuration. They are not a Nexitally export."
+  ],
+  "cases": [
+    {
+      "name": "happy-path",
+      "description": "Extract usable servers from a synthetic managed full configuration.",
+      "input": "fixtures/happy-path.conf",
+      "expectedContent": "fixtures/happy-path.expected.txt"
+    },
+    {
+      "name": "happy-path-crlf-bom",
+      "description": "Same happy-path file after a UTF-8 BOM and CRLF line endings.",
+      "input": "fixtures/happy-path.conf",
+      "transforms": ["bom", "crlf"],
+      "expectedContent": "fixtures/happy-path.expected.txt"
+    },
+    {
+      "name": "missing-section",
+      "description": "A profile without [server_local] must fail clearly.",
+      "input": "fixtures/missing-section.conf",
+      "expectedError": "Nexitally parser: [server_local] section was not found."
+    },
+    {
+      "name": "placeholders-only",
+      "description": "Traffic, expiry, and [Premium] lines are not usable servers.",
+      "input": "fixtures/placeholders-only.conf",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "name": "empty-section",
+      "description": "An empty [server_local] section is the same as no usable servers.",
+      "input": "fixtures/empty-section.conf",
+      "expectedError": "Nexitally parser: no usable server entries were found."
+    },
+    {
+      "name": "duplicates-and-comments",
+      "description": "Comments, padding, and exact duplicate lines are removed.",
+      "input": "fixtures/duplicates-and-comments.conf",
+      "expectedContent": "fixtures/duplicates-and-comments.expected.txt"
+    },
+    {
+      "name": "mixed-protocols",
+      "description": "Keep anytls, shadowsocks, vmess, vless, trojan, http, and socks5.",
+      "input": "fixtures/mixed-protocols.conf",
+      "expectedContent": "fixtures/mixed-protocols.expected.txt"
+    },
+    {
+      "name": "extra-sections",
+      "description": "Stop at the next [section] so filters and remotes never leak.",
+      "input": "fixtures/extra-sections.conf",
+      "expectedContent": "fixtures/extra-sections.expected.txt"
+    },
+    {
+      "name": "unsupported-protocols",
+      "description": "Drop hysteria2, tuic, wireguard, bare ssr, and https aliases.",
+      "input": "fixtures/unsupported-protocols.conf",
+      "expectedContent": "fixtures/unsupported-protocols.expected.txt"
+    },
+    {
+      "name": "case-insensitive-header",
+      "description": "[SERVER_LOCAL] is accepted the same as [server_local].",
+      "input": "fixtures/case-insensitive-header.conf",
+      "expectedContent": "fixtures/case-insensitive-header.expected.txt"
+    },
+    {
+      "name": "chinese-exclusion",
+      "description": "Chinese traffic / expiry / plan words are excluded like the English ones.",
+      "input": "fixtures/chinese-exclusion.conf",
+      "expectedContent": "fixtures/chinese-exclusion.expected.txt"
+    },
+    {
+      "name": "server-local-at-eof",
+      "description": "[server_local] may be the last section in the file.",
+      "input": "fixtures/server-local-at-eof.conf",
+      "expectedContent": "fixtures/server-local-at-eof.expected.txt"
+    },
+    {
+      "name": "leading-whitespace-header",
+      "description": "Whitespace around the section header is tolerated.",
+      "input": "fixtures/leading-whitespace-header.conf",
+      "expectedContent": "fixtures/leading-whitespace-header.expected.txt"
+    },
+    {
+      "name": "spaced-equals",
+      "description": "Protocol tokens may have spaces before '='.",
+      "input": "fixtures/spaced-equals.conf",
+      "expectedContent": "fixtures/spaced-equals.expected.txt"
+    }
+  ]
+}
